@@ -1,0 +1,58 @@
+{
+    "name": "savannabits/savadmin",
+    "description": "Simplistic, Bare - Bones, yet fully automated Laravel Admin Panel Code Generator by Savannabits",
+    "keywords": [
+        "savannabits",
+        "savadmin"
+    ],
+    "homepage": "https://github.com/savannabits/savadmin",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Sam Maosa",
+            "email": "maosa.sam@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^7.18.0",
+        "spatie/laravel-permission": "^3.13.0",
+        "yajra/laravel-datatables-oracle": "^9.10.2",
+        "yajra/laravel-datatables-buttons": "^4.9.2",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.3.0",
+        "phpunit/phpunit": "^9.2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Savannabits\\Savadmin\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Savannabits\\Savadmin\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Savannabits\\Savadmin\\SavadminServiceProvider"
+            ],
+            "aliases": {
+                "Savadmin": "Savannabits\\Savadmin\\SavadminFacade"
+            }
+        }
+    }
+}
