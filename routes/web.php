@@ -25,4 +25,6 @@ Route::group(["prefix" => config('savadmin.app.prefix',''),
    Route::group(['as' => 'users.', 'prefix' => 'users'], function() {
        Route::get('', 'UserController@index')->name('index');
    });
+
+   Route::get('roles',"RoleController@index")->name('roles.index');
 });

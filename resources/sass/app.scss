@@ -1,8 +1,50 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import "~@mdi/font/css/materialdesignicons.min.css";
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import "~bootstrap-vue/src/index";
+@import "~vue-snotify/styles/material";
+@import "includes/sidebar";
+.table {
+    thead th {
+        vertical-align: bottom;
+        border-bottom: $table-border-width solid $table-border-color;
+    }
+
+    tbody + tbody {
+        border-top: $table-border-width solid $table-border-color;
+    }
+}
+.card {
+    position: relative;
+    background-color: $card-bg;
+    background-clip: border-box;
+    border: $card-border-width solid transparent;
+    box-shadow: 0 0 1px 1px rgba($primary,.175);
+    @include border-radius($card-border-radius);
+
+    > hr {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    > .list-group {
+        border-top: inherit;
+        border-bottom: inherit;
+
+        &:first-child {
+            border-top-width: 0;
+            @include border-top-radius($card-inner-border-radius);
+        }
+
+        &:last-child  {
+            border-bottom-width: 0;
+            @include border-bottom-radius($card-inner-border-radius);
+        }
+    }
+}

@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.18.0 on 2020-07-05 09:46:13.
+ * Generated for Laravel 7.18.0 on 2020-07-24 12:10:33.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -12131,6 +12131,46 @@ namespace Illuminate\Support\Facades {
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->macroCall($method, $parameters);
         }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function auth($options = [])
+        {
+                        return \Illuminate\Routing\Router::auth($options);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function resetPassword()
+        {
+                        return \Illuminate\Routing\Router::resetPassword();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function confirmPassword()
+        {
+                        return \Illuminate\Routing\Router::confirmPassword();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function emailVerification()
+        {
+                        return \Illuminate\Routing\Router::emailVerification();
+        }
          
     }
 
@@ -15569,6 +15609,2602 @@ namespace Facade\Ignition\Facades {
  
 }
 
+namespace Intervention\Image\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Image {
+        
+        /**
+         * Overrides configuration settings
+         *
+         * @param array $config
+         * @return self 
+         * @static 
+         */ 
+        public static function configure($config = [])
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->configure($config);
+        }
+        
+        /**
+         * Initiates an Image instance from different input types
+         *
+         * @param mixed $data
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function make($data)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->make($data);
+        }
+        
+        /**
+         * Creates an empty image canvas
+         *
+         * @param int $width
+         * @param int $height
+         * @param mixed $background
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function canvas($width, $height, $background = null)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->canvas($width, $height, $background);
+        }
+        
+        /**
+         * Create new cached image and run callback
+         * (requires additional package intervention/imagecache)
+         *
+         * @param \Closure $callback
+         * @param int $lifetime
+         * @param boolean $returnObj
+         * @return \Image 
+         * @static 
+         */ 
+        public static function cache($callback, $lifetime = null, $returnObj = false)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->cache($callback, $lifetime, $returnObj);
+        }
+         
+    }
+ 
+}
+
+namespace Collective\Html { 
+
+    /**
+     * 
+     *
+     * @see \Collective\Html\FormBuilder
+     */ 
+    class FormFacade {
+        
+        /**
+         * Open up a new HTML form.
+         *
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function open($options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->open($options);
+        }
+        
+        /**
+         * Create a new model based form builder.
+         *
+         * @param mixed $model
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function model($model, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->model($model, $options);
+        }
+        
+        /**
+         * Set the model instance on the form builder.
+         *
+         * @param mixed $model
+         * @return void 
+         * @static 
+         */ 
+        public static function setModel($model)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        $instance->setModel($model);
+        }
+        
+        /**
+         * Get the current model instance on the form builder.
+         *
+         * @return mixed $model
+         * @static 
+         */ 
+        public static function getModel()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->getModel();
+        }
+        
+        /**
+         * Close the current form.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function close()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->close();
+        }
+        
+        /**
+         * Generate a hidden field with the current CSRF token.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function token()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->token();
+        }
+        
+        /**
+         * Create a form label element.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @param bool $escape_html
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function label($name, $value = null, $options = [], $escape_html = true)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->label($name, $value, $options, $escape_html);
+        }
+        
+        /**
+         * Create a form input field.
+         *
+         * @param string $type
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function input($type, $name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->input($type, $name, $value, $options);
+        }
+        
+        /**
+         * Create a text input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function text($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->text($name, $value, $options);
+        }
+        
+        /**
+         * Create a password input field.
+         *
+         * @param string $name
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function password($name, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->password($name, $options);
+        }
+        
+        /**
+         * Create a range input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function range($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->range($name, $value, $options);
+        }
+        
+        /**
+         * Create a hidden input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function hidden($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->hidden($name, $value, $options);
+        }
+        
+        /**
+         * Create a search input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function search($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->search($name, $value, $options);
+        }
+        
+        /**
+         * Create an e-mail input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function email($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->email($name, $value, $options);
+        }
+        
+        /**
+         * Create a tel input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function tel($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->tel($name, $value, $options);
+        }
+        
+        /**
+         * Create a number input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function number($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->number($name, $value, $options);
+        }
+        
+        /**
+         * Create a date input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function date($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->date($name, $value, $options);
+        }
+        
+        /**
+         * Create a datetime input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function datetime($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->datetime($name, $value, $options);
+        }
+        
+        /**
+         * Create a datetime-local input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function datetimeLocal($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->datetimeLocal($name, $value, $options);
+        }
+        
+        /**
+         * Create a time input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function time($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->time($name, $value, $options);
+        }
+        
+        /**
+         * Create a url input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function url($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->url($name, $value, $options);
+        }
+        
+        /**
+         * Create a week input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function week($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->week($name, $value, $options);
+        }
+        
+        /**
+         * Create a file input field.
+         *
+         * @param string $name
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function file($name, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->file($name, $options);
+        }
+        
+        /**
+         * Create a textarea input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function textarea($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->textarea($name, $value, $options);
+        }
+        
+        /**
+         * Create a select box field.
+         *
+         * @param string $name
+         * @param array $list
+         * @param string|bool $selected
+         * @param array $selectAttributes
+         * @param array $optionsAttributes
+         * @param array $optgroupsAttributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function select($name, $list = [], $selected = null, $selectAttributes = [], $optionsAttributes = [], $optgroupsAttributes = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->select($name, $list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes);
+        }
+        
+        /**
+         * Create a select range field.
+         *
+         * @param string $name
+         * @param string $begin
+         * @param string $end
+         * @param string $selected
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function selectRange($name, $begin, $end, $selected = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->selectRange($name, $begin, $end, $selected, $options);
+        }
+        
+        /**
+         * Create a select year field.
+         *
+         * @param string $name
+         * @param string $begin
+         * @param string $end
+         * @param string $selected
+         * @param array $options
+         * @return mixed 
+         * @static 
+         */ 
+        public static function selectYear()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->selectYear();
+        }
+        
+        /**
+         * Create a select month field.
+         *
+         * @param string $name
+         * @param string $selected
+         * @param array $options
+         * @param string $format
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function selectMonth($name, $selected = null, $options = [], $format = '%B')
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->selectMonth($name, $selected, $options, $format);
+        }
+        
+        /**
+         * Get the select option for the given value.
+         *
+         * @param string $display
+         * @param string $value
+         * @param string $selected
+         * @param array $attributes
+         * @param array $optgroupAttributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function getSelectOption($display, $value, $selected, $attributes = [], $optgroupAttributes = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->getSelectOption($display, $value, $selected, $attributes, $optgroupAttributes);
+        }
+        
+        /**
+         * Create a checkbox input field.
+         *
+         * @param string $name
+         * @param mixed $value
+         * @param bool $checked
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function checkbox($name, $value = 1, $checked = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->checkbox($name, $value, $checked, $options);
+        }
+        
+        /**
+         * Create a radio button input field.
+         *
+         * @param string $name
+         * @param mixed $value
+         * @param bool $checked
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function radio($name, $value = null, $checked = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->radio($name, $value, $checked, $options);
+        }
+        
+        /**
+         * Create a HTML reset input element.
+         *
+         * @param string $value
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function reset($value, $attributes = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->reset($value, $attributes);
+        }
+        
+        /**
+         * Create a HTML image input element.
+         *
+         * @param string $url
+         * @param string $name
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function image($url, $name = null, $attributes = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->image($url, $name, $attributes);
+        }
+        
+        /**
+         * Create a month input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function month($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->month($name, $value, $options);
+        }
+        
+        /**
+         * Create a color input field.
+         *
+         * @param string $name
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function color($name, $value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->color($name, $value, $options);
+        }
+        
+        /**
+         * Create a submit button element.
+         *
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function submit($value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->submit($value, $options);
+        }
+        
+        /**
+         * Create a button element.
+         *
+         * @param string $value
+         * @param array $options
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function button($value = null, $options = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->button($value, $options);
+        }
+        
+        /**
+         * Create a datalist box field.
+         *
+         * @param string $id
+         * @param array $list
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function datalist($id, $list = [])
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->datalist($id, $list);
+        }
+        
+        /**
+         * Get the ID attribute for a field name.
+         *
+         * @param string $name
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */ 
+        public static function getIdAttribute($name, $attributes)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->getIdAttribute($name, $attributes);
+        }
+        
+        /**
+         * Get the value that should be assigned to the field.
+         *
+         * @param string $name
+         * @param string $value
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getValueAttribute($name, $value = null)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->getValueAttribute($name, $value);
+        }
+        
+        /**
+         * Take Request in fill process
+         *
+         * @param bool $consider
+         * @static 
+         */ 
+        public static function considerRequest($consider = true)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->considerRequest($consider);
+        }
+        
+        /**
+         * Get a value from the session's old input.
+         *
+         * @param string $name
+         * @return mixed 
+         * @static 
+         */ 
+        public static function old($name)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->old($name);
+        }
+        
+        /**
+         * Determine if the old input is empty.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function oldInputIsEmpty()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->oldInputIsEmpty();
+        }
+        
+        /**
+         * Get the session store implementation.
+         *
+         * @return \Illuminate\Contracts\Session\Session $session
+         * @static 
+         */ 
+        public static function getSessionStore()
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->getSessionStore();
+        }
+        
+        /**
+         * Set the session store implementation.
+         *
+         * @param \Illuminate\Contracts\Session\Session $session
+         * @return \Collective\Html\FormBuilder 
+         * @static 
+         */ 
+        public static function setSessionStore($session)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->setSessionStore($session);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Collective\Html\FormBuilder::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Collective\Html\FormBuilder::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Collective\Html\FormBuilder::hasMacro($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function macroCall($method, $parameters)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->macroCall($method, $parameters);
+        }
+        
+        /**
+         * Register a custom component.
+         *
+         * @param $name
+         * @param $view
+         * @param array $signature
+         * @return void 
+         * @static 
+         */ 
+        public static function component($name, $view, $signature)
+        {
+                        \Collective\Html\FormBuilder::component($name, $view, $signature);
+        }
+        
+        /**
+         * Check if a component is registered.
+         *
+         * @param $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasComponent($name)
+        {
+                        return \Collective\Html\FormBuilder::hasComponent($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return \Illuminate\Contracts\View\View|mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function componentCall($method, $parameters)
+        {
+                        /** @var \Collective\Html\FormBuilder $instance */
+                        return $instance->componentCall($method, $parameters);
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @see \Collective\Html\HtmlBuilder
+     */ 
+    class HtmlFacade {
+        
+        /**
+         * Convert an HTML string to entities.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function entities($value)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->entities($value);
+        }
+        
+        /**
+         * Convert entities to HTML characters.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function decode($value)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->decode($value);
+        }
+        
+        /**
+         * Generate a link to a JavaScript file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function script($url, $attributes = [], $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->script($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a link to a CSS file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function style($url, $attributes = [], $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->style($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate an HTML image element.
+         *
+         * @param string $url
+         * @param string $alt
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function image($url, $alt = null, $attributes = [], $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->image($url, $alt, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a link to a Favicon file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function favicon($url, $attributes = [], $secure = null)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->favicon($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a HTML link.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $secure
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function link($url, $title = null, $attributes = [], $secure = null, $escape = true)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->link($url, $title, $attributes, $secure, $escape);
+        }
+        
+        /**
+         * Generate a HTTPS HTML link.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function secureLink($url, $title = null, $attributes = [], $escape = true)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->secureLink($url, $title, $attributes, $escape);
+        }
+        
+        /**
+         * Generate a HTML link to an asset.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $secure
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkAsset($url, $title = null, $attributes = [], $secure = null, $escape = true)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkAsset($url, $title, $attributes, $secure, $escape);
+        }
+        
+        /**
+         * Generate a HTTPS HTML link to an asset.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkSecureAsset($url, $title = null, $attributes = [], $escape = true)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkSecureAsset($url, $title, $attributes, $escape);
+        }
+        
+        /**
+         * Generate a HTML link to a named route.
+         *
+         * @param string $name
+         * @param string $title
+         * @param array $parameters
+         * @param array $attributes
+         * @param bool $secure
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkRoute($name, $title = null, $parameters = [], $attributes = [], $secure = null, $escape = true)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkRoute($name, $title, $parameters, $attributes, $secure, $escape);
+        }
+        
+        /**
+         * Generate a HTML link to a controller action.
+         *
+         * @param string $action
+         * @param string $title
+         * @param array $parameters
+         * @param array $attributes
+         * @param bool $secure
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function linkAction($action, $title = null, $parameters = [], $attributes = [], $secure = null, $escape = true)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->linkAction($action, $title, $parameters, $attributes, $secure, $escape);
+        }
+        
+        /**
+         * Generate a HTML link to an email address.
+         *
+         * @param string $email
+         * @param string $title
+         * @param array $attributes
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function mailto($email, $title = null, $attributes = [], $escape = true)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->mailto($email, $title, $attributes, $escape);
+        }
+        
+        /**
+         * Obfuscate an e-mail address to prevent spam-bots from sniffing it.
+         *
+         * @param string $email
+         * @return string 
+         * @static 
+         */ 
+        public static function email($email)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->email($email);
+        }
+        
+        /**
+         * Generates non-breaking space entities based on number supplied.
+         *
+         * @param int $num
+         * @return string 
+         * @static 
+         */ 
+        public static function nbsp($num = 1)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->nbsp($num);
+        }
+        
+        /**
+         * Generate an ordered list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString|string 
+         * @static 
+         */ 
+        public static function ol($list, $attributes = [])
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->ol($list, $attributes);
+        }
+        
+        /**
+         * Generate an un-ordered list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString|string 
+         * @static 
+         */ 
+        public static function ul($list, $attributes = [])
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->ul($list, $attributes);
+        }
+        
+        /**
+         * Generate a description list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function dl($list, $attributes = [])
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->dl($list, $attributes);
+        }
+        
+        /**
+         * Build an HTML attribute string from an array.
+         *
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */ 
+        public static function attributes($attributes)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->attributes($attributes);
+        }
+        
+        /**
+         * Obfuscate a string to prevent spam-bots from sniffing it.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function obfuscate($value)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->obfuscate($value);
+        }
+        
+        /**
+         * Generate a meta tag.
+         *
+         * @param string $name
+         * @param string $content
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function meta($name, $content, $attributes = [])
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->meta($name, $content, $attributes);
+        }
+        
+        /**
+         * Generate an html tag.
+         *
+         * @param string $tag
+         * @param mixed $content
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */ 
+        public static function tag($tag, $content, $attributes = [])
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->tag($tag, $content, $attributes);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Collective\Html\HtmlBuilder::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Collective\Html\HtmlBuilder::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Collective\Html\HtmlBuilder::hasMacro($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function macroCall($method, $parameters)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->macroCall($method, $parameters);
+        }
+        
+        /**
+         * Register a custom component.
+         *
+         * @param $name
+         * @param $view
+         * @param array $signature
+         * @return void 
+         * @static 
+         */ 
+        public static function component($name, $view, $signature)
+        {
+                        \Collective\Html\HtmlBuilder::component($name, $view, $signature);
+        }
+        
+        /**
+         * Check if a component is registered.
+         *
+         * @param $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasComponent($name)
+        {
+                        return \Collective\Html\HtmlBuilder::hasComponent($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return \Illuminate\Contracts\View\View|mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function componentCall($method, $parameters)
+        {
+                        /** @var \Collective\Html\HtmlBuilder $instance */
+                        return $instance->componentCall($method, $parameters);
+        }
+         
+    }
+ 
+}
+
+namespace Maatwebsite\Excel\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Excel {
+        
+        /**
+         * 
+         *
+         * @param object $export
+         * @param string|null $fileName
+         * @param string $writerType
+         * @param array $headers
+         * @throws \PhpOffice\PhpSpreadsheet\Exception
+         * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+         * @return \Maatwebsite\Excel\BinaryFileResponse 
+         * @static 
+         */ 
+        public static function download($export, $fileName, $writerType = null, $headers = [])
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->download($export, $fileName, $writerType, $headers);
+        }
+        
+        /**
+         * 
+         *
+         * @param object $export
+         * @param string $filePath
+         * @param string|null $disk
+         * @param string $writerType
+         * @param mixed $diskOptions
+         * @throws \PhpOffice\PhpSpreadsheet\Exception
+         * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+         * @return bool 
+         * @static 
+         */ 
+        public static function store($export, $filePath, $diskName = null, $writerType = null, $diskOptions = [])
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->store($export, $filePath, $diskName, $writerType, $diskOptions);
+        }
+        
+        /**
+         * 
+         *
+         * @param object $export
+         * @param string $filePath
+         * @param string|null $disk
+         * @param string $writerType
+         * @param mixed $diskOptions
+         * @return \Maatwebsite\Excel\PendingDispatch 
+         * @static 
+         */ 
+        public static function queue($export, $filePath, $disk = null, $writerType = null, $diskOptions = [])
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->queue($export, $filePath, $disk, $writerType, $diskOptions);
+        }
+        
+        /**
+         * 
+         *
+         * @param object $export
+         * @param string $writerType
+         * @return string 
+         * @static 
+         */ 
+        public static function raw($export, $writerType)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->raw($export, $writerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return \Maatwebsite\Excel\Reader|\Maatwebsite\Excel\PendingDispatch 
+         * @static 
+         */ 
+        public static function import($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->import($import, $filePath, $disk, $readerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return array 
+         * @static 
+         */ 
+        public static function toArray($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->toArray($import, $filePath, $disk, $readerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return \Maatwebsite\Excel\Collection 
+         * @static 
+         */ 
+        public static function toCollection($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->toCollection($import, $filePath, $disk, $readerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param \Maatwebsite\Excel\ShouldQueue $import
+         * @param string|\Maatwebsite\Excel\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string $readerType
+         * @return \Maatwebsite\Excel\PendingDispatch 
+         * @static 
+         */ 
+        public static function queueImport($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->queueImport($import, $filePath, $disk, $readerType);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $concern
+         * @param callable $handler
+         * @param string $event
+         * @static 
+         */ 
+        public static function extend($concern, $handler, $event = 'Maatwebsite\\Excel\\Events\\BeforeWriting')
+        {
+                        return \Maatwebsite\Excel\Excel::extend($concern, $handler, $event);
+        }
+        
+        /**
+         * When asserting downloaded, stored, queued or imported, use regular expression
+         * to look for a matching file path.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function matchByRegex()
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        $instance->matchByRegex();
+        }
+        
+        /**
+         * When asserting downloaded, stored, queued or imported, use regular string
+         * comparison for matching file path.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function doNotMatchByRegex()
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        $instance->doNotMatchByRegex();
+        }
+        
+        /**
+         * 
+         *
+         * @param string $fileName
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertDownloaded($fileName, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertDownloaded($fileName, $callback);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertStored($filePath, $disk = null, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertStored($filePath, $disk, $callback);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertQueued($filePath, $disk = null, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertQueued($filePath, $disk, $callback);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertImported($filePath, $disk = null, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertImported($filePath, $disk, $callback);
+        }
+         
+    }
+ 
+}
+
+namespace Savannabits\Savadmin { 
+
+    /**
+     * 
+     *
+     * @see \Savannabits\Savadmin\Skeleton\SkeletonClass
+     */ 
+    class SavadminFacade {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function handle($files)
+        {
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->handle($files);
+        }
+        
+        /**
+         * Run the console command.
+         *
+         * @param \Symfony\Component\Console\Input\InputInterface $input
+         * @param \Symfony\Component\Console\Output\OutputInterface $output
+         * @return int 
+         * @static 
+         */ 
+        public static function run($input, $output)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->run($input, $output);
+        }
+        
+        /**
+         * 
+         *
+         * @return bool whether the command should be publicly shown or not
+         * @static 
+         */ 
+        public static function isHidden()
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->isHidden();
+        }
+        
+        /**
+         * 
+         *
+         * @param bool $hidden Whether or not the command should be hidden from the list of commands
+         *                     The default value will be true in Symfony 6.0
+         * @return \Symfony\Component\Console\Command\Command The current instance
+         * @final since Symfony 5.1
+         * @static 
+         */ 
+        public static function setHidden($hidden)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->setHidden($hidden);
+        }
+        
+        /**
+         * Get the Laravel application instance.
+         *
+         * @return \Illuminate\Contracts\Foundation\Application 
+         * @static 
+         */ 
+        public static function getLaravel()
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getLaravel();
+        }
+        
+        /**
+         * Set the Laravel application instance.
+         *
+         * @param \Illuminate\Contracts\Container\Container $laravel
+         * @return void 
+         * @static 
+         */ 
+        public static function setLaravel($laravel)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        $instance->setLaravel($laravel);
+        }
+        
+        /**
+         * 
+         *
+         * @return string|null The default command name or null when no default name is set
+         * @static 
+         */ 
+        public static function getDefaultName()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        return \Savannabits\Savadmin\Savadmin::getDefaultName();
+        }
+        
+        /**
+         * Ignores validation errors.
+         * 
+         * This is mainly useful for the help command.
+         *
+         * @static 
+         */ 
+        public static function ignoreValidationErrors()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->ignoreValidationErrors();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setApplication($application = null)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->setApplication($application);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setHelperSet($helperSet)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->setHelperSet($helperSet);
+        }
+        
+        /**
+         * Gets the helper set.
+         *
+         * @return \Symfony\Component\Console\Command\HelperSet|null A HelperSet instance
+         * @static 
+         */ 
+        public static function getHelperSet()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getHelperSet();
+        }
+        
+        /**
+         * Gets the application instance for this command.
+         *
+         * @return \Symfony\Component\Console\Command\Application|null An Application instance
+         * @static 
+         */ 
+        public static function getApplication()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getApplication();
+        }
+        
+        /**
+         * Checks whether the command is enabled or not in the current environment.
+         * 
+         * Override this to check for x or y and return false if the command can not
+         * run properly under the current conditions.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isEnabled()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->isEnabled();
+        }
+        
+        /**
+         * Sets the code to execute when running this command.
+         * 
+         * If this method is used, it overrides the code defined
+         * in the execute() method.
+         *
+         * @param callable $code A callable(InputInterface $input, OutputInterface $output)
+         * @return \Savannabits\Savadmin\Savadmin 
+         * @throws InvalidArgumentException
+         * @see execute()
+         * @static 
+         */ 
+        public static function setCode($code)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->setCode($code);
+        }
+        
+        /**
+         * Merges the application definition with the command definition.
+         * 
+         * This method is not part of public API and should not be used directly.
+         *
+         * @param bool $mergeArgs Whether to merge or not the Application definition arguments to Command definition arguments
+         * @static 
+         */ 
+        public static function mergeApplicationDefinition($mergeArgs = true)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->mergeApplicationDefinition($mergeArgs);
+        }
+        
+        /**
+         * Sets an array of argument and option instances.
+         *
+         * @param array|\Symfony\Component\Console\Command\InputDefinition $definition An array of argument and option instances or a definition instance
+         * @return \Savannabits\Savadmin\Savadmin 
+         * @static 
+         */ 
+        public static function setDefinition($definition)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->setDefinition($definition);
+        }
+        
+        /**
+         * Gets the InputDefinition attached to this Command.
+         *
+         * @return \Symfony\Component\Console\Command\InputDefinition An InputDefinition instance
+         * @static 
+         */ 
+        public static function getDefinition()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getDefinition();
+        }
+        
+        /**
+         * Gets the InputDefinition to be used to create representations of this Command.
+         * 
+         * Can be overridden to provide the original command representation when it would otherwise
+         * be changed by merging with the application InputDefinition.
+         * 
+         * This method is not part of public API and should not be used directly.
+         *
+         * @return \Symfony\Component\Console\Command\InputDefinition An InputDefinition instance
+         * @static 
+         */ 
+        public static function getNativeDefinition()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getNativeDefinition();
+        }
+        
+        /**
+         * Adds an argument.
+         *
+         * @param int|null $mode The argument mode: InputArgument::REQUIRED or InputArgument::OPTIONAL
+         * @param string|string[]|null $default The default value (for InputArgument::OPTIONAL mode only)
+         * @throws InvalidArgumentException When argument mode is not valid
+         * @return \Savannabits\Savadmin\Savadmin 
+         * @static 
+         */ 
+        public static function addArgument($name, $mode = null, $description = '', $default = null)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->addArgument($name, $mode, $description, $default);
+        }
+        
+        /**
+         * Adds an option.
+         *
+         * @param string|array|null $shortcut The shortcuts, can be null, a string of shortcuts delimited by | or an array of shortcuts
+         * @param int|null $mode The option mode: One of the InputOption::VALUE_* constants
+         * @param string|string[]|int|bool|null $default The default value (must be null for InputOption::VALUE_NONE)
+         * @throws InvalidArgumentException If option mode is invalid or incompatible
+         * @return \Savannabits\Savadmin\Savadmin 
+         * @static 
+         */ 
+        public static function addOption($name, $shortcut = null, $mode = null, $description = '', $default = null)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->addOption($name, $shortcut, $mode, $description, $default);
+        }
+        
+        /**
+         * Sets the name of the command.
+         * 
+         * This method can set both the namespace and the name if
+         * you separate them by a colon (:)
+         * 
+         *     $command->setName('foo:bar');
+         *
+         * @return \Savannabits\Savadmin\Savadmin 
+         * @throws InvalidArgumentException When the name is invalid
+         * @static 
+         */ 
+        public static function setName($name)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->setName($name);
+        }
+        
+        /**
+         * Sets the process title of the command.
+         * 
+         * This feature should be used only when creating a long process command,
+         * like a daemon.
+         * 
+         * PHP 5.5+ or the proctitle PECL library is required
+         *
+         * @return \Savannabits\Savadmin\Savadmin 
+         * @static 
+         */ 
+        public static function setProcessTitle($title)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->setProcessTitle($title);
+        }
+        
+        /**
+         * Returns the command name.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function getName()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getName();
+        }
+        
+        /**
+         * Sets the description for the command.
+         *
+         * @return \Savannabits\Savadmin\Savadmin 
+         * @static 
+         */ 
+        public static function setDescription($description)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->setDescription($description);
+        }
+        
+        /**
+         * Returns the description for the command.
+         *
+         * @return string The description for the command
+         * @static 
+         */ 
+        public static function getDescription()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getDescription();
+        }
+        
+        /**
+         * Sets the help for the command.
+         *
+         * @return \Savannabits\Savadmin\Savadmin 
+         * @static 
+         */ 
+        public static function setHelp($help)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->setHelp($help);
+        }
+        
+        /**
+         * Returns the help for the command.
+         *
+         * @return string The help for the command
+         * @static 
+         */ 
+        public static function getHelp()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getHelp();
+        }
+        
+        /**
+         * Returns the processed help for the command replacing the %command.name% and
+         * %command.full_name% patterns with the real values dynamically.
+         *
+         * @return string The processed help for the command
+         * @static 
+         */ 
+        public static function getProcessedHelp()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getProcessedHelp();
+        }
+        
+        /**
+         * Sets the aliases for the command.
+         *
+         * @param string[] $aliases An array of aliases for the command
+         * @return \Savannabits\Savadmin\Savadmin 
+         * @throws InvalidArgumentException When an alias is invalid
+         * @static 
+         */ 
+        public static function setAliases($aliases)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->setAliases($aliases);
+        }
+        
+        /**
+         * Returns the aliases for the command.
+         *
+         * @return array An array of aliases for the command
+         * @static 
+         */ 
+        public static function getAliases()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getAliases();
+        }
+        
+        /**
+         * Returns the synopsis for the command.
+         *
+         * @param bool $short Whether to show the short version of the synopsis (with options folded) or not
+         * @return string The synopsis
+         * @static 
+         */ 
+        public static function getSynopsis($short = false)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getSynopsis($short);
+        }
+        
+        /**
+         * Add a command usage example, it'll be prefixed with the command name.
+         *
+         * @return \Savannabits\Savadmin\Savadmin 
+         * @static 
+         */ 
+        public static function addUsage($usage)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->addUsage($usage);
+        }
+        
+        /**
+         * Returns alternative usages of the command.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getUsages()
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getUsages();
+        }
+        
+        /**
+         * Gets a helper instance by name.
+         *
+         * @return mixed The helper value
+         * @throws LogicException           if no HelperSet is defined
+         * @throws InvalidArgumentException if the helper is not defined
+         * @static 
+         */ 
+        public static function getHelper($name)
+        {
+            //Method inherited from \Symfony\Component\Console\Command\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getHelper($name);
+        }
+        
+        /**
+         * Call another console command.
+         *
+         * @param \Symfony\Component\Console\Command\Command|string $command
+         * @param array $arguments
+         * @return int 
+         * @static 
+         */ 
+        public static function call($command, $arguments = [])
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->call($command, $arguments);
+        }
+        
+        /**
+         * Call another console command silently.
+         *
+         * @param \Symfony\Component\Console\Command\Command|string $command
+         * @param array $arguments
+         * @return int 
+         * @static 
+         */ 
+        public static function callSilent($command, $arguments = [])
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->callSilent($command, $arguments);
+        }
+        
+        /**
+         * Determine if the given argument is present.
+         *
+         * @param string|int $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasArgument($name)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->hasArgument($name);
+        }
+        
+        /**
+         * Get the value of a command argument.
+         *
+         * @param string|null $key
+         * @return string|array|null 
+         * @static 
+         */ 
+        public static function argument($key = null)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->argument($key);
+        }
+        
+        /**
+         * Get all of the arguments passed to the command.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function arguments()
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->arguments();
+        }
+        
+        /**
+         * Determine if the given option is present.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasOption($name)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->hasOption($name);
+        }
+        
+        /**
+         * Get the value of a command option.
+         *
+         * @param string|null $key
+         * @return string|array|bool|null 
+         * @static 
+         */ 
+        public static function option($key = null)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->option($key);
+        }
+        
+        /**
+         * Get all of the options passed to the command.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function options()
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->options();
+        }
+        
+        /**
+         * Confirm a question with the user.
+         *
+         * @param string $question
+         * @param bool $default
+         * @return bool 
+         * @static 
+         */ 
+        public static function confirm($question, $default = false)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->confirm($question, $default);
+        }
+        
+        /**
+         * Prompt the user for input.
+         *
+         * @param string $question
+         * @param string|null $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function ask($question, $default = null)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->ask($question, $default);
+        }
+        
+        /**
+         * Prompt the user for input with auto completion.
+         *
+         * @param string $question
+         * @param array|callable $choices
+         * @param string|null $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function anticipate($question, $choices, $default = null)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->anticipate($question, $choices, $default);
+        }
+        
+        /**
+         * Prompt the user for input with auto completion.
+         *
+         * @param string $question
+         * @param array|callable $choices
+         * @param string|null $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function askWithCompletion($question, $choices, $default = null)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->askWithCompletion($question, $choices, $default);
+        }
+        
+        /**
+         * Prompt the user for input but hide the answer from the console.
+         *
+         * @param string $question
+         * @param bool $fallback
+         * @return mixed 
+         * @static 
+         */ 
+        public static function secret($question, $fallback = true)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->secret($question, $fallback);
+        }
+        
+        /**
+         * Give the user a single choice from an array of answers.
+         *
+         * @param string $question
+         * @param array $choices
+         * @param string|null $default
+         * @param mixed|null $attempts
+         * @param bool $multiple
+         * @return string|array 
+         * @static 
+         */ 
+        public static function choice($question, $choices, $default = null, $attempts = null, $multiple = false)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->choice($question, $choices, $default, $attempts, $multiple);
+        }
+        
+        /**
+         * Format input to textual table.
+         *
+         * @param array $headers
+         * @param \Illuminate\Contracts\Support\Arrayable|array $rows
+         * @param string $tableStyle
+         * @param array $columnStyles
+         * @return void 
+         * @static 
+         */ 
+        public static function table($headers, $rows, $tableStyle = 'default', $columnStyles = [])
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        $instance->table($headers, $rows, $tableStyle, $columnStyles);
+        }
+        
+        /**
+         * Write a string as information output.
+         *
+         * @param string $string
+         * @param int|string|null $verbosity
+         * @return void 
+         * @static 
+         */ 
+        public static function info($string, $verbosity = null)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        $instance->info($string, $verbosity);
+        }
+        
+        /**
+         * Write a string as standard output.
+         *
+         * @param string $string
+         * @param string|null $style
+         * @param int|string|null $verbosity
+         * @return void 
+         * @static 
+         */ 
+        public static function line($string, $style = null, $verbosity = null)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        $instance->line($string, $style, $verbosity);
+        }
+        
+        /**
+         * Write a string as comment output.
+         *
+         * @param string $string
+         * @param int|string|null $verbosity
+         * @return void 
+         * @static 
+         */ 
+        public static function comment($string, $verbosity = null)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        $instance->comment($string, $verbosity);
+        }
+        
+        /**
+         * Write a string as question output.
+         *
+         * @param string $string
+         * @param int|string|null $verbosity
+         * @return void 
+         * @static 
+         */ 
+        public static function question($string, $verbosity = null)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        $instance->question($string, $verbosity);
+        }
+        
+        /**
+         * Write a string as error output.
+         *
+         * @param string $string
+         * @param int|string|null $verbosity
+         * @return void 
+         * @static 
+         */ 
+        public static function error($string, $verbosity = null)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        $instance->error($string, $verbosity);
+        }
+        
+        /**
+         * Write a string as warning output.
+         *
+         * @param string $string
+         * @param int|string|null $verbosity
+         * @return void 
+         * @static 
+         */ 
+        public static function warn($string, $verbosity = null)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        $instance->warn($string, $verbosity);
+        }
+        
+        /**
+         * Write a string in an alert box.
+         *
+         * @param string $string
+         * @return void 
+         * @static 
+         */ 
+        public static function alert($string)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        $instance->alert($string);
+        }
+        
+        /**
+         * Set the input interface implementation.
+         *
+         * @param \Symfony\Component\Console\Input\InputInterface $input
+         * @return void 
+         * @static 
+         */ 
+        public static function setInput($input)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        $instance->setInput($input);
+        }
+        
+        /**
+         * Set the output interface implementation.
+         *
+         * @param \Illuminate\Console\OutputStyle $output
+         * @return void 
+         * @static 
+         */ 
+        public static function setOutput($output)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        $instance->setOutput($output);
+        }
+        
+        /**
+         * Get the output implementation.
+         *
+         * @return \Illuminate\Console\OutputStyle 
+         * @static 
+         */ 
+        public static function getOutput()
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        /** @var \Savannabits\Savadmin\Savadmin $instance */
+                        return $instance->getOutput();
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        \Savannabits\Savadmin\Savadmin::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        \Savannabits\Savadmin\Savadmin::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+            //Method inherited from \Illuminate\Console\Command            
+                        return \Savannabits\Savadmin\Savadmin::hasMacro($name);
+        }
+         
+    }
+ 
+}
+
+namespace Yajra\DataTables\Facades { 
+
+    /**
+     * 
+     *
+     * @mixin \Yajra\DataTables\DataTables
+     * @see \Yajra\DataTables\DataTables
+     */ 
+    class DataTables {
+        
+        /**
+         * Make a DataTable instance from source.
+         * 
+         * Alias of make for backward compatibility.
+         *
+         * @param mixed $source
+         * @return mixed 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function of($source)
+        {
+                        return \Yajra\DataTables\DataTables::of($source);
+        }
+        
+        /**
+         * Make a DataTable instance from source.
+         *
+         * @param mixed $source
+         * @return mixed 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function make($source)
+        {
+                        return \Yajra\DataTables\DataTables::make($source);
+        }
+        
+        /**
+         * Get request object.
+         *
+         * @return \Yajra\DataTables\Utilities\Request 
+         * @static 
+         */ 
+        public static function getRequest()
+        {
+                        /** @var \Yajra\DataTables\DataTables $instance */
+                        return $instance->getRequest();
+        }
+        
+        /**
+         * Get config instance.
+         *
+         * @return \Yajra\DataTables\Utilities\Config 
+         * @static 
+         */ 
+        public static function getConfig()
+        {
+                        /** @var \Yajra\DataTables\DataTables $instance */
+                        return $instance->getConfig();
+        }
+        
+        /**
+         * 
+         *
+         * @deprecated Please use query() instead, this method will be removed in a next version.
+         * @param $builder
+         * @return \Yajra\DataTables\QueryDataTable 
+         * @static 
+         */ 
+        public static function queryBuilder($builder)
+        {
+                        /** @var \Yajra\DataTables\DataTables $instance */
+                        return $instance->queryBuilder($builder);
+        }
+        
+        /**
+         * DataTables using Query.
+         *
+         * @param \Illuminate\Database\Query\Builder|mixed $builder
+         * @return \Yajra\DataTables\DataTableAbstract|\Yajra\DataTables\QueryDataTable 
+         * @static 
+         */ 
+        public static function query($builder)
+        {
+                        /** @var \Yajra\DataTables\DataTables $instance */
+                        return $instance->query($builder);
+        }
+        
+        /**
+         * DataTables using Eloquent Builder.
+         *
+         * @param \Illuminate\Database\Eloquent\Builder|mixed $builder
+         * @return \Yajra\DataTables\DataTableAbstract|\Yajra\DataTables\EloquentDataTable 
+         * @static 
+         */ 
+        public static function eloquent($builder)
+        {
+                        /** @var \Yajra\DataTables\DataTables $instance */
+                        return $instance->eloquent($builder);
+        }
+        
+        /**
+         * DataTables using Collection.
+         *
+         * @param \Illuminate\Support\Collection|array $collection
+         * @return \Yajra\DataTables\DataTableAbstract|\Yajra\DataTables\CollectionDataTable 
+         * @static 
+         */ 
+        public static function collection($collection)
+        {
+                        /** @var \Yajra\DataTables\DataTables $instance */
+                        return $instance->collection($collection);
+        }
+        
+        /**
+         * DataTables using Collection.
+         *
+         * @param \Illuminate\Http\Resources\Json\AnonymousResourceCollection|array $collection
+         * @return \Yajra\DataTables\DataTableAbstract|\Yajra\DataTables\ApiResourceDataTable 
+         * @static 
+         */ 
+        public static function resource($resource)
+        {
+                        /** @var \Yajra\DataTables\DataTables $instance */
+                        return $instance->resource($resource);
+        }
+        
+        /**
+         * Get html builder instance.
+         *
+         * @return \Yajra\DataTables\Html\Builder 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function getHtmlBuilder()
+        {
+                        /** @var \Yajra\DataTables\DataTables $instance */
+                        return $instance->getHtmlBuilder();
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Yajra\DataTables\DataTables::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Yajra\DataTables\DataTables::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Yajra\DataTables\DataTables::hasMacro($name);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -18519,6 +21155,18 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
 
     class Flare extends \Facade\Ignition\Facades\Flare {}
+
+    class Image extends \Intervention\Image\Facades\Image {}
+
+    class Form extends \Collective\Html\FormFacade {}
+
+    class Html extends \Collective\Html\HtmlFacade {}
+
+    class Excel extends \Maatwebsite\Excel\Facades\Excel {}
+
+    class Savadmin extends \Savannabits\Savadmin\SavadminFacade {}
+
+    class DataTables extends \Yajra\DataTables\Facades\DataTables {}
  
 }
 

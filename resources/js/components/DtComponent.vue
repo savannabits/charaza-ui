@@ -1,5 +1,5 @@
 <template>
-    <table :id="tableId" class="table table-hover table-bordered table-striped datatable" style="width:100%">
+    <table :id="tableId" class="table table-hover" :class="tableClasses" style="width:100%">
         <thead>
         <tr>
             <th v-for="column of columns" :key="column.data">{{column.title || column.data}}</th>
@@ -15,6 +15,10 @@
             "tableId": {
                 required: true,
                 type: String
+            },
+            "tableClasses": {
+                required: false,
+                default: "",
             },
             "processing": {
                 type: Boolean,
@@ -52,6 +56,7 @@
         data() {
             return {
                 item_id: null,
+                table: null
             }
         },
         mounted() {
@@ -68,22 +73,34 @@
                 },
             ]
             $(document).ready(function() {
-                $(`#${vm.tableId}`).DataTable({
+                vm.table = $(`#${vm.tableId}`).DataTable({
                     processing: true,
                     serverSide: true,
+                    stateSave: true,
                     ajax: vm.ajaxUrl,
                     columns: columns,
                     columnDefs: vm.columnDefs
                 });
-                $(`#${vm.tableId}`).on('click', '.action-button', function (e) {
+                vm.table.on('click', '.action-button', function (e) {
                     var ev = $(this)
                     if (ev.data('tag') ==='button') {
+                        vm.$emit(`${ev.data('action')}`,{
+                            id: ev.data('id'),
+                        });
                         vm.$root.$emit(`${ev.data('action')}`,{
                             id: ev.data('id'),
                         });
                     }
                 });
-                console.log(`Datatable ${vm.tableId } has been mounted`);
+
+            })
+            vm.$root.$on("refresh-dt", function(e) {
+                if (e.tableId === vm.tableId) {
+                    //Refresh Table here
+                    if (vm.table) {
+                        vm.table.ajax.reload(null,false);
+                    }
+                }
             })
         },
         methods: {
@@ -103,7 +120,8 @@
                         data-url="${actionButton.url}"
                         data-id="${payload.id}"
                         data-tag="${actionButton.tag}"
-                    >${actionButton.title}</${actionButton.tag}>
+                    ><i v-if="${actionButton.icon}" class="${actionButton.icon}"></i> ${actionButton.title}
+                    </${actionButton.tag}>
                     `
                 });
                 return actions;

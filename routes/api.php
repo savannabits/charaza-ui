@@ -19,8 +19,19 @@ Route::group(['prefix' => env('API_VERSION',''),'as' => 'api.', 'namespace' => "
     Route::get('/', function () {
         return "Welcome to the API";
     });
-    Route::group(['prefix' => "users", "middleware" => ['auth:sanctum'], 'as' => 'users.'],function() {
-        Route::get("", "UserController@index")->name('index');
-        Route::get("dt", "UserController@dt")->name('dt');
+
+    Route::group(['middleware' => "auth:sanctum"], function() {
+        Route::group(['prefix' => "users", 'as' => 'users.'],function() {
+            Route::get("dt", "UserController@dt")->name('dt');
+        });
+        Route::apiResource('users',"UserController")->parameters(["users" => "user"]);
+
+        Route::group(['prefix' => "roles", 'as' => 'roles.'],function() {
+            Route::get("dt", "RoleController@dt")->name('dt');
+        });
+        Route::apiResource('roles',"RoleController")->parameters(["roles" => "role"]);
+
+        /*{APPEND_ROUTES}*/
     });
+
 });
