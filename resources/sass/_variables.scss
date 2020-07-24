@@ -2,18 +2,43 @@
 $body-bg: #f8fafc;
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
+$font-family-sans-serif: 'Poppins', sans-serif;
+$font-size-base: 0.95rem;
 $line-height-base: 1.6;
 
 // Colors
-$blue: #3490dc;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$blue: #4490ff;
 $indigo: #6574cd;
 $purple: #9561e2;
 $pink: #f66d9b;
 $red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+$white: #fff;
+
+$primary: $blue;
+$secondary: #C5CBE3;
+$info: $yellow;
+$warning: #D79922;
+$danger: #F13D20;
+
+$table-cell-padding:          .75rem !default;
+$table-cell-padding-sm:       .3rem !default;
+
+$table-hover-bg:              rgba($primary, .1);
+
+$table-border-color:          rgba($primary,.1);
+
+$table-head-color:            $primary !default;
+
+$table-bg-level:              -9 !default;
+$table-border-level:          -6 !default;
+
+$sidebar-bg: lighten($primary,20%);
+$sidebar-sub-bg: lighten($primary, 30%);
+$sidebar-color: $white;
+$sidebar-width: 250px;
+$sidebar-min-width: 80px;

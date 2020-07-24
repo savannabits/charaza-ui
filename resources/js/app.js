@@ -4,18 +4,25 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-
-import DtComponent from "./components/DtComponent";
-
-require('./bootstrap');
+import './bootstrap';
 import BootstrapVue, {BootstrapVueIcons} from "bootstrap-vue";
-window.Vue = require('vue');
-Vue.prototype.$dtAction = function(e, row) {
-    console.log(row);
+import Vue from "vue";
+window.Vue = Vue;
+import Snotify, { SnotifyPosition } from 'vue-snotify'
+
+const options = {
+    toast: {
+        position: SnotifyPosition.rightTop,
+        showProgressBar: false
+    }
 }
-Vue.component('dt-component', DtComponent)
+
+Vue.use(Snotify, options)
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
+// Vue.component('dt-component', DtComponent)
+Vue.component('dt-component', () => import(/*webpackChunkName: 'js/dt-component'*/'./components/DtComponent'))
+import "./backend"
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -36,9 +43,9 @@ Vue.use(BootstrapVueIcons);
 const app = new Vue({
     el: '#app',
     mounted() {
-        this.$root.$on("edit-user", function(e) {
+        /*this.$root.$on("edit-user", function(e) {
             console.log("an edit user event was triggeredd");
             console.log(e);
-        })
+        })*/
     }
 });

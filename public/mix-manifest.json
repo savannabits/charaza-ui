@@ -1,4 +1,13 @@
 {
+    "/css/app.css": "/css/app.css",
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/dt-component.js": "/js/dt-component.js",
+    "/js/manifest.js": "/js/manifest.js",
+    "/js/users-component.js": "/js/users-component.js",
+    "/js/vendor.js": "/js/vendor.js",
+    "/vendors~/js/users-component.js": "/vendors~/js/users-component.js",
+    "/vendors~js/users-component.js": "/vendors~js/users-component.js",
+    "/js/roles-component.js": "/js/roles-component.js",
+    "/vendors~js/roles-component~js/users-component.js": "/vendors~js/roles-component~js/users-component.js",
+    "/vendors~js/roles-component.js": "/vendors~js/roles-component.js"
 }

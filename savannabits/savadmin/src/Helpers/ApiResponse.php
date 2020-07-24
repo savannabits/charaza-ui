@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\HeaderBag;
 
 class ApiResponse
 {
-    private $success=true, $message="Request Successful.", $payload=[], $code=200, $headers=[];
+    private $success=true, $message="Request Successful.", $payload=[], $code, $headers=[];
 
     /**
      * The operation was successful.
@@ -18,6 +18,9 @@ class ApiResponse
      */
     public function success() {
         $this->success = true;
+        if (!$this->code) {
+            $this->code = 200;
+        }
         return $this;
     }
 
@@ -27,6 +30,9 @@ class ApiResponse
      */
     public function failed() {
         $this->success = false;
+        if (!$this->code) {
+            $this->code = 500;
+        }
         return $this;
     }
 
@@ -36,7 +42,7 @@ class ApiResponse
      * @return ApiResponse
      */
     public function message($message="") {
-        $this->message = $this;
+        $this->message = $message;
         return $this;
     }
 
