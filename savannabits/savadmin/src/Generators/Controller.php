@@ -87,7 +87,7 @@ class Controller extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('savannabits/admin-generator::'.$this->view, [
+        return view('sv::'.$this->view, [
             'controllerBaseName' => $this->classBaseName,
             'controllerNamespace' => $this->classNamespace,
             'modelBaseName' => $this->modelBaseName,

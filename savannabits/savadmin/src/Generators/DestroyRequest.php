@@ -34,7 +34,7 @@ class DestroyRequest extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('savannabits/admin-generator::destroy-request', [
+        return view('sv::destroy-request', [
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,
             'modelWithNamespaceFromDefault' => $this->modelWithNamespaceFromDefault,

@@ -36,7 +36,7 @@ class BulkDestroyRequest extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('savannabits/admin-generator::bulk-destroy-request', [
+        return view('sv::bulk-destroy-request', [
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,
             'modelWithNamespaceFromDefault' => $this->modelWithNamespaceFromDefault,

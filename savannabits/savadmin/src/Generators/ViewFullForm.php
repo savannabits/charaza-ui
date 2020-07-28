@@ -140,7 +140,7 @@ class ViewFullForm extends ViewGenerator {
 
     protected function buildForm() {
 
-        return view('savannabits/admin-generator::'.$this->view, [
+        return view('sv::'.$this->view, [
             'modelBaseName' => $this->modelBaseName,
             'modelVariableName' => $this->modelVariableName,
             'route' => $this->route,
@@ -163,7 +163,7 @@ class ViewFullForm extends ViewGenerator {
     }
 
     protected function buildFormJs() {
-        return view('savannabits/admin-generator::'.$this->viewJs, [
+        return view('sv::'.$this->viewJs, [
             'modelJSName' => $this->formJsRelativePath,
 
             'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName),

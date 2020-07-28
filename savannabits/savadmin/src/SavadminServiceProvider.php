@@ -11,13 +11,33 @@ class SavadminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->commands([
+            Savadmin::class,
+            Generators\Model::class,
+            Generators\Controller::class,
+            Generators\ViewIndex::class,
+            Generators\ViewForm::class,
+            Generators\ViewFullForm::class,
+            Generators\ModelFactory::class,
+            Generators\Routes::class,
+            Generators\IndexRequest::class,
+            Generators\StoreRequest::class,
+            Generators\UpdateRequest::class,
+            Generators\DestroyRequest::class,
+            Generators\ImpersonalLoginRequest::class,
+            Generators\BulkDestroyRequest::class,
+            Generators\Lang::class,
+            Generators\Permissions::class,
+            Generators\Export::class,
+        ]);
+
         /*
          * Optional methods to load your package assets
          */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'savadmin');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'savadmin');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+//         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'savadmin');
+         $this->loadViewsFrom(__DIR__.'/../resources/views', 'sv');
+//         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+//         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([

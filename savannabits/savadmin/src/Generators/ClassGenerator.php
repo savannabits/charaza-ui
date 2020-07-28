@@ -132,6 +132,7 @@ abstract class ClassGenerator extends Command {
                 $this->warn('File '.$path.' already exists! File will be deleted.');
                 $this->files->delete($path);
             } else {
+                //TODO: Backup the class then generate a new one... for recovery purposes.
                 $this->error('File '.$path.' already exists!');
                 return false;
             }

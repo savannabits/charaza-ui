@@ -52,7 +52,7 @@ class StoreRequest extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('savannabits/admin-generator::'.$this->view, [
+        return view('sv::'.$this->view, [
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,
             'modelWithNamespaceFromDefault' => $this->modelWithNamespaceFromDefault,

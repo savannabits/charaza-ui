@@ -178,7 +178,7 @@ class ViewForm extends ViewGenerator {
 
     protected function buildForm() {
 
-        return view('savannabits/admin-generator::'.$this->form, [
+        return view('sv::'.$this->form, [
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
             'modelPlural' => $this->modelPlural,
@@ -198,7 +198,7 @@ class ViewForm extends ViewGenerator {
 
     protected function buildFormRight() {
 
-        return view('savannabits/admin-generator::'.$this->formRight, [
+        return view('sv::'.$this->formRight, [
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
             'modelPlural' => $this->modelPlural,
@@ -219,7 +219,7 @@ class ViewForm extends ViewGenerator {
 
     protected function buildCreate() {
 
-        return view('savannabits/admin-generator::'.$this->create, [
+        return view('sv::'.$this->create, [
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
             'modelVariableName' => $this->modelVariableName,
@@ -241,7 +241,7 @@ class ViewForm extends ViewGenerator {
 
     protected function buildEdit() {
 
-        return view('savannabits/admin-generator::'.$this->edit, [
+        return view('sv::'.$this->edit, [
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
             'modelVariableName' => $this->modelVariableName,
@@ -264,7 +264,7 @@ class ViewForm extends ViewGenerator {
     }
 
     protected function buildFormJs() {
-        return view('savannabits/admin-generator::'.$this->formJs, [
+        return view('sv::'.$this->formJs, [
             'modelViewsDirectory' => $this->modelViewsDirectory,
             'modelJSName' => $this->modelJSName,
 
