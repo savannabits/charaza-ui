@@ -29,7 +29,7 @@ class Savadmin extends Command
             '--force' => $force,
         ]);
 
-        $this->call('sv:generate:factory', [
+        /*$this->call('sv:generate:factory', [
             'table_name' => $tableNameArgument,
             '--model-name' => $modelOption,
             '--seed' => $this->option('seed'),
@@ -122,9 +122,9 @@ class Savadmin extends Command
             if ($this->option('no-interaction') || $this->confirm('Do you want to attach generated permissions to the default role now?', true)) {
                 $this->call('migrate');
             }
-        }
+        }*/
 
-        $this->info('Generating whole admin finished');
+        $this->info('Generating whole admin module finished');
     }
 
     protected function getArguments() {

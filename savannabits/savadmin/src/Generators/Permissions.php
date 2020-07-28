@@ -82,7 +82,7 @@ class Permissions extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('savannabits/admin-generator::permissions', [
+        return view('sv::permissions', [
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,
             'className' => $this->generateClassNameFromTable($this->tableName),

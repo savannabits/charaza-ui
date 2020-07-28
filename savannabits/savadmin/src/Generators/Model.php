@@ -1,5 +1,6 @@
 <?php namespace Savannabits\Savadmin\Generators;
 
+use Doctrine\DBAL\Schema\ForeignKeyConstraint;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -54,10 +55,20 @@ class Model extends ClassGenerator {
     }
 
     protected function buildClass() {
-        return view('savannabits/admin-generator::'.$this->view, [
+        //Set belongsTo Relations
+        $this->relations["belongsTo"] = collect(\Schema::getConnection()->getDoctrineSchemaManager()->listTableForeignKeys($this->tableName))->map(function($fk) {
+            /**@var ForeignKeyConstraint $fk*/
+            return [
+                "function_name" => Str::camel(Str::singular($fk->getForeignTableName())),
+                "related_table" => $fk->getForeignTableName(),
+                "related_model" => "\\$this->modelNamespace\\". Str::studly(Str::singular($fk->getForeignTableName())).'::class',
+                "foreign_key" => collect($fk->getColumns())->first(),
+                "owner_key" => collect($fk->getForeignColumns())->first(),
+            ];
+        })->keyBy('related_table');
+        return view('sv::'.$this->view, [
             'modelBaseName' => $this->classBaseName,
             'modelNameSpace' => $this->classNamespace,
-
             // if table name differs from the snake case plural form of the classname, then we need to specify the table name
             'tableName' => ($this->tableName !== Str::snake(Str::plural($this->classBaseName))) ? $this->tableName : null,
 
@@ -65,7 +76,7 @@ class Model extends ClassGenerator {
                 return $column['type'] == "datetime" || $column['type'] == "date";
             })->pluck('name'),
             'fillable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
-                return !in_array($column['name'], ['id', 'created_at', 'updated_at', 'deleted_at', 'remember_token']);
+                return !in_array($column['name'], ['id', 'created_at', 'updated_at', 'deleted_at', 'remember_token','slug']);
             })->pluck('name'),
             'hidden' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return in_array($column['name'], ['password', 'remember_token']);
@@ -79,8 +90,8 @@ class Model extends ClassGenerator {
             'hasSoftDelete' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return $column['name'] == "deleted_at";
             })->count() > 0,
+            'routeBaseName' => Str::kebab(Str::plural($this->classBaseName)),
             'resource' => $this->resource,
-
             'relations' => $this->relations,
         ])->render();
     }

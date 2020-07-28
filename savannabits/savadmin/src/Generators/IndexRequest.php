@@ -34,7 +34,7 @@ class IndexRequest extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('savannabits/admin-generator::index-request', [
+        return view('sv::index-request', [
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,
             'modelWithNamespaceFromDefault' => $this->modelWithNamespaceFromDefault,

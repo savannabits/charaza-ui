@@ -85,7 +85,7 @@ trait Names
 
         $controllerFullName = $controllerGenerator->qualifyClass($controllerName);
         if (!Str::startsWith($controllerFullName,
-            $startsWith = trim($controllerGenerator->rootNamespace(), '\\') . '\Http\\Controllers\\Admin\\')) {
+            $startsWith = trim($controllerGenerator->rootNamespace(), '\\') . '\Http\\Controllers\\Api\\')) {
             $this->controllerWithNamespaceFromDefault = $controllerFullName;
         } else {
             $this->controllerWithNamespaceFromDefault = Str::replaceFirst($startsWith, '', $controllerFullName);

@@ -46,7 +46,7 @@ class Export extends ClassGenerator {
     }
 
     protected function buildClass() {
-        return view('savannabits/admin-generator::'.$this->view, [
+        return view('sv::'.$this->view, [
             'exportNamespace' => $this->classNamespace,
             'modelFullName' => $this->modelFullName,
             'classBaseName' => $this->exportBaseName,

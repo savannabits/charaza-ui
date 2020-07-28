@@ -68,7 +68,7 @@ class Lang extends FileAppender {
     }
 
     protected function buildClass() {
-        return view('savannabits/admin-generator::'.$this->view, [
+        return view('sv::'.$this->view, [
             'modelLangFormat' => $this->modelLangFormat,
             'modelBaseName' => $this->modelBaseName,
             'modelPlural' => $this->modelPlural,

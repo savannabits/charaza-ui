@@ -113,7 +113,7 @@ class ViewIndex extends ViewGenerator {
 
     protected function buildView() {
 
-        return view('savannabits/admin-generator::'.$this->view, [
+        return view('sv::'.$this->view, [
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
             'modelPlural' => $this->modelPlural,
@@ -155,7 +155,7 @@ class ViewIndex extends ViewGenerator {
     }
 
     protected function buildListingJs() {
-        return view('savannabits/admin-generator::'.$this->viewJs, [
+        return view('sv::'.$this->viewJs, [
             'modelViewsDirectory' => $this->modelViewsDirectory,
             'modelJSName' => $this->modelJSName,
         ])->render();

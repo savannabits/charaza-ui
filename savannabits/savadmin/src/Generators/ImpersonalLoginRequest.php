@@ -34,7 +34,7 @@ class ImpersonalLoginRequest extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('savannabits/admin-generator::templates.admin-user.impersonal-login-request', [
+        return view('sv::templates.admin-user.impersonal-login-request', [
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,
             'modelWithNamespaceFromDefault' => $this->modelWithNamespaceFromDefault,
