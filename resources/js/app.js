@@ -5,10 +5,12 @@
  */
 
 import './bootstrap';
+import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
 import BootstrapVue, {BootstrapVueIcons} from "bootstrap-vue";
 import Vue from "vue";
 window.Vue = Vue;
 import Snotify, { SnotifyPosition } from 'vue-snotify'
+import VeeValidate from "vee-validate";
 
 const options = {
     toast: {
@@ -18,10 +20,14 @@ const options = {
 }
 
 Vue.use(Snotify, options)
+Vue.use(VeeValidate,{
+    inject: true
+})
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 // Vue.component('dt-component', DtComponent)
 Vue.component('dt-component', () => import(/*webpackChunkName: 'js/dt-component'*/'./components/DtComponent'))
+Vue.component('datePicker', () => import(/*webpackChunkName: 'js/date-picker'*/'vue-bootstrap-datetimepicker'))
 import "./backend"
 /**
  * The following block of code may be used to automatically register your

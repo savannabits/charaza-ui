@@ -1,4 +1,7 @@
+import DateUtils from "../mixins/DateUtils";
+
 export default {
+    mixins:[DateUtils],
     data() {
         return {
             form: {},
@@ -38,12 +41,24 @@ export default {
         axios.defaults.baseURL = this.appUrl;
     },
     methods: {
+        validateState(ref) {
+            if (
+                this.fields[ref] &&
+                (this.fields[ref].dirty || this.fields[ref].validated)
+            ) {
+                return !this.errors.has(ref);
+            }
+            return null;
+        },
         // Reset form
         resetForm() {
             this.form = {
                 ...this.model,
                 api_route: this.apiRoute
             };
+            this.$nextTick(() => {
+                this.$validator.reset();
+            });
         },
         /**
          * Show create or edit form
@@ -91,17 +106,24 @@ export default {
         async submitForm(e, url,method='post') {
             let vm = this;
             return new Promise((resolve, reject) => {
-                axios.request({
-                    method: method,
-                    url: url,
-                    data: vm.form,
-                }).then(res => {
-                    vm.$snotify.success(res.data.message);
-                    vm.issueGlobalDtUpdateEvent(vm.tableId);
-                    resolve(res.data);
-                }).catch(err => {
-                    vm.$snotify.error(err.response?.data?.message || err.message || err)
-                    reject(err);
+                vm.$validator.validateAll().then(valid => {
+                    if (!valid) {
+                        reject("The form contains invalid fields")
+                        return;
+                    }
+                    axios.request({
+                        method: method,
+                        url: url,
+                        data: vm.form,
+                    }).then(res => {
+                        vm.$snotify.success(res.data.message);
+                        vm.issueGlobalDtUpdateEvent(vm.tableId);
+                        resolve(res.data);
+                    }).catch(err => {
+                        vm.$setErrorsFromResponse(err.response?.data);
+                        vm.$snotify.error(err.response?.data?.message || err.message || err)
+                        reject(err);
+                    })
                 })
             })
         },

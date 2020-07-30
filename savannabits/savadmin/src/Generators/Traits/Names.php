@@ -50,7 +50,7 @@ trait Names
         $this->modelBaseName = class_basename($modelName);
         $this->modelPlural = Str::plural(class_basename($modelName));
         $this->modelVariableName = lcfirst(Str::singular(class_basename($this->modelBaseName)));
-        $this->modelRouteAndViewName = Str::lower(Str::kebab($this->modelBaseName));
+        $this->modelRouteAndViewName = Str::plural(Str::lower(Str::kebab($this->modelBaseName)));
         $this->modelNamespace = Str::replaceLast("\\" . $this->modelBaseName, '', $this->modelFullName);
         if (!Str::startsWith($this->modelFullName,
             $startsWith = trim($modelGenerator->rootNamespace(), '\\') . '\Models\\')) {
@@ -58,10 +58,10 @@ trait Names
         } else {
             $this->modelWithNamespaceFromDefault = Str::replaceFirst($startsWith, '', $this->modelFullName);
         }
-        $this->modelViewsDirectory = Str::lower(Str::kebab(implode('/',
+        $this->modelViewsDirectory = Str::plural(Str::lower(Str::kebab(implode('/',
             collect(explode('\\', $this->modelWithNamespaceFromDefault))->map(function ($part) {
                 return lcfirst($part);
-            })->toArray())));
+            })->toArray()))));
 
         $parts = collect(explode('\\', $this->modelWithNamespaceFromDefault));
         $parts->pop();
@@ -69,7 +69,7 @@ trait Names
         $this->resource = Str::lower(Str::kebab(implode('', $parts->toArray())));
 
         $this->modelDotNotation = str_replace('/', '.', $this->modelViewsDirectory);
-        $this->modelJSName = str_replace('/', '-', $this->modelViewsDirectory);
+        $this->modelJSName = Str::plural(str_replace('/', '-', $this->modelViewsDirectory));
         $this->modelLangFormat = str_replace('/', '_', $this->modelViewsDirectory);
 
         if ($this instanceof Controller) {
@@ -85,7 +85,9 @@ trait Names
 
         $controllerFullName = $controllerGenerator->qualifyClass($controllerName);
         if (!Str::startsWith($controllerFullName,
-            $startsWith = trim($controllerGenerator->rootNamespace(), '\\') . '\Http\\Controllers\\Api\\')) {
+            $startsWith = trim($controllerGenerator->rootNamespace(), '\\') . '\Http\\Controllers\\Admin\\')
+            && !Str::startsWith($controllerFullName,
+                $startsWith = trim($controllerGenerator->rootNamespace(), '\\') . '\Http\\Controllers\\Api\\' )) {
             $this->controllerWithNamespaceFromDefault = $controllerFullName;
         } else {
             $this->controllerWithNamespaceFromDefault = Str::replaceFirst($startsWith, '', $controllerFullName);

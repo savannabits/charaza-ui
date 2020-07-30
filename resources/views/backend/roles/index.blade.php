@@ -28,7 +28,7 @@
                                       v-on:show-role="showDetailsDialog"
                         ></dt-component>
                     </b-card>
-                    <b-modal v-if="form" v-on:ok.prevent="onFormSubmit" v-cloak ref="rolesFormDialog">
+                    <b-modal v-if="form" v-on:ok.prevent="onFormSubmit" no-close-on-backdrop v-cloak ref="rolesFormDialog">
                         <template v-slot:modal-title>
                             <h4 v-if="form.id" class="font-weight-bolder">Edit Role @{{ form.id }}</h4>
                             <h4 v-else class="font-weight-bolder">Create New Role</h4>

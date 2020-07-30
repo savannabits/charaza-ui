@@ -67,10 +67,9 @@ class ViewIndex extends ViewGenerator {
             $this->viewJs = 'templates.'.$template.'.listing-js';
         }
 
-        $viewPath = resource_path('views/admin/'.$this->modelViewsDirectory.'/index.blade.php');
-        $listingJsPath = resource_path('js/admin/'.$this->modelJSName.'/Listing.js');
-        $indexJsPath = resource_path('js/admin/'.$this->modelJSName.'/index.js');
-        $bootstrapJsPath = resource_path('js/admin/index.js');
+        $viewPath = resource_path('views/backend/'.$this->modelViewsDirectory.'/index.blade.php');
+        $listingJsPath = resource_path('js/backend/'.$this->modelJSName.'.js');
+        $indexJsPath = resource_path('js/backend/index.js');
 
         if ($this->alreadyExists($viewPath) && !$force) {
             $this->error('File '.$viewPath.' already exists!');
@@ -88,7 +87,7 @@ class ViewIndex extends ViewGenerator {
         }
 
 
-        if ($this->alreadyExists($listingJsPath) && !$force) {
+        /*if ($this->alreadyExists($listingJsPath) && !$force) {
             $this->error('File '.$listingJsPath.' already exists!');
         } else {
             if ($this->alreadyExists($listingJsPath) && $force) {
@@ -100,27 +99,30 @@ class ViewIndex extends ViewGenerator {
 
             $this->files->put($listingJsPath, $this->buildListingJs());
             $this->info('Generating '.$listingJsPath.' finished');
-        }
+        }*/
 
 
-		if ($this->appendIfNotAlreadyAppended($indexJsPath, "import './Listing';".PHP_EOL)){
-			$this->info('Appending Listing to '.$indexJsPath.' finished');
-		}
-		if ($this->appendIfNotAlreadyAppended($bootstrapJsPath, "import './". $this->modelJSName ."';".PHP_EOL)){
+//		if ($this->appendIfNotAlreadyAppended($indexJsPath, "Vue.component('".$this->modelJSName."-component', () => import(/*webpackChunkName: 'js/".$this->modelJSName."-component'*/'./".$this->modelJSName."'));".PHP_EOL)){
+//			$this->info('Appending index component to '.$indexJsPath.' finished');
+//		}
+		/*if ($this->appendIfNotAlreadyAppended($bootstrapJsPath, "import './". $this->modelJSName ."';".PHP_EOL)){
 			$this->info('Appending '.$this->modelJSName.'/index.js to '.$bootstrapJsPath.' finished');
-		};
+		};*/
     }
 
     protected function buildView() {
 
         return view('sv::'.$this->view, [
             'modelBaseName' => $this->modelBaseName,
-            'modelRouteAndViewName' => $this->modelRouteAndViewName,
+            'modelRouteAndViewName' => str_plural($this->modelRouteAndViewName),
             'modelPlural' => $this->modelPlural,
             'modelViewsDirectory' => $this->modelViewsDirectory,
             'modelJSName' => $this->modelJSName,
+            'modelVariableName' => $this->modelVariableName,
             'modelDotNotation' => $this->modelDotNotation,
             'modelLangFormat' => $this->modelLangFormat,
+            'modelTitle' => $this->titleSingular,
+            'modelTitlePlural' => $this->titlePlural,
             'resource' => $this->resource,
             'export' => $this->export,
             'containsPublishedAtColumn' => in_array("published_at", array_column($this->readColumnsFromTable($this->tableName)->toArray(), 'name')),

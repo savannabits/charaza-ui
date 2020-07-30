@@ -62,15 +62,16 @@ class Routes extends FileAppender {
         }
     }
 
-    protected function buildClass() {
-
+    protected function buildClass($api=false) {
         return view('sv::'.$this->view, [
+            'controllerClassName' => class_basename($this->controllerWithNamespaceFromDefault),
             'controllerPartiallyFullName' => $this->controllerWithNamespaceFromDefault,
+            'modelRouteName' => Str::plural($this->modelRouteAndViewName),
             'modelVariableName' => $this->modelVariableName,
             'modelViewsDirectory' => $this->modelViewsDirectory,
             'resource' => $this->resource,
             'export' => $this->export,
-            'withoutBulk' => $this->withoutBulk,
+            'withoutBulk' => true,
         ])->render();
     }
 

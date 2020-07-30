@@ -18,7 +18,10 @@ mix.webpackConfig({
         publicPath: `${process.env.MIX_APP_URI || '/'}`
     }
 });
-
+mix.autoload({
+    'vue': ['Vue','window.Vue'],
+    'moment': ['moment','window.moment'],
+})
 mix
     .extract([
         // 'bootstrap',

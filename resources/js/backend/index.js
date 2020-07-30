@@ -1,3 +1,31 @@
+//Set Laravel validation errors to vee-validate
+Vue.prototype.$setErrorsFromResponse = function(errorResponse) {
+    // only allow this function to be run if the validator exists
+    if(!this.hasOwnProperty('$validator')) {
+        console.log("no validator found")
+        return;
+    }
+
+    // clear errors
+    this.$validator.errors.clear();
+
+    // check if errors exist
+    if(!errorResponse.hasOwnProperty('errors')) {
+        console.log("response has no errors property")
+        return;
+    }
+
+    let errorFields = Object.keys(errorResponse.errors);
+    // insert laravel errors
+    const vm = this;
+    errorFields.map(field => {
+        let errorString = errorResponse.errors[field].join(', ');
+        console.log(errorString);
+        vm.$validator.errors.add({field: field, msg: errorString});
+    });
+};
 Vue.component('users-component', () => import(/*webpackChunkName: 'js/users-component'*/'./users'));
 Vue.component('roles-component', () => import(/*webpackChunkName: 'js/roles-component'*/'./roles'));
-/*{{COMPONENTS->DO NOT DELETE}}*/
+Vue.component('product-types-component', () => import(/*webpackChunkName: 'js/product-types-component'*/'./product-types'));
+Vue.component('products-component', () => import(/*webpackChunkName: 'js/products-component'*/'./products'));
+Vue.component('loans-component', () => import(/*webpackChunkName: 'js/loans-component'*/'./loans'));

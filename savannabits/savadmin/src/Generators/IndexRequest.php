@@ -35,10 +35,10 @@ class IndexRequest extends ClassGenerator {
     protected function buildClass() {
 
         return view('sv::index-request', [
-            'modelBaseName' => $this->modelBaseName,
-            'modelDotNotation' => $this->modelDotNotation,
+            'modelBaseName'                 => $this->modelBaseName,
+            'modelDotNotation'              => $this->modelDotNotation,
             'modelWithNamespaceFromDefault' => $this->modelWithNamespaceFromDefault,
-            'modelVariableName' => $this->modelVariableName,
+            'modelVariableName'             => $this->modelVariableName,
 
             'columnsToQuery' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return !($column['type'] == 'text' || $column['name'] == "password" || $column['name'] == "remember_token" || $column['name'] == "slug" || $column['name'] == "created_at" || $column['name'] == "updated_at" || $column['name'] == "deleted_at");
@@ -65,7 +65,7 @@ class IndexRequest extends ClassGenerator {
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Http\Requests\Admin\\'.$this->modelWithNamespaceFromDefault;
+        return $rootNamespace.'\Http\Requests\Api\\'.$this->modelWithNamespaceFromDefault;
     }
 
 }

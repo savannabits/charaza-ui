@@ -33,7 +33,8 @@ class Savadmin extends Command
             'table_name' => $tableNameArgument,
             '--model-name' => $modelOption,
             '--seed' => $this->option('seed'),
-        ]);
+        ]);*/
+
 
         $this->call('sv:generate:controller', [
             'table_name' => $tableNameArgument,
@@ -43,6 +44,15 @@ class Savadmin extends Command
             '--with-export' => $exportOption,
             '--without-bulk' => $withoutBulkOptions,
         ]);
+        $this->call('sv:generate:api:controller', [
+            'table_name' => $tableNameArgument,
+            'class_name' => $controllerOption,
+            '--model-name' => $modelOption,
+            '--force' => $force,
+            '--with-export' => $exportOption,
+            '--without-bulk' => $withoutBulkOptions,
+        ]);
+
 
         $this->call('sv:generate:request:index', [
             'table_name' => $tableNameArgument,
@@ -62,6 +72,7 @@ class Savadmin extends Command
             '--force' => $force,
         ]);
 
+        /**
         $this->call('sv:generate:request:destroy', [
             'table_name' => $tableNameArgument,
             '--model-name' => $modelOption,
@@ -75,8 +86,18 @@ class Savadmin extends Command
                 '--force' => $force,
             ]);
         }
+         */
+
 
         $this->call('sv:generate:routes', [
+            'table_name' => $tableNameArgument,
+            '--model-name' => $modelOption,
+            '--controller-name' => $controllerOption,
+            '--with-export' => $exportOption,
+            '--without-bulk' => $withoutBulkOptions,
+        ]);
+
+        $this->call('sv:generate:api:routes', [
             'table_name' => $tableNameArgument,
             '--model-name' => $modelOption,
             '--controller-name' => $controllerOption,
@@ -92,17 +113,20 @@ class Savadmin extends Command
             '--without-bulk' => $withoutBulkOptions,
         ]);
 
+
         $this->call('sv:generate:form', [
             'table_name' => $tableNameArgument,
             '--model-name' => $modelOption,
             '--force' => $force,
         ]);
 
+        /*
         $this->call('sv:generate:lang', [
             'table_name' => $tableNameArgument,
             '--model-name' => $modelOption,
             '--with-export' => $exportOption,
         ]);
+
 
         if($exportOption){
             $this->call('sv:generate:export', [
@@ -110,6 +134,8 @@ class Savadmin extends Command
                 '--force' => $force,
             ]);
         }
+
+        */
 
         if ($this->shouldGeneratePermissionsMigration()) {
             $this->call('sv:generate:permissions', [
@@ -122,9 +148,9 @@ class Savadmin extends Command
             if ($this->option('no-interaction') || $this->confirm('Do you want to attach generated permissions to the default role now?', true)) {
                 $this->call('migrate');
             }
-        }*/
+        }
 
-        $this->info('Generating whole admin module finished');
+        $this->info('Generating whole admin CRUD module finished');
     }
 
     protected function getArguments() {
