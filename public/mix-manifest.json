@@ -9,5 +9,19 @@
     "/vendors~js/users-component.js": "/vendors~js/users-component.js",
     "/js/roles-component.js": "/js/roles-component.js",
     "/vendors~js/roles-component~js/users-component.js": "/vendors~js/roles-component~js/users-component.js",
-    "/vendors~js/roles-component.js": "/vendors~js/roles-component.js"
+    "/vendors~js/roles-component.js": "/vendors~js/roles-component.js",
+    "/js/product-types-component.js": "/js/product-types-component.js",
+    "/js/date-picker.js": "/js/date-picker.js",
+    "/vendors~js/date-picker.js": "/vendors~js/date-picker.js",
+    "/js/product-types-component~js/roles-component.js": "/js/product-types-component~js/roles-component.js",
+    "/vendors~js/product-types-component~js/roles-component.js": "/vendors~js/product-types-component~js/roles-component.js",
+    "/vendors~js/product-types-component~js/roles-component~js/users-component.js": "/vendors~js/product-types-component~js/roles-component~js/users-component.js",
+    "/js/product-types-component~js/products-component~js/roles-component.js": "/js/product-types-component~js/products-component~js/roles-component.js",
+    "/js/products-component.js": "/js/products-component.js",
+    "/vendors~js/product-types-component~js/products-component~js/roles-component.js": "/vendors~js/product-types-component~js/products-component~js/roles-component.js",
+    "/vendors~js/product-types-component~js/products-component~js/roles-component~js/users-component.js": "/vendors~js/product-types-component~js/products-component~js/roles-component~js/users-component.js",
+    "/js/loans-component.js": "/js/loans-component.js",
+    "/js/loans-component~js/product-types-component~js/products-component~js/roles-component.js": "/js/loans-component~js/product-types-component~js/products-component~js/roles-component.js",
+    "/vendors~js/loans-component~js/product-types-component~js/products-component~js/roles-component.js": "/vendors~js/loans-component~js/product-types-component~js/products-component~js/roles-component.js",
+    "/vendors~js/loans-component~js/product-types-component~js/products-component~js/roles-component~js/us~7e9cc62a.js": "/vendors~js/loans-component~js/product-types-component~js/products-component~js/roles-component~js/us~7e9cc62a.js"
 }

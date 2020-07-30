@@ -37,6 +37,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mixins_DateUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mixins/DateUtils */ "./resources/js/mixins/DateUtils.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -49,7 +50,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_DateUtils__WEBPACK_IMPORTED_MODULE_1__["default"]],
   data: function data() {
     return {
       form: {},
@@ -88,10 +91,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     axios.defaults.baseURL = this.appUrl;
   },
   methods: {
+    validateState: function validateState(ref) {
+      if (this.fields[ref] && (this.fields[ref].dirty || this.fields[ref].validated)) {
+        return !this.errors.has(ref);
+      }
+
+      return null;
+    },
     // Reset form
     resetForm: function resetForm() {
+      var _this = this;
+
       this.form = _objectSpread(_objectSpread({}, this.model), {}, {
         api_route: this.apiRoute
+      });
+      this.$nextTick(function () {
+        _this.$validator.reset();
       });
     },
 
@@ -147,7 +162,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
      */
     submitForm: function submitForm(e, url) {
       var _arguments = arguments,
-          _this = this;
+          _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var method, vm;
@@ -156,21 +171,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context.prev = _context.next) {
               case 0:
                 method = _arguments.length > 2 && _arguments[2] !== undefined ? _arguments[2] : 'post';
-                vm = _this;
+                vm = _this2;
                 return _context.abrupt("return", new Promise(function (resolve, reject) {
-                  axios.request({
-                    method: method,
-                    url: url,
-                    data: vm.form
-                  }).then(function (res) {
-                    vm.$snotify.success(res.data.message);
-                    vm.issueGlobalDtUpdateEvent(vm.tableId);
-                    resolve(res.data);
-                  })["catch"](function (err) {
-                    var _err$response2, _err$response2$data;
+                  vm.$validator.validateAll().then(function (valid) {
+                    if (!valid) {
+                      reject("The form contains invalid fields");
+                      return;
+                    }
 
-                    vm.$snotify.error(((_err$response2 = err.response) === null || _err$response2 === void 0 ? void 0 : (_err$response2$data = _err$response2.data) === null || _err$response2$data === void 0 ? void 0 : _err$response2$data.message) || err.message || err);
-                    reject(err);
+                    axios.request({
+                      method: method,
+                      url: url,
+                      data: vm.form
+                    }).then(function (res) {
+                      vm.$snotify.success(res.data.message);
+                      vm.issueGlobalDtUpdateEvent(vm.tableId);
+                      resolve(res.data);
+                    })["catch"](function (err) {
+                      var _err$response2, _err$response3, _err$response3$data;
+
+                      vm.$setErrorsFromResponse((_err$response2 = err.response) === null || _err$response2 === void 0 ? void 0 : _err$response2.data);
+                      vm.$snotify.error(((_err$response3 = err.response) === null || _err$response3 === void 0 ? void 0 : (_err$response3$data = _err$response3.data) === null || _err$response3$data === void 0 ? void 0 : _err$response3$data.message) || err.message || err);
+                      reject(err);
+                    });
                   });
                 }));
 
@@ -191,7 +214,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     fetchModel: function fetchModel(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var vm;
@@ -199,7 +222,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                vm = _this2;
+                vm = _this3;
                 return _context2.abrupt("return", new Promise(function (resolve, reject) {
                   axios.get("".concat(vm.form.api_route, "/").concat(id)).then(function (res) {
                     vm.form = _objectSpread({}, res.data.payload);
@@ -222,6 +245,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         tableId: tableId
       });
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/mixins/DateUtils.js":
+/*!******************************************!*\
+  !*** ./resources/js/mixins/DateUtils.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dateConfig: {
+        format: 'YYYY-MM-DD'
+      },
+      dateTimeConfig: {
+        format: 'YYYY-MM-DD HH:mm:ss'
+      },
+      timeConfig: {
+        format: 'HH:mm:ss'
+      }
+    };
   }
 });
 

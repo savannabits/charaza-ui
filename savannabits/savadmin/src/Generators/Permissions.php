@@ -1,5 +1,6 @@
 <?php namespace Savannabits\Savadmin\Generators;
 
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 class Permissions extends ClassGenerator {
@@ -44,7 +45,7 @@ class Permissions extends ClassGenerator {
     }
 
     protected function generateClass($force = false) {
-        $fileName = 'fill_permissions_for_'.$this->modelRouteAndViewName.'.php';
+        $fileName = 'fill_permissions_for_'.str_replace("-","_",$this->modelRouteAndViewName).'.php';
         $path = database_path('migrations/'.date('Y_m_d_His', time()).'_'.$fileName);
 
         if ($oldPath = $this->alreadyExists($fileName)) {
@@ -99,6 +100,6 @@ class Permissions extends ClassGenerator {
     }
 
     public function generateClassNameFromTable($tableName) {
-        return 'FillPermissionsFor'.$this->modelBaseName;
+        return 'FillPermissionsFor'.Str::plural($this->modelBaseName);
     }
 }

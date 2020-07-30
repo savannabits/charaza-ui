@@ -16,6 +16,11 @@ class Product extends Model
     ];
     
     
+    protected $casts = [
+        'active' => 'boolean',
+    
+    ];
+    
     protected $dates = [
         'created_at',
         'updated_at',

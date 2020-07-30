@@ -7,7 +7,6 @@ use App\Http\Requests\roles\StoreRole;
 use App\Http\Requests\roles\UpdateRole;
 use App\Models\Role;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Savannabits\Savadmin\Helpers\ApiResponse;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -27,7 +26,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::paginate();
-        return $this->api->success()->message("All Roles")->payload($roles)->send();
+        return $this->api->success()->message("List of Roles")->payload($roles)->send();
     }
 
     public function dt(Request $request) {
@@ -37,22 +36,28 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StoreRole $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreRole $request)
     {
-        $array = $request->sanitizedArray();
-        $role = new Role($array);
-        $role->name = str_slug($role->display_name);
-        $role->saveOrFail();
-        return $this->api->success()->message('Role Created')->payload($role)->send();
+        try {
+            $array = $request->sanitizedArray();
+            $role = new Role($array);
+            $role->name = str_slug($role->display_name);
+            $role->saveOrFail();
+            return $this->api->success()->message('Role Created')->payload($role)->send();
+        } catch (\Throwable $exception) {
+            \Log::error($exception);
+            return $this->api->failed()->message($exception->getMessage())->payload([])->code(500)->send();
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param Role $role
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Request $request, Role $role)
@@ -67,8 +72,8 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param UpdateRole $request
+     * @param Role $role
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRole $request, Role $role)
@@ -88,11 +93,13 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Role $role
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        return $this->api->success()->message("Role has been deleted")->payload($role)->code(200)->send();
     }
 }

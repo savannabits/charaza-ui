@@ -1,5 +1,6 @@
 <?php namespace Savannabits\Savadmin\Generators;
 
+use Doctrine\DBAL\Schema\ForeignKeyConstraint;
 use Savannabits\Savadmin\Generators\Traits\FileManipulations;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
@@ -21,7 +22,7 @@ class Controller extends ClassGenerator {
      *
      * @var string
      */
-    protected $description = 'Generate a controller class';
+    protected $description = 'Generate a web controller class';
 
     /**
      * Path for view
@@ -43,6 +44,7 @@ class Controller extends ClassGenerator {
      * @return mixed
      */
     protected $withoutBulk = false;
+    protected $modelTitle;
 
     public function handle()
     {
@@ -72,12 +74,11 @@ class Controller extends ClassGenerator {
 
             $this->info('Generating '.$this->classFullName.' finished');
 
-            $icon = Arr::random(['icon-graduation', 'icon-puzzle', 'icon-compass', 'icon-drop', 'icon-globe', 'icon-ghost', 'icon-book-open', 'icon-flag', 'icon-star', 'icon-umbrella', 'icon-energy', 'icon-plane', 'icon-magnet', 'icon-diamond']);
-            if ($this->strReplaceInFile(
-                resource_path('views/admin/layout/sidebar.blade.php'),
-                '|url\(\'admin\/'.$this->resource.'\'\)|',
-                "{{-- Do not delete me :) I'm used for auto-generation menu items --}}",
-                "<li class=\"nav-item\"><a class=\"nav-link\" href=\"{{ url('admin/".$this->resource."') }}\"><i class=\"nav-icon ".$icon."\"></i> {{ trans('admin.".$this->modelLangFormat.".title') }}</a></li>".PHP_EOL."           {{-- Do not delete me :) I'm used for auto-generation menu items --}}"
+            $icon = "mdi-list";
+            if ($this->strReplaceInFileAnyway(
+                resource_path("views/layouts/partials/sidebar.blade.php"),
+                "{{--DO NOT REMOVE ME!--}}",
+                '@can("'.$this->modelRouteAndViewName.'.index")<li><a href=\'{{route("$adminPrefix.'.str_plural($this->modelRouteAndViewName).'.index")}}\'><i class="mdi mdi-menu"></i> '.$this->modelTitle.'</a></li>@endcan'.PHP_EOL."{{--DO NOT REMOVE ME!--}}"
             )) {
                 $this->info('Updating sidebar');
             }
@@ -87,12 +88,25 @@ class Controller extends ClassGenerator {
 
     protected function buildClass() {
 
+        //Set belongsTo Relations
+        $this->relations["belongsTo"] = collect(\Schema::getConnection()->getDoctrineSchemaManager()->listTableForeignKeys($this->tableName))->map(function($fk) {
+            /**@var ForeignKeyConstraint $fk*/
+            return [
+                "function_name" => Str::camel(Str::singular($fk->getForeignTableName())),
+                "related_table" => $fk->getForeignTableName(),
+                "related_model" => "\\$this->modelNamespace\\". Str::studly(Str::singular($fk->getForeignTableName())).'::class',
+                "foreign_key" => collect($fk->getColumns())->first(),
+                "owner_key" => collect($fk->getForeignColumns())->first(),
+            ];
+        })->keyBy('related_table');
+        $this->modelTitle = str_replace("_"," ", Str::title($this->tableName));
         return view('sv::'.$this->view, [
             'controllerBaseName' => $this->classBaseName,
             'controllerNamespace' => $this->classNamespace,
             'modelBaseName' => $this->modelBaseName,
             'modelFullName' => $this->modelFullName,
             'modelPlural' => $this->modelPlural,
+            'modelTitle' => $this->modelTitle,
             'modelVariableName' => $this->modelVariableName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
             'modelViewsDirectory' => $this->modelViewsDirectory,
@@ -112,7 +126,7 @@ class Controller extends ClassGenerator {
                 } else if($this->readColumnsFromTable($this->tableName)->contains('name', 'created_by_admin_user_id') && $this->readColumnsFromTable($this->tableName)->contains('name', 'updated_by_admin_user_id')) {
                     return !($column['type'] == 'text' || $column['name'] == "password" || $column['name'] == "remember_token" || $column['name'] == "slug" || $column['name'] == "deleted_at");
                 }
-                return !($column['type'] == 'text' || $column['name'] == "password" || $column['name'] == "remember_token" || $column['name'] == "slug" || $column['name'] == "created_at" || $column['name'] == "updated_at" || $column['name'] == "deleted_at");
+                return !($column['type'] == 'text' || $column['name'] == "password" || $column['name'] == "remember_token" || $column['name'] == "slug" || $column['name'] == "created_at" || $column['name'] == "deleted_at"||Str::contains($column['name'],"_id"));
             })->pluck('name')->toArray(),
             'columnsToSearchIn' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return ($column['type'] == 'json' || $column['type'] == 'text' || $column['type'] == 'string' || $column['name'] == "id") && !($column['name'] == "password" || $column['name'] == "remember_token");
@@ -142,7 +156,7 @@ class Controller extends ClassGenerator {
     }
 
     public function generateClassNameFromTable($tableName) {
-        return Str::studly($tableName).'Controller';
+        return Str::studly(Str::singular($tableName)).'Controller';
     }
 
     /**

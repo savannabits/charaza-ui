@@ -1,5 +1,6 @@
 <?php namespace Savannabits\Savadmin\Generators;
 
+use Doctrine\DBAL\Schema\ForeignKeyConstraint;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -31,7 +32,7 @@ class ViewForm extends ViewGenerator {
      *
      * @var string
      */
-    protected $edit = 'edit';
+    protected $show = 'show';
 
     /**
      * Path for form view
@@ -78,7 +79,7 @@ class ViewForm extends ViewGenerator {
             $this->setBelongToManyRelation($belongsToMany);
         }
 
-        $viewPath = resource_path('views/admin/'.$this->modelViewsDirectory.'/components/form-elements.blade.php');
+        $viewPath = resource_path('views/backend/'.$this->modelViewsDirectory.'/form.blade.php');
         if ($this->alreadyExists($viewPath) && !$force) {
             $this->error('File '.$viewPath.' already exists!');
         } else {
@@ -94,25 +95,7 @@ class ViewForm extends ViewGenerator {
             $this->info('Generating '.$viewPath.' finished');
         }
 
-        if(in_array("published_at", array_column($this->getVisibleColumns($this->tableName, $this->modelVariableName)->toArray(), 'name'))){
-            $viewPath = resource_path('views/admin/'.$this->modelViewsDirectory.'/components/form-elements-right.blade.php');
-            if ($this->alreadyExists($viewPath) && !$force) {
-                $this->error('File '.$viewPath.' already exists!');
-            } else {
-                if ($this->alreadyExists($viewPath) && $force) {
-                    $this->warn('File '.$viewPath.' already exists! File will be deleted.');
-                    $this->files->delete($viewPath);
-                }
-
-                $this->makeDirectory($viewPath);
-
-                $this->files->put($viewPath, $this->buildFormRight());
-
-                $this->info('Generating '.$viewPath.' finished');
-            }
-        }
-
-        $viewPath = resource_path('views/admin/'.$this->modelViewsDirectory.'/create.blade.php');
+        $viewPath = resource_path('views/backend/'.$this->modelViewsDirectory.'/show.blade.php');
         if ($this->alreadyExists($viewPath) && !$force) {
             $this->error('File '.$viewPath.' already exists!');
         } else {
@@ -123,29 +106,12 @@ class ViewForm extends ViewGenerator {
 
             $this->makeDirectory($viewPath);
 
-            $this->files->put($viewPath, $this->buildCreate());
+            $this->files->put($viewPath, $this->buildShow());
 
             $this->info('Generating '.$viewPath.' finished');
         }
 
-
-        $viewPath = resource_path('views/admin/'.$this->modelViewsDirectory.'/edit.blade.php');
-        if ($this->alreadyExists($viewPath) && !$force) {
-            $this->error('File '.$viewPath.' already exists!');
-        } else {
-            if ($this->alreadyExists($viewPath) && $force) {
-                $this->warn('File '.$viewPath.' already exists! File will be deleted.');
-                $this->files->delete($viewPath);
-            }
-
-            $this->makeDirectory($viewPath);
-
-            $this->files->put($viewPath, $this->buildEdit());
-
-            $this->info('Generating '.$viewPath.' finished');
-        }
-
-        $formJsPath = resource_path('js/admin/'.$this->modelJSName.'/Form.js');
+        $formJsPath = resource_path('js/backend/'.$this->modelJSName.'.js');
 
         if ($this->alreadyExists($formJsPath) && !$force) {
             $this->error('File '.$formJsPath.' already exists!');
@@ -161,22 +127,28 @@ class ViewForm extends ViewGenerator {
             $this->info('Generating '.$formJsPath.' finished');
         }
 
-		$indexJsPath = resource_path('js/admin/'.$this->modelJSName.'/index.js');
-		$bootstrapJsPath = resource_path('js/admin/index.js');
+		$indexJsPath = resource_path('js/backend/index.js');
 
-		if ($this->appendIfNotAlreadyAppended($indexJsPath, "import './Form';".PHP_EOL)){
+		if ($this->appendIfNotAlreadyAppended($indexJsPath, "Vue.component('".$this->modelJSName."-component', () => import(/*webpackChunkName: 'js/".$this->modelJSName."-component'*/'./".$this->modelJSName."'));".PHP_EOL)){
 			$this->info('Appending Form to '.$indexJsPath.' finished');
-		};
-		if ($this->appendIfNotAlreadyAppended($bootstrapJsPath, "import './".$this->modelJSName."';".PHP_EOL)){
-			$this->info('Appending Form to '.$bootstrapJsPath.' finished');
 		};
     }
 
     protected function isUsedTwoColumnsLayout() : bool {
-        return in_array("published_at", array_column($this->readColumnsFromTable($this->tableName)->toArray(), 'name'));
+        return false;
     }
 
     protected function buildForm() {
+        $belongsTos = $this->setBelongsToRelations();
+        $relatables = $this->getVisibleColumns($this->tableName, $this->modelVariableName)->filter(function($column) use($belongsTos) {
+            return in_array($column['name'],$belongsTos->pluck('foreign_key')->toArray());
+        })->keyBy('name');
+        $columns = $this->getVisibleColumns($this->tableName, $this->modelVariableName)->reject(function($column) use($belongsTos) {
+            return in_array($column['name'],$belongsTos->pluck('foreign_key')->toArray()) || $column["name"] ==='slug';
+        })->map(function($column) {
+            $column["label"] = str_replace("_"," ",Str::title($column['name']));
+            return $column;
+        })->keyBy('name');
 
         return view('sv::'.$this->form, [
             'modelBaseName' => $this->modelBaseName,
@@ -184,10 +156,8 @@ class ViewForm extends ViewGenerator {
             'modelPlural' => $this->modelPlural,
             'modelDotNotation' => $this->modelDotNotation,
             'modelLangFormat' => $this->modelLangFormat,
-
-            'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName)->sortBy(function($column) {
-                return !($column['type'] == "json");
-            }),
+            'columns' => $columns,
+            "relatable" => $relatables,
             'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return $column['type'] == "json";
             })->count() > 0,
@@ -196,52 +166,19 @@ class ViewForm extends ViewGenerator {
         ])->render();
     }
 
-    protected function buildFormRight() {
+    protected function buildShow() {
 
-        return view('sv::'.$this->formRight, [
-            'modelBaseName' => $this->modelBaseName,
-            'modelRouteAndViewName' => $this->modelRouteAndViewName,
-            'modelPlural' => $this->modelPlural,
-            'modelDotNotation' => $this->modelDotNotation,
-            'modelLangFormat' => $this->modelLangFormat,
-            'modelVariableName' => $this->modelVariableName,
-
-            'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName)->sortBy(function($column) {
-                return !($column['type'] == "json");
-            }),
-            'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
-                    return $column['type'] == "json";
-                })->count() > 0,
-            'translatableTextarea' => ['perex', 'text', 'body'],
-            'relations' => $this->relations,
-        ])->render();
-    }
-
-    protected function buildCreate() {
-
-        return view('sv::'.$this->create, [
-            'modelBaseName' => $this->modelBaseName,
-            'modelRouteAndViewName' => $this->modelRouteAndViewName,
-            'modelVariableName' => $this->modelVariableName,
-            'modelPlural' => $this->modelPlural,
-            'modelViewsDirectory' => $this->modelViewsDirectory,
-            'modelDotNotation' => $this->modelDotNotation,
-            'modelJSName' => $this->modelJSName,
-            'modelLangFormat' => $this->modelLangFormat,
-            'resource' => $this->resource,
-            'isUsedTwoColumnsLayout' => $this->isUsedTwoColumnsLayout(),
-
-            'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName),
-            'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
-                return $column['type'] == "json";
-            })->count() > 0,
-        ])->render();
-    }
-
-
-    protected function buildEdit() {
-
-        return view('sv::'.$this->edit, [
+        $belongsTos = $this->setBelongsToRelations();
+        $relatables = $this->getVisibleColumns($this->tableName, $this->modelVariableName)->filter(function($column) use($belongsTos) {
+            return in_array($column['name'],$belongsTos->pluck('foreign_key')->toArray());
+        })->keyBy('name');
+        $columns = $this->getVisibleColumns($this->tableName, $this->modelVariableName)->reject(function($column) use($belongsTos) {
+            return in_array($column['name'],$belongsTos->pluck('foreign_key')->toArray()) || $column["name"] ==='slug';
+        })->map(function($column) {
+            $column["label"] = str_replace("_"," ",Str::title($column['name']));
+            return $column;
+        })->keyBy('name');
+        return view('sv::'.$this->show, [
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
             'modelVariableName' => $this->modelVariableName,
@@ -256,7 +193,9 @@ class ViewForm extends ViewGenerator {
             'modelTitle' => $this->readColumnsFromTable($this->tableName)->filter(function($column){
             	return in_array($column['name'], ['title', 'name', 'first_name', 'email']);
             })->first(null, ['name'=>'id'])['name'],
-            'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName),
+            'columns' => $columns,
+            "relatables" => $relatables,
+            'relations' => $this->relations,
             'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return $column['type'] == "json";
             })->count() > 0,
@@ -264,11 +203,23 @@ class ViewForm extends ViewGenerator {
     }
 
     protected function buildFormJs() {
+        $belongsTos = $this->setBelongsToRelations();
+        $relatables = $this->getVisibleColumns($this->tableName, $this->modelVariableName)->filter(function($column) use($belongsTos) {
+            return in_array($column['name'],$belongsTos->pluck('foreign_key')->toArray());
+        })->keyBy('name');
+        $columns = $this->getVisibleColumns($this->tableName, $this->modelVariableName)->reject(function($column) use($belongsTos) {
+            return in_array($column['name'],$belongsTos->pluck('foreign_key')->toArray())|| $column["name"] ==='slug';
+        })->map(function($column) {
+            $column["label"] = str_replace("_"," ",Str::title($column['name']));
+            return $column;
+        })->keyBy('name');
         return view('sv::'.$this->formJs, [
             'modelViewsDirectory' => $this->modelViewsDirectory,
             'modelJSName' => $this->modelJSName,
 
-            'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName),
+            'columns' => $columns,
+            "relatables" => $relatables,
+            "relations" => $this->relations
         ])->render();
     }
 

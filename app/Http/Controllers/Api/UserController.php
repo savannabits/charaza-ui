@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\User\IndexUser;
 use App\Http\Requests\users\StoreRole;
 use App\Http\Requests\users\StoreUser;
 use App\Http\Requests\users\UpdateRole;
@@ -26,9 +27,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(IndexUser $request)
     {
-        $users = User::paginate();
+        $users = User::query();
+        if ($request->has('search')) {
+            $users->where("name","LIKE","%$request->search%");
+        }
+        $users = $users->paginate($request->get('per_page') ?? 15);
         return $this->api->success()->message("All Users")->payload($users)->send();
     }
 

@@ -1,30 +1,21 @@
 @php echo "<?php"
 @endphp
 
-
-namespace App\Http\Requests\Admin\{{ $modelWithNamespaceFromDefault }};
+namespace App\Http\Requests\Api\{{ $modelWithNamespaceFromDefault }};
 @php
-    if($translatable->count() > 0) {
-        $translatableColumns = $columns->filter(function($column) use ($translatable) {
-            return in_array($column['name'], $translatable->toArray());
-        });
-        $standardColumn = $columns->reject(function($column) use ($translatable) {
-            return in_array($column['name'], $translatable->toArray());
-        });
-    }
+    $standardColumns = $columns->reject(function($column) use ($relatable) {
+        return in_array($column['name'], $relatable->pluck('name')->toArray())|| $column["name"]=='slug';
+    });
+    $relatableColumns = $columns->filter(function($column) use ($relatable) {
+        return in_array($column['name'], $relatable->pluck('name')->toArray());
+    })->keyBy('name');
 @endphp
 
-@if($translatable->count() > 0)use Savannabits\Translatable\TranslatableFormRequest;
-@else
 use Illuminate\Foundation\Http\FormRequest;
-@endif
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
-@if($translatable->count() > 0)class Store{{ $modelBaseName }} extends TranslatableFormRequest
-@else
 class Store{{ $modelBaseName }} extends FormRequest
-@endif
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,42 +24,9 @@ class Store{{ $modelBaseName }} extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('admin.{{ $modelDotNotation }}.create');
+        return Gate::allows('{{ str_plural($modelDotNotation) }}.create');
     }
 
-@if($translatable->count() > 0)/**
-     * Get the validation rules that apply to the requests untranslatable fields.
-     *
-     * {{'@'}}return array
-     */
-    public function untranslatableRules(): array {
-        return [
-            @foreach($standardColumn as $column)'{{ $column['name'] }}' => [{!! implode(', ', (array) $column['serverStoreRules']) !!}],
-            @endforeach
-@if (count($relations))
-    @if (count($relations['belongsToMany']))
-
-            @foreach($relations['belongsToMany'] as $belongsToMany)'{{ $belongsToMany['related_table'] }}' => [{!! implode(', ', ['\'array\'']) !!}],
-            @endforeach
-    @endif
-@endif
-
-        ];
-    }
-
-    /**
-     * Get the validation rules that apply to the requests translatable fields.
-     *
-     * {{'@'}}return array
-     */
-    public function translatableRules($locale): array {
-        return [
-            @foreach($translatableColumns as $column)'{{ $column['name'] }}' => [{!! implode(', ', (array) $column['serverStoreRules']) !!}],
-            @endforeach
-
-        ];
-    }
-@else
     /**
      * Get the validation rules that apply to the request.
      *
@@ -77,33 +35,47 @@ class Store{{ $modelBaseName }} extends FormRequest
     public function rules(): array
     {
         return [
-            @foreach($columns as $column)
+            @foreach($standardColumns as $column)
 @if(!($column['name'] == "updated_by_admin_user_id" || $column['name'] == "created_by_admin_user_id" ))'{{ $column['name'] }}' => [{!! implode(', ', (array) $column['serverStoreRules']) !!}],
 @endif
             @endforeach
 @if (count($relations))
-    @if (count($relations['belongsToMany']))
+    @if (isset($relations["belongsToMany"]) && count($relations['belongsToMany']))
 
             @foreach($relations['belongsToMany'] as $belongsToMany)'{{ $belongsToMany['related_table'] }}' => [{!! implode(', ', ['\'array\'']) !!}],
+            @endforeach
+    @endif
+    @if (isset($relations["belongsTo"]) && count($relations['belongsTo']))
+
+            @foreach($relations['belongsTo'] as $belongsTo)
+'{{ $belongsTo['relationship_variable'] }}' => [{!! implode(', ', array_merge(
+    ['\'array\''], collect($relatableColumns[$belongsTo['foreign_key']]['serverStoreRules'])->reject(function($rule){return str_contains($rule,'integer');})->toArray()
+)) !!}],
             @endforeach
     @endif
 @endif
 
         ];
     }
-@endif
-
     /**
     * Modify input data
     *
     * {{'@'}}return array
     */
-    public function getSanitized(): array
+    public function sanitizedArray(): array
     {
         $sanitized = $this->validated();
 
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+    /**
+    * Return modified (sanitized data) as a php object
+    * @return object
+    */
+    public function sanitizedObject(): object {
+        $sanitized = $this->sanitizedArray();
+        return json_decode(collect($sanitized));
     }
 }

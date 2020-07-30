@@ -27,18 +27,15 @@ class {{ $className }} extends Migration
      */
     public function __construct()
     {
-        $this->guardName = config('admin-auth.defaults.guard');
+        $this->guardName = "web";
 
         $permissions = collect([
-            'admin.{{ $modelDotNotation }}',
-            'admin.{{ $modelDotNotation }}.index',
-            'admin.{{ $modelDotNotation }}.create',
-            'admin.{{ $modelDotNotation }}.show',
-            'admin.{{ $modelDotNotation }}.edit',
-            'admin.{{ $modelDotNotation }}.delete',
-@if(!$withoutBulk)
-            'admin.{{ $modelDotNotation }}.bulk-delete',
-@endif
+            '{{ $modelDotNotation }}',
+            '{{ $modelDotNotation }}.index',
+            '{{ $modelDotNotation }}.create',
+            '{{ $modelDotNotation }}.show',
+            '{{ $modelDotNotation }}.edit',
+            '{{ $modelDotNotation }}.delete',
         ]);
 
         //Add New permissions
@@ -54,7 +51,7 @@ class {{ $className }} extends Migration
         //Role should already exists
         $this->roles = [
             [
-                'name' => 'Administrator',
+                'name' => 'administrator',
                 'guard_name' => $this->guardName,
                 'permissions' => $permissions,
             ],
@@ -132,7 +129,7 @@ class {{ $className }} extends Migration
             'model_has_roles' => 'model_has_roles',
             'role_has_permissions' => 'role_has_permissions',
         ]);
-        
+
         DB::transaction(function () use ($tableNames){
             foreach ($this->permissions as $permission) {
                 $permissionItem = DB::table($tableNames['permissions'])->where([

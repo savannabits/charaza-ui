@@ -2,7 +2,7 @@
 @endphp
 
 
-namespace App\Http\Requests\Admin\{{ $modelWithNamespaceFromDefault }};
+namespace App\Http\Requests\Api\{{ $modelWithNamespaceFromDefault }};
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
@@ -16,7 +16,7 @@ class Index{{ $modelBaseName }} extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('admin.{{ $modelDotNotation }}.index');
+        return Gate::allows('{{ str_plural($modelDotNotation) }}.index');
     }
 
     /**
@@ -27,12 +27,9 @@ class Index{{ $modelBaseName }} extends FormRequest
     public function rules(): array
     {
         return [
-            'orderBy' => 'in:{{ implode(',', $columnsToQuery) }}|nullable',
-            'orderDirection' => 'in:asc,desc|nullable',
             'search' => 'string|nullable',
             'page' => 'integer|nullable',
             'per_page' => 'integer|nullable',
-
         ];
     }
 }

@@ -56,16 +56,7 @@ class Model extends ClassGenerator {
 
     protected function buildClass() {
         //Set belongsTo Relations
-        $this->relations["belongsTo"] = collect(\Schema::getConnection()->getDoctrineSchemaManager()->listTableForeignKeys($this->tableName))->map(function($fk) {
-            /**@var ForeignKeyConstraint $fk*/
-            return [
-                "function_name" => Str::camel(Str::singular($fk->getForeignTableName())),
-                "related_table" => $fk->getForeignTableName(),
-                "related_model" => "\\$this->modelNamespace\\". Str::studly(Str::singular($fk->getForeignTableName())).'::class',
-                "foreign_key" => collect($fk->getColumns())->first(),
-                "owner_key" => collect($fk->getForeignColumns())->first(),
-            ];
-        })->keyBy('related_table');
+        $this->setBelongsToRelations();
         return view('sv::'.$this->view, [
             'modelBaseName' => $this->classBaseName,
             'modelNameSpace' => $this->classNamespace,
@@ -74,6 +65,9 @@ class Model extends ClassGenerator {
 
             'dates' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return $column['type'] == "datetime" || $column['type'] == "date";
+            })->pluck('name'),
+            'booleans' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
+                return $column['type'] == "boolean" || $column['type'] == "bool";
             })->pluck('name'),
             'fillable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return !in_array($column['name'], ['id', 'created_at', 'updated_at', 'deleted_at', 'remember_token','slug']);

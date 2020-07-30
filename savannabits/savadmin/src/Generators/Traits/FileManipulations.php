@@ -12,6 +12,10 @@ trait FileManipulations {
 
         return File::put($fileName, str_replace($find, $replaceWith, $content));
     }
+    protected function strReplaceInFileAnyway($fileName, $find, $replaceWith) {
+        $content = File::get($fileName);
+        return File::put($fileName, str_replace($find, $replaceWith, $content));
+    }
 
 
 }

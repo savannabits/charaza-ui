@@ -1,7 +1,9 @@
 <?php namespace Savannabits\Savadmin\Generators\Traits;
 
+use Doctrine\DBAL\Schema\ForeignKeyConstraint;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 trait Columns {
 
@@ -143,6 +145,11 @@ trait Columns {
                     $serverUpdateRules->push('\'integer\'');
                     $frontendRules->push('integer');
                     break;
+                case 'bigint':
+                    $serverStoreRules->push('\'integer\'');
+                    $serverUpdateRules->push('\'integer\'');
+                    $frontendRules->push('integer');
+                    break;
                 case 'unsignedInteger':
                     $serverStoreRules->push('\'integer\'');
                     $serverUpdateRules->push('\'integer\'');
@@ -200,11 +207,43 @@ trait Columns {
             return [
                 'name' => $column['name'],
                 'type' => $column['type'],
+                'label' => Str::title(str_replace("-"," ",Str::slug($column["name"]))),
                 'serverStoreRules' => $serverStoreRules->toArray(),
                 'serverUpdateRules' => $serverUpdateRules->toArray(),
                 'frontendRules' => $frontendRules->toArray(),
             ];
         });
+    }
+
+    protected function setBelongsToRelations() {
+        $relationships = collect(\Schema::getConnection()->getDoctrineSchemaManager()->listTableForeignKeys($this->tableName))->map(function($fk) {
+            /**@var ForeignKeyConstraint $fk*/
+            $columns = $this->readColumnsFromTable($fk->getForeignTableName())->filter(function($column) {
+                return in_array($column["name"],["name", "display_name","title"]) || in_array($column["type"],["string"]);
+            })->pluck("name");
+            $labelColumn = $columns->filter(function($column){return $column==='display_name';})->first();
+            if (!$labelColumn) $labelColumn = $columns->filter(function($column){return $column==='title';})->first();
+            if (!$labelColumn) $labelColumn = $columns->filter(function($column){return $column==='name';})->first();
+            if (!$labelColumn) $labelColumn = $columns->first();
+            if (!$labelColumn) $labelColumn = "id";
+            $functionName = collect($fk->getColumns())->first();
+            if (str_contains($functionName,"_id")) $functionName = str_replace("_id","",$functionName);
+            $functionName = Str::camel(Str::singular($functionName));
+            $relatedTitle = Str::title(str_replace("-"," ",Str::slug($functionName)));
+            return [
+                "function_name" => $functionName,
+                "related_table" => $fk->getForeignTableName(),
+                "related_route_name" => Str::slug(Str::pluralStudly($fk->getForeignTableName())),
+                "related_model" => "\\$this->modelNamespace\\". Str::studly(Str::singular($fk->getForeignTableName())).'::class',
+                "related_model_title" => $relatedTitle,
+                "label_column" => $labelColumn,
+                "relationship_variable" => Str::snake($functionName),
+                "foreign_key" => collect($fk->getColumns())->first(),
+                "owner_key" => collect($fk->getForeignColumns())->first(),
+            ];
+        })->keyBy('foreign_key');
+        $this->relations["belongsTo"] = $relationships;
+        return $relationships;
     }
 
 }

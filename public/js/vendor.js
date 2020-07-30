@@ -42824,7 +42824,7 @@ var observeDom = function observeDom(el, callback, options)
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkMultipleVue", function() { return checkMultipleVue; });
+/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_Vue) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkMultipleVue", function() { return checkMultipleVue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "installFactory", function() { return installFactory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "installFactoryNoConfig", function() { return installFactoryNoConfig; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pluginFactory", function() { return pluginFactory; });
@@ -43025,8 +43025,8 @@ var registerDirectives = function registerDirectives(Vue) {
 
 var vueUse = function vueUse(VuePlugin) {
   /* istanbul ignore next */
-  if (_env__WEBPACK_IMPORTED_MODULE_2__["hasWindowSupport"] && window.Vue) {
-    window.Vue.use(VuePlugin);
+  if (_env__WEBPACK_IMPORTED_MODULE_2__["hasWindowSupport"] && __webpack_provided_window_dot_Vue) {
+    __webpack_provided_window_dot_Vue.use(VuePlugin);
   }
   /* istanbul ignore next */
 
@@ -43035,6 +43035,7 @@ var vueUse = function vueUse(VuePlugin) {
     window[VuePlugin.NAME] = VuePlugin;
   }
 };
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js")))
 
 /***/ }),
 

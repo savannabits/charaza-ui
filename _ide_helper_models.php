@@ -12,6 +12,32 @@
 
 namespace App\Models{
 /**
+ * App\Models\ProductType
+ *
+ * @property int $id
+ * @property string $slug
+ * @property string $name
+ * @property string|null $description
+ * @property int $active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $api_route
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductType whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductType whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductType whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ProductType whereUpdatedAt($value)
+ */
+	class ProductType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Permission
  *
  * @property int $id
@@ -68,6 +94,35 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Role whereUpdatedAt($value)
  */
 	class Role extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Product
+ *
+ * @property int $id
+ * @property string $slug
+ * @property string $name
+ * @property string|null $description
+ * @property int $product_type_id
+ * @property int $active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $api_route
+ * @property-read \App\Models\ProductType $productType
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereProductTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereUpdatedAt($value)
+ */
+	class Product extends \Eloquent {}
 }
 
 namespace App{

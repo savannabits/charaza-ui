@@ -12,6 +12,19 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    jQuery.extend(true, jQuery.fn.datetimepicker.defaults, {
+        icons: {
+            time: 'mdi-clock',
+            date: 'mdi-calendar',
+            up: 'mdi-chevron-up',
+            down: 'mdi-chevron-down',
+            previous: 'mdi-chevron-left',
+            next: 'mdi-chevron-right',
+            today: 'mdi-calendar-today',
+            clear: 'mdi-delete',
+            close: 'mdi-close'
+        }
+    });
 } catch (e) {}
 
 /**

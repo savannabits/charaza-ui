@@ -1,5 +1,7 @@
 <?php namespace Savannabits\Savadmin\Generators;
 
+use Doctrine\DBAL\Schema\ForeignKeyConstraint;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 class UpdateRequest extends ClassGenerator {
@@ -52,6 +54,7 @@ class UpdateRequest extends ClassGenerator {
 
     protected function buildClass() {
 
+        $this->setBelongsToRelations();
         return view('sv::'.$this->view, [
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,
@@ -66,6 +69,9 @@ class UpdateRequest extends ClassGenerator {
             'translatable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return $column['type'] == "json";
             })->pluck('name'),
+            'relatable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
+                return in_array($column['name'],$this->relations["belongsTo"]->pluck('foreign_key')->toArray());
+            })->keyBy('name'),
             'hasSoftDelete' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return $column['name'] == "deleted_at";
             })->count() > 0,
@@ -94,7 +100,7 @@ class UpdateRequest extends ClassGenerator {
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Http\Requests\Admin\\'.$this->modelWithNamespaceFromDefault;
+        return $rootNamespace.'\Http\Requests\Api\\'.$this->modelWithNamespaceFromDefault;
     }
 
 }

@@ -1,15 +1,20 @@
-import AppForm from '../app-components/Form/AppForm';
+import BackendModule from "../components/BackendModule";
+import InfiniteSelect from "../components/InfiniteSelect";
 
-Vue.component('{{ $modelJSName }}-form', {
-    mixins: [AppForm],
-    data: function() {
-        return {
-            form: {
-                @foreach($columns as $column){{ $column['name'].':' }} @if($column['type'] == 'json') {{ 'this.getLocalizedFormDefaults()' }} @elseif($column['type'] == 'boolean') {!! "false" !!} @else {!! "''" !!} @endif,
-                @endforeach
+export default {
+    mixins:[BackendModule],
+    components: {
+        InfiniteSelect,
+    },
+    data: () => ({
+        model: {
+            @foreach($columns as $column){{ $column['name'].':' }} @if($column['type'] == 'json') {{ 'this.getLocalizedFormDefaults()' }}@elseif($column['type'] == 'boolean') {!! "false" !!} @else {!! 'null' !!} @endif,
+            @endforeach
+            @if(isset($relations['belongsTo']) && count($relations["belongsTo"]))
+            @foreach($relations["belongsTo"] as $relation){{$relation['relationship_variable'].': null'}},
+            @endforeach
+            @endif
 
-            }
-        }
-    }
-
-});
+        },
+    }),
+}

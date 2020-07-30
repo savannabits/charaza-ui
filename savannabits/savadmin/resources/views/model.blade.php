@@ -54,6 +54,14 @@ class {{ $modelBaseName }} extends Model
     ];
     @endif
 
+    @if ($booleans && count($booleans) > 0)protected $casts = [
+    @foreach($booleans as $b)
+    '{{ $b }}' => 'boolean',
+    @endforeach
+
+    ];
+    @endif
+
     @if ($dates)protected $dates = [
     @foreach($dates as $date)
     '{{ $date }}',
