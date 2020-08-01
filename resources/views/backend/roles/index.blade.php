@@ -14,7 +14,7 @@
         >
             <b-row>
                 <b-col>
-                    <b-card title="Users Table">
+                    <b-card title="Roles List">
                         <div class="text-right mb-2">
                             <b-button v-on:click="showFormDialog()" variant="primary"><i class="mdi mdi-plus"></i> New Role</b-button>
                         </div>
