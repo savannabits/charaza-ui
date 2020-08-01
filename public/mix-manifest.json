@@ -23,5 +23,9 @@
     "/js/loans-component.js": "/js/loans-component.js",
     "/js/loans-component~js/product-types-component~js/products-component~js/roles-component.js": "/js/loans-component~js/product-types-component~js/products-component~js/roles-component.js",
     "/vendors~js/loans-component~js/product-types-component~js/products-component~js/roles-component.js": "/vendors~js/loans-component~js/product-types-component~js/products-component~js/roles-component.js",
-    "/vendors~js/loans-component~js/product-types-component~js/products-component~js/roles-component~js/us~7e9cc62a.js": "/vendors~js/loans-component~js/product-types-component~js/products-component~js/roles-component~js/us~7e9cc62a.js"
+    "/vendors~js/loans-component~js/product-types-component~js/products-component~js/roles-component~js/us~7e9cc62a.js": "/vendors~js/loans-component~js/product-types-component~js/products-component~js/roles-component~js/us~7e9cc62a.js",
+    "/js/loans-component~js/payments-component~js/product-types-component~js/products-component~js/roles-component.js": "/js/loans-component~js/payments-component~js/product-types-component~js/products-component~js/roles-component.js",
+    "/js/payments-component.js": "/js/payments-component.js",
+    "/vendors~js/loans-component~js/payments-component~js/product-types-component~js/products-component~js~47ffcc22.js": "/vendors~js/loans-component~js/payments-component~js/product-types-component~js/products-component~js~47ffcc22.js",
+    "/vendors~js/loans-component~js/payments-component~js/product-types-component~js/products-component~js~5a5cb045.js": "/vendors~js/loans-component~js/payments-component~js/product-types-component~js/products-component~js~5a5cb045.js"
 }

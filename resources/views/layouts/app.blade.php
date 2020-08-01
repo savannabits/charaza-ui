@@ -26,8 +26,8 @@
         <!-- Sidebar -->
         <nav class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <strong>SAVUI</strong>
-                <h4>Savannabits UI</h4>
+                <strong>SV</strong>
+                <h4>SavUI</h4>
             </div>
 
             <ul class="list-unstyled components">
@@ -36,14 +36,13 @@
         </nav>
         <div class="content" id="content">
             <vue-snotify></vue-snotify>
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="mdi mdi-menu"></i>
-                    <span></span>
+            <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary p-0 my-0 rounded-0">
+                    <i class="fa fa-list fa-2x"></i>
                 </button>
-                <a class="navbar-brand" href="{{ url('/') }}">
+                {{--<a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
-                </a>
+                </a>--}}
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

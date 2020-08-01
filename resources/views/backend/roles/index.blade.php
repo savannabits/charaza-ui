@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <roles-component
             table-id="roles-dt"
-            form-dialog-ref="rolesFormDialog"
+            form-dialog-ref="roleFormDialog"
             details-dialog-ref="roleDetailsDialog"
             app-url="{{config('app.url')}}"
             api-route="{{route('api.roles.index')}}"
@@ -14,21 +14,20 @@
         >
             <b-row>
                 <b-col>
-                    <b-card title="Roles Table">
+                    <b-card title="Users Table">
                         <div class="text-right mb-2">
                             <b-button v-on:click="showFormDialog()" variant="primary"><i class="mdi mdi-plus"></i> New Role</b-button>
                         </div>
                         <dt-component table-id="roles-dt"
-                                      ajax-url="{{route('api.roles.dt')}}"
-                                      v-cloak
+                                      ajax-url="{{route('api.roles.dt')}}"                                      v-cloak
                                       :columns="{{json_encode($columns)}}"
                                       :action-buttons="{{json_encode($actions)}}"
-                                      table-classes=""
+                                      table-classes="table table-hover"
                                       v-on:edit-role="showFormDialog"
                                       v-on:show-role="showDetailsDialog"
                         ></dt-component>
                     </b-card>
-                    <b-modal v-if="form" v-on:ok.prevent="onFormSubmit" no-close-on-backdrop v-cloak ref="rolesFormDialog">
+                    <b-modal v-if="form" v-on:ok.prevent="onFormSubmit" no-close-on-backdrop v-cloak ref="roleFormDialog">
                         <template v-slot:modal-title>
                             <h4 v-if="form.id" class="font-weight-bolder">Edit Role @{{ form.id }}</h4>
                             <h4 v-else class="font-weight-bolder">Create New Role</h4>

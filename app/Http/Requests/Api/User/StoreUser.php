@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests\Api\User;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,10 +25,14 @@ class StoreUser extends FormRequest
     public function rules(): array
     {
         return [
+            'username' => ['required', Rule::unique('users', 'username'), 'string'],
             'email' => ['required', 'email', Rule::unique('users', 'email'), 'string'],
-            'email_verified_at' => ['nullable', 'date'],
             'name' => ['required', 'string'],
-            'password' => ['required', 'confirmed', 'min:7', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9]).*$/', 'string'],
+            'first_name' => ['required', 'string'],
+            'middle_name' => ['nullable', 'string'],
+            'last_name' => ['required', 'string'],
+            'email_verified_at' => ['nullable', 'date'],
+            'password' => ['nullable', 'confirmed', 'min:7', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9]).*$/', 'string'],
                     
         ];
     }
@@ -38,12 +41,20 @@ class StoreUser extends FormRequest
     *
     * @return array
     */
-    public function getSanitized(): array
+    public function sanitizedArray(): array
     {
         $sanitized = $this->validated();
 
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+    /**
+    * Return modified (sanitized data) as a php object
+    * @return  object
+    */
+    public function sanitizedObject(): object {
+        $sanitized = $this->sanitizedArray();
+        return json_decode(collect($sanitized));
     }
 }

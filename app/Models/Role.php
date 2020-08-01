@@ -1,49 +1,41 @@
 <?php
 
 namespace App\Models;
-
+/* Imports */
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends \Spatie\Permission\Models\Role
+class Role extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name', 'display_name', 'guard_name', 'description','enabled'
+        'display_name',
+        'guard_name',
+        'enabled',
+    
     ];
-
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $dates = [
-        "created_at",
-        "updated_at"
-    ];
+    
+    
     protected $casts = [
-        "enabled" => "boolean"
+        'enabled' => 'boolean',
+    
     ];
+    
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    
+    ];
+    
     protected $appends = ["api_route"];
+
+    /* ************************ ACCESSOR ************************* */
 
     public function getApiRouteAttribute() {
         return route("api.roles.index");
     }
-
-    protected function serializeDate(DateTimeInterface $date)
-    {
+    protected function serializeDate(DateTimeInterface $date) {
         return $date->format('Y-m-d H:i:s');
     }
+
+    /* ************************ RELATIONS ************************ */
 }

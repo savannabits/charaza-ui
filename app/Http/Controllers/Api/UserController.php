@@ -1,20 +1,16 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\IndexUser;
-use App\Http\Requests\users\StoreRole;
-use App\Http\Requests\users\StoreUser;
-use App\Http\Requests\users\UpdateRole;
-use App\Http\Requests\users\UpdateUser;
-use App\User;
+use App\Http\Requests\Api\User\StoreUser;
+use App\Http\Requests\Api\User\UpdateUser;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 use Savannabits\Savadmin\Helpers\ApiResponse;
 use Yajra\DataTables\Facades\DataTables;
 
-class UserController extends Controller
+class UserController  extends Controller
 {
     private $api;
     public function __construct(ApiResponse $apiResponse)
@@ -29,12 +25,20 @@ class UserController extends Controller
      */
     public function index(IndexUser $request)
     {
-        $users = User::query();
+        $query = User::query();
         if ($request->has('search')) {
-            $users->where("name","LIKE","%$request->search%");
+            $query->whereNotNull('id')
+            ->orWhere("id","LIKE","%$request->search%")
+            ->orWhere("username","LIKE","%$request->search%")
+            ->orWhere("email","LIKE","%$request->search%")
+            ->orWhere("name","LIKE","%$request->search%")
+            ->orWhere("first_name","LIKE","%$request->search%")
+            ->orWhere("middle_name","LIKE","%$request->search%")
+            ->orWhere("last_name","LIKE","%$request->search%")
+            ;
         }
-        $users = $users->paginate($request->get('per_page') ?? 15);
-        return $this->api->success()->message("All Users")->payload($users)->send();
+        $data = $query->paginate($request->get('per_page') ?? 15);
+        return $this->api->success()->message("List of Users")->payload($data)->send();
     }
 
     public function dt(Request $request) {
@@ -44,29 +48,39 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreUser $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreUser $request)
     {
-        $array = $request->sanitizedArray();
-        $user = new User($array);
-        if (collect($array)->get('password')) {
-            $user->password =bcrypt($array["password"]);
+        try {
+            $array = $request->sanitizedArray();
+            $user = new User($array);
+            
+            // Save Relationships
+            $object = $request->sanitizedObject();
+                        
+
+            $user->saveOrFail();
+            return $this->api->success()->message('User Created')->payload($user)->send();
+        } catch (\Throwable $exception) {
+            \Log::error($exception);
+            return $this->api->failed()->message($exception->getMessage())->payload([])->code(500)->send();
         }
-        $user->saveOrFail();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
+     * @param User $user
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Request $request, User $user)
     {
         try {
-            return $this->api->success()->message("User $user->id")->payload($user)->send();
+            //Fetch relationships
+                        return $this->api->success()->message("User $user->id")->payload($user)->send();
         } catch (\Throwable $exception) {
             return $this->api->failed()->message($exception->getMessage())->send();
         }
@@ -75,8 +89,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param UpdateUser $request
+     * @param {$modelBaseName} $user
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateUser $request, User $user)
@@ -84,8 +98,13 @@ class UserController extends Controller
         try {
             $data = $request->sanitizedArray();
             $user->update($data);
+            
+            // Save Relationships
+                $object = $request->sanitizedObject();
+                
+
             $user->saveOrFail();
-            return $this->api->success()->message("User has been updated")->payload($user)->code(200)->send();
+            return $this->api->success()->message("Role has been updated")->payload($user)->code(200)->send();
         } catch (\Throwable $exception) {
             \Log::error($exception);
             return $this->api->failed()->code(400)->message($exception->getMessage())->send();
@@ -95,11 +114,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return $this->api->success()->message("User has been deleted")->payload($user)->code(200)->send();
     }
+
 }
