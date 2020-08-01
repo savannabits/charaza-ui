@@ -16,7 +16,7 @@
         >
             <b-row>
                 <b-col>
-                    <b-card title="Users Table">
+                    <b-card title="{{\Illuminate\Support\Str::pluralStudly($modelTitle)}} List">
                         <div class="text-right mb-2">
                             <b-button v-on:click="showFormDialog()" variant="primary"><i class="mdi mdi-plus"></i> New {{$modelTitle}}</b-button>
                         </div>
