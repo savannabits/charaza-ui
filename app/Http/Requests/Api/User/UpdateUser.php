@@ -27,10 +27,14 @@ class UpdateUser extends FormRequest
     public function rules(): array
     {
         return [
+            'username' => ['sometimes', Rule::unique('users', 'username')->ignore($this->user->getKey(), $this->user->getKeyName()), 'string'],
             'email' => ['sometimes', 'email', Rule::unique('users', 'email')->ignore($this->user->getKey(), $this->user->getKeyName()), 'string'],
-            'email_verified_at' => ['nullable', 'date'],
             'name' => ['sometimes', 'string'],
-            'password' => ['sometimes', 'confirmed', 'min:7', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9]).*$/', 'string'],
+            'first_name' => ['sometimes', 'string'],
+            'middle_name' => ['nullable', 'string'],
+            'last_name' => ['sometimes', 'string'],
+            'email_verified_at' => ['nullable', 'date'],
+            'password' => ['nullable', 'confirmed', 'min:7', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9]).*$/', 'string'],
                     
         ];
     }
@@ -40,7 +44,7 @@ class UpdateUser extends FormRequest
      *
      * @return array
      */
-    public function getSanitized(): array
+    public function sanitizedArray(): array
     {
         $sanitized = $this->validated();
 
@@ -48,5 +52,13 @@ class UpdateUser extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+    /**
+    * Return modified (sanitized data) as a php object
+    * @return  object
+    */
+    public function sanitizedObject(): object {
+        $sanitized = $this->sanitizedArray();
+        return json_decode(collect($sanitized));
     }
 }

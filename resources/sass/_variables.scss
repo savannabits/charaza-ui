@@ -19,11 +19,12 @@ $teal: #4dc0b5;
 $cyan: #6cb2eb;
 $white: #fff;
 
-$primary: $blue;
+$primary: #0d47a1;
 $secondary: #C5CBE3;
-$info: $yellow;
-$warning: #D79922;
-$danger: #F13D20;
+$info: #ef9a9a;
+$warning: #f57f17;
+$danger: #ec407a;
+$success: #26a69a;
 
 $table-cell-padding:          .75rem !default;
 $table-cell-padding-sm:       .3rem !default;
@@ -37,8 +38,8 @@ $table-head-color:            $primary !default;
 $table-bg-level:              -9 !default;
 $table-border-level:          -6 !default;
 
-$sidebar-bg: lighten($primary,20%);
-$sidebar-sub-bg: lighten($primary, 30%);
+$sidebar-bg: lighten($secondary,1%);
+$sidebar-sub-bg: lighten($primary, 50%);
 $sidebar-color: $white;
 $sidebar-width: 250px;
 $sidebar-min-width: 80px;

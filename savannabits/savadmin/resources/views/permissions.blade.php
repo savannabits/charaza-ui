@@ -51,7 +51,7 @@ class {{ $className }} extends Migration
         //Role should already exists
         $this->roles = [
             [
-                'name' => 'administrator',
+                'slug' => 'administrator',
                 'guard_name' => $this->guardName,
                 'permissions' => $permissions,
             ],
@@ -89,7 +89,7 @@ class {{ $className }} extends Migration
                 unset($role['permissions']);
 
                 $roleItem = DB::table($tableNames['roles'])->where([
-                    'name' => $role['name'],
+                    'slug' => $role['slug'],
                     'guard_name' => $role['guard_name']
                 ])->first();
                 if ($roleItem !== null) {

@@ -1,16 +1,16 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
-use App\Http\Requests\roles\StoreRole;
-use App\Http\Requests\roles\UpdateRole;
+use App\Http\Requests\Api\Role\IndexRole;
+use App\Http\Requests\Api\Role\StoreRole;
+use App\Http\Requests\Api\Role\UpdateRole;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Savannabits\Savadmin\Helpers\ApiResponse;
 use Yajra\DataTables\Facades\DataTables;
 
-class RoleController extends Controller
+class RoleController  extends Controller
 {
     private $api;
     public function __construct(ApiResponse $apiResponse)
@@ -23,10 +23,19 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(IndexRole $request)
     {
-        $roles = Role::paginate();
-        return $this->api->success()->message("List of Roles")->payload($roles)->send();
+        $query = Role::query();
+        if ($request->has('search')) {
+            $query->whereNotNull('id')
+            ->orWhere("id","LIKE","%$request->search%")
+            ->orWhere("slug","LIKE","%$request->search%")
+            ->orWhere("display_name","LIKE","%$request->search%")
+            ->orWhere("guard_name","LIKE","%$request->search%")
+            ;
+        }
+        $data = $query->paginate($request->get('per_page') ?? 15);
+        return $this->api->success()->message("List of Roles")->payload($data)->send();
     }
 
     public function dt(Request $request) {
@@ -44,7 +53,12 @@ class RoleController extends Controller
         try {
             $array = $request->sanitizedArray();
             $role = new Role($array);
-            $role->name = str_slug($role->display_name);
+            $role->slug = Str::slug($role->name);
+            
+            // Save Relationships
+            $object = $request->sanitizedObject();
+                        
+
             $role->saveOrFail();
             return $this->api->success()->message('Role Created')->payload($role)->send();
         } catch (\Throwable $exception) {
@@ -63,7 +77,8 @@ class RoleController extends Controller
     public function show(Request $request, Role $role)
     {
         try {
-            return $this->api->success()->message("Role $role->id")->payload($role)->send();
+            //Fetch relationships
+                        return $this->api->success()->message("Role $role->id")->payload($role)->send();
         } catch (\Throwable $exception) {
             return $this->api->failed()->message($exception->getMessage())->send();
         }
@@ -73,7 +88,7 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param UpdateRole $request
-     * @param Role $role
+     * @param {$modelBaseName} $role
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRole $request, Role $role)
@@ -81,7 +96,12 @@ class RoleController extends Controller
         try {
             $data = $request->sanitizedArray();
             $role->update($data);
-            $role->name = str_slug($role->display_name);
+            $role->slug = Str::slug($role->display_name);
+            
+            // Save Relationships
+                $object = $request->sanitizedObject();
+                
+
             $role->saveOrFail();
             return $this->api->success()->message("Role has been updated")->payload($role)->code(200)->send();
         } catch (\Throwable $exception) {
@@ -102,4 +122,5 @@ class RoleController extends Controller
         $role->delete();
         return $this->api->success()->message("Role has been deleted")->payload($role)->code(200)->send();
     }
+
 }

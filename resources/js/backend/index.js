@@ -24,8 +24,5 @@ Vue.prototype.$setErrorsFromResponse = function(errorResponse) {
         vm.$validator.errors.add({field: field, msg: errorString});
     });
 };
-Vue.component('users-component', () => import(/*webpackChunkName: 'js/users-component'*/'./users'));
 Vue.component('roles-component', () => import(/*webpackChunkName: 'js/roles-component'*/'./roles'));
-Vue.component('product-types-component', () => import(/*webpackChunkName: 'js/product-types-component'*/'./product-types'));
-Vue.component('products-component', () => import(/*webpackChunkName: 'js/products-component'*/'./products'));
-Vue.component('loans-component', () => import(/*webpackChunkName: 'js/loans-component'*/'./loans'));
+Vue.component('users-component', () => import(/*webpackChunkName: 'js/users-component'*/'./users'));

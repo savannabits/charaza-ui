@@ -1,5 +1,6 @@
 import BackendModule from "../components/BackendModule";
 import InfiniteSelect from "../components/InfiniteSelect";
+
 export default {
     mixins:[BackendModule],
     components: {
@@ -7,11 +8,10 @@ export default {
     },
     data: () => ({
         model: {
-            display_name: null,
-            description: null,
-            enabled: true,
-            user: null,
-            date: null,
+            display_name:  null ,
+            guard_name:  null ,
+            enabled:  false ,
+                        
         },
     }),
 }
