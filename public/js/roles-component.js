@@ -22,10 +22,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       model: {
         display_name: null,
-        description: null,
-        enabled: true,
-        user: null,
-        date: null
+        guard_name: null,
+        enabled: false
       }
     };
   }

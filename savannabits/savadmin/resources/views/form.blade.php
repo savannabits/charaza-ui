@@ -63,6 +63,35 @@
         @endphp
     </b-form-invalid-feedback>
 </b-form-group>
+
+        @elseif($col['name'] === 'password')
+<b-form-group label="{{$col['label']}}" label-class="font-weight-bolder">
+    <b-form-input
+        type="password" name="{{$col['name']}}" ref="{{$col['name']}}" id="{{$col['name']}}"
+        v-validate="'{{ implode('|', $col['frontendRules']) }}'"
+        :state="validateState('{{$col['name']}}')" v-model="form.{{$col['name']}}"
+    ></b-form-input>
+    <b-form-invalid-feedback v-if="errors.has('{{$col['name']}}')">
+        @php
+            echo '@{{errors.first(\''.$col['name'].'\')}}';
+        @endphp
+    </b-form-invalid-feedback>
+</b-form-group>
+
+<b-form-group label="Confirm Password" label-class="font-weight-bolder">
+    <b-form-input
+        type="password" name="password_confirmation" id="password_confirmation"
+        data-vv-as="password"
+        v-validate="'confirmed:password|{{ implode('|', $col['frontendRules']) }}'"
+        :state="validateState('password_confirmation')" v-model="form.password_confirmation"
+    ></b-form-input>
+    <b-form-invalid-feedback v-if="errors.has('password_confirmation')">
+        @php
+            echo '@{{errors.first(\'password_confirmation\')}}';
+        @endphp
+    </b-form-invalid-feedback>
+</b-form-group>
+
     @else
 <b-form-group label-class="font-weight-bolder" label="{{$col['label']}}">
     <b-form-input

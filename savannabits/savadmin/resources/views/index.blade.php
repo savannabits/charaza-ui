@@ -1,4 +1,4 @@
-{{"@"}}extends('layouts.app')
+{{"@"}}extends('layouts.backend')
 {{"@"}}push('styles')
 {{"@"}}endpush
 
@@ -34,7 +34,7 @@
                                       v-on:show-{{str_singular($modelRouteAndViewName)}}="showDetailsDialog"
                         ></dt-component>
                     </b-card>
-                    <b-modal v-if="form" v-on:ok.prevent="onFormSubmit" no-close-on-backdrop v-cloak ref="{{$modelVariableName}}FormDialog">
+                    <b-modal size="lg" v-if="form" v-on:ok.prevent="onFormSubmit" no-close-on-backdrop scrollable v-cloak ref="{{$modelVariableName}}FormDialog">
                         <template v-slot:modal-title>
                             <h4 v-if="form.id" class="font-weight-bolder">Edit {{$modelTitle}} @@{{ form.id }}</h4>
                             <h4 v-else class="font-weight-bolder">Create New {{$modelTitle}}</h4>
@@ -43,7 +43,7 @@
                             {{"@"}}include("backend.{{$modelJSName}}.form")
                         </template>
                     </b-modal>
-                    <b-modal v-if="form" scrollable v-cloak ref="{{$modelVariableName}}DetailsDialog">
+                    <b-modal size="lg" v-if="form" scrollable v-cloak ref="{{$modelVariableName}}DetailsDialog">
                         {{"@"}}include('backend.{{$modelJSName}}.show')
                     </b-modal>
                 </b-col>
