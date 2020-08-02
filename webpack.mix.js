@@ -33,5 +33,8 @@ mix
         // 'vuejs-noty'
     ])
     .js('resources/js/app.js', 'public/js')
+    .js('resources/js/main.js', 'public/js')
+    .copy('node_modules/@coreui/utils/dist/coreui-utils.js', 'public/js')
+    .copy('node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js', 'public/js')
     .mergeManifest()
 ;

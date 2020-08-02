@@ -74,11 +74,12 @@ class Controller extends ClassGenerator {
 
             $this->info('Generating '.$this->classFullName.' finished');
 
-            $icon = "mdi-list";
-            if ($this->strReplaceInFileAnyway(
-                resource_path("views/layouts/partials/sidebar.blade.php"),
+            $icon = "fa fa-sticky-note-o";
+            if ($this->strReplaceInFile(
+                resource_path("views/layouts/backend/sidebar.blade.php"),
+                '|{{route\("\$adminPrefix.'.str_plural($this->modelRouteAndViewName).'.index"\)}}|',
                 "{{--DO NOT REMOVE ME!--}}",
-                '@can("'.$this->modelRouteAndViewName.'.index")<li><a href=\'{{route("$adminPrefix.'.str_plural($this->modelRouteAndViewName).'.index")}}\'><i class="mdi mdi-menu"></i> '.$this->modelTitle.'</a></li>@endcan'.PHP_EOL."{{--DO NOT REMOVE ME!--}}"
+                '@can("'.$this->modelRouteAndViewName.'.index")<li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href=\'{{route("$adminPrefix.'.str_plural($this->modelRouteAndViewName).'.index")}}\'><i class="c-sidebar-nav-icon fa fa-sticky-note-o"></i> '.$this->modelTitle.'</a></li>@endcan'.PHP_EOL."{{--DO NOT REMOVE ME!--}}"
             )) {
                 $this->info('Updating sidebar');
             }

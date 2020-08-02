@@ -8,10 +8,13 @@ export default {
     },
     data: () => ({
         model: {
-            display_name:  null ,
-            guard_name:  null ,
-            enabled:  false ,
-                        
+                            display_name: null ,
+
+                                            guard_name: null ,
+
+                                            enabled: false ,
+
+                                        
         },
     }),
 }

@@ -31,6 +31,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DtComponent",
   props: {
@@ -154,32 +156,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "table",
-    {
-      staticClass: "table table-hover",
-      class: _vm.tableClasses,
-      staticStyle: { width: "100%" },
-      attrs: { id: _vm.tableId }
-    },
-    [
-      _c("thead", [
-        _c(
-          "tr",
-          [
-            _vm._l(_vm.columns, function(column) {
-              return _c("th", { key: column.data }, [
-                _vm._v(_vm._s(column.title || column.data))
-              ])
-            }),
-            _vm._v(" "),
-            _c("th", [_vm._v("Actions")])
-          ],
-          2
-        )
-      ])
-    ]
-  )
+  return _c("div", { staticClass: "table-responsive" }, [
+    _c(
+      "table",
+      {
+        staticClass: "table table-hover",
+        class: _vm.tableClasses,
+        staticStyle: { width: "100%" },
+        attrs: { id: _vm.tableId }
+      },
+      [
+        _c("thead", [
+          _c(
+            "tr",
+            [
+              _vm._l(_vm.columns, function(column) {
+                return _c("th", { key: column.data }, [
+                  _vm._v(_vm._s(column.title || column.data))
+                ])
+              }),
+              _vm._v(" "),
+              _c("th", [_vm._v("Actions")])
+            ],
+            2
+          )
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
