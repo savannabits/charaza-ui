@@ -12,6 +12,7 @@
                 <use xlink:href="{{url('/assets/icons/coreui/free-symbol-defs.svg#cui-speedometer')}}"></use>
             </svg> Dashboard</a></li>
 {{--DO NOT REMOVE ME!--}}
+    @canany(['roles.index','users.index'])
     <li class="c-sidebar-nav-dropdown">
         <a class="c-sidebar-nav-dropdown-toggle" href="#">
             <i class="fa fa-user"></i>
@@ -24,6 +25,7 @@
                 @can("users.index")<li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href='{{route("$adminPrefix.users.index")}}'><i class="c-sidebar-nav-icon fa fa-sticky-note-o"></i> Users</a></li>@endcan
         </ul>
     </li>
+    @endcanany
     <li class="c-sidebar-nav-divider"></li>
     <li class="c-sidebar-nav-item nav-item">
         <a class="c-sidebar-nav-link" href="" target="_top">

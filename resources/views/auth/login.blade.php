@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backend.authBase')
 
 @section('content')
 <div class="container">
@@ -59,7 +59,12 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('Forgot Password?') }}
+                                    </a>
+                                @endif
+                                @if(Route::has('register'))
+                                    <a class="btn btn-outline-danger" href="{{route('register')}}">
+                                        {{__('No Account? Sign up')}}
                                     </a>
                                 @endif
                             </div>

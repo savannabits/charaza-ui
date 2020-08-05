@@ -5,7 +5,7 @@ namespace App\Models;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class User extends \App\User
 {
     protected $fillable = [
         'username',
@@ -16,23 +16,23 @@ class User extends Model
         'last_name',
         'email_verified_at',
         'password',
-    
+
     ];
-    
+
     protected $hidden = [
         'password',
         'remember_token',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'email_verified_at',
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
     protected $appends = ["api_route"];
 
     /* ************************ ACCESSOR ************************* */

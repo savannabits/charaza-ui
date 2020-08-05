@@ -12,6 +12,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('users.index');
         $columns = [
             [
                 "data" => "id",
