@@ -64,15 +64,27 @@
         :class="{'is-invalid': validateState('email_verified_at')===false, 'is-valid': validateState('email_verified_at')===true}"
     ></date-picker>
 </b-form-group>
-    <b-form-group label-class="font-weight-bolder" label="Password">
+    <b-form-group label="Password" label-class="font-weight-bolder">
     <b-form-input
-        type="text" name="password" id="password"
+        type="password" name="password" ref="password" id="password"
         v-validate="'confirmed:password|min:7'"
         :state="validateState('password')" v-model="form.password"
     ></b-form-input>
     <b-form-invalid-feedback v-if="errors.has('password')">
         @{{errors.first('password')}}    </b-form-invalid-feedback>
 </b-form-group>
-    <b-button class="d-none" type="submit"></b-button>
+
+<b-form-group label="Confirm Password" label-class="font-weight-bolder">
+    <b-form-input
+        type="password" name="password_confirmation" id="password_confirmation"
+        data-vv-as="password"
+        v-validate="'confirmed:password|confirmed:password|min:7'"
+        :state="validateState('password_confirmation')" v-model="form.password_confirmation"
+    ></b-form-input>
+    <b-form-invalid-feedback v-if="errors.has('password_confirmation')">
+        @{{errors.first('password_confirmation')}}    </b-form-invalid-feedback>
+</b-form-group>
+
+        <b-button class="d-none" type="submit"></b-button>
 </b-form>
 

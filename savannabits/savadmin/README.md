@@ -5,7 +5,18 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/savannabits/savadmin.svg?style=flat-square)](https://scrutinizer-ci.com/g/savannabits/savadmin)
 [![Total Downloads](https://img.shields.io/packagist/dt/savannabits/savadmin.svg?style=flat-square)](https://packagist.org/packages/savannabits/savadmin)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+Savadmin is a lightweight admin CRUD generator built on top of [Laravel 7.*](https://laravel.com) and [bootstrap-vue](https://bootsdtrap-vue.org) frontend. It also has support for [CoreUI](https://coreui.io) in when scaffolding the views.
+All you need to do is write the migrations and run them, from there the package can generate for you every module one by one.
+## Features
+- Model Generator with support for relationships (belongsTo and belongsToMany) as well as casts (Boolean and dates)
+- Admin Controller Generator with a function to render DataTables using [Yajra Laravel DataTables](https://yajrabox.com/docs)
+- API Resource Controller with index, dt(datatables), store, show, update and destroy functions.
+- API StoreRequest - Request files for the API controllers to authorize and validate resource storage.
+- API UpdateRequest - Request files for the API controllers to authorize and validate resource update.
+- Appending menus to the sidebar
+- Index view generator
+- Form generator for creating and editing resources using bootstrap vue modals and axios for submission to the API
+- Javascript form module generation to handle form inputs and submission
 
 ## Installation
 
@@ -14,6 +25,10 @@ You can install the package via composer:
 ```bash
 composer require savannabits/savadmin
 ```
+```bash
+php artisan vendor:publish
+```
+
 
 ## Usage
 

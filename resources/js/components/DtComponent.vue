@@ -1,12 +1,14 @@
 <template>
-    <table :id="tableId" class="table table-hover" :class="tableClasses" style="width:100%">
-        <thead>
-        <tr>
-            <th v-for="column of columns" :key="column.data">{{column.title || column.data}}</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-    </table>
+    <div  v-cloak class="table-responsive">
+        <table :id="tableId" class="table table-hover" :class="tableClasses" style="width:100%">
+            <thead>
+            <tr>
+                <th v-for="column of columns" :key="column.data">{{column.title || column.data}}</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
 </template>
 <script>
     export default {

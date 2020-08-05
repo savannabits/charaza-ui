@@ -8,7 +8,11 @@ export default {
     },
     data: () => ({
         model: {
-            @foreach($columns as $column){{ $column['name'].':' }} @if($column['type'] == 'json') {{ 'this.getLocalizedFormDefaults()' }}@elseif($column['type'] == 'boolean') {!! "false" !!} @else {!! 'null' !!} @endif,
+            @foreach($columns as $column)
+{{ $column['name'].':' }}@if($column['type'] == 'json') {{ 'this.getLocalizedFormDefaults()' }}@elseif($column['type'] == 'boolean') {!! "false" !!} @else {!! 'null' !!} @endif,
+            @if($column['name'] ==='password')
+password_confirmation: null
+            @endif
             @endforeach
             @if(isset($relations['belongsTo']) && count($relations["belongsTo"]))
             @foreach($relations["belongsTo"] as $relation){{$relation['relationship_variable'].': null'}},

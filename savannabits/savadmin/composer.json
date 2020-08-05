@@ -1,9 +1,13 @@
 {
     "name": "savannabits/savadmin",
-    "description": "Simplistic, Bare - Bones, yet fully automated Laravel Admin Panel Code Generator by Savannabits",
+    "description": "Simplistic, Minimal, yet fully automated Laravel Admin CRUD Code Generator with support for belongsTo Relationships, fully scaffolded roles and users module and CoreUI 3.0.0 frontend framework",
     "keywords": [
         "savannabits",
-        "savadmin"
+        "savadmin",
+        "Laravel",
+        "admin generator",
+        "crud generator",
+        "coreui"
     ],
     "homepage": "https://github.com/savannabits/savadmin",
     "license": "MIT",
@@ -16,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "illuminate/support": "^7.18.0",
         "spatie/laravel-permission": "^3.13.0",
         "yajra/laravel-datatables-oracle": "^9.10.2",

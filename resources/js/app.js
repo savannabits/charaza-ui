@@ -49,6 +49,7 @@ import "./backend"
 const app = new Vue({
     el: '#app',
     mounted() {
+        console.log('App mounted');
         /*this.$root.$on("edit-user", function(e) {
             console.log("an edit user event was triggeredd");
             console.log(e);

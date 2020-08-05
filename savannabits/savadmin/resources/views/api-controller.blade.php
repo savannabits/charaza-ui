@@ -33,7 +33,7 @@ class {{ $controllerBaseName }}  extends Controller
     {
         $query = {{$modelBaseName}}::query();
         if ($request->has('search')) {
-            $query->whereNotNull('id')
+            $query = $query->whereNotNull('id')
             @foreach($columnsToSearchIn as $col)
 ->orWhere("{{$col}}","LIKE","%$request->search%")
             @endforeach
@@ -146,7 +146,7 @@ if (isset($object->{{$relation["relationship_variable"]}})) {
     @endif
             @endif{{PHP_EOL}}
             ${{$modelVariableName}}->saveOrFail();
-            return $this->api->success()->message("Role has been updated")->payload(${{$modelVariableName}})->code(200)->send();
+            return $this->api->success()->message("{{$modelBaseName}} has been updated")->payload(${{$modelVariableName}})->code(200)->send();
         } catch (\Throwable $exception) {
             \Log::error($exception);
             return $this->api->failed()->code(400)->message($exception->getMessage())->send();

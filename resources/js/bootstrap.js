@@ -11,7 +11,7 @@ try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap');
+    // require('bootstrap');
     jQuery.extend(true, jQuery.fn.datetimepicker.defaults, {
         icons: {
             time: 'mdi-clock',

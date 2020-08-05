@@ -1,0 +1,49 @@
+// Here you can add other styles
+@import "variables";
+
+.c-header.c-header-fixed{
+    top:0px;
+}
+
+.click-file{
+    cursor:pointer;
+}
+
+.table {
+    thead th {
+        vertical-align: bottom;
+        border-bottom: $table-border-width solid $table-border-color;
+    }
+
+    tbody + tbody {
+        border-top: $table-border-width solid $table-border-color;
+    }
+}
+.card {
+    position: relative;
+    background-color: $card-bg;
+    background-clip: border-box;
+    border: $card-border-width solid transparent;
+    box-shadow: 0 0 1px 1px rgba($primary,.175);
+    @include border-radius($card-border-radius);
+
+    > hr {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    > .list-group {
+        border-top: inherit;
+        border-bottom: inherit;
+
+        &:first-child {
+            border-top-width: 0;
+            @include border-top-radius($card-inner-border-radius);
+        }
+
+        &:last-child  {
+            border-bottom-width: 0;
+            @include border-bottom-radius($card-inner-border-radius);
+        }
+    }
+}
