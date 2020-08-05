@@ -52,7 +52,7 @@
                 </svg> Lock Account</a><a class="dropdown-item" href="#">
                 <svg class="c-icon mr-2">
                   <use xlink:href="{{ env('APP_URL', '') }}/icons/sprites/free.svg#cil-account-logout"></use>
-                </svg><form action="{{route('logout')}}" method="POST"> @csrf <button type="submit" class="btn btn-ghost-dark btn-block">Logout</button></form></a>
+                </svg><form action="{{route('logout')}}" method="POST"> @csrf <button type="submit" class="btn btn-ghost-primary btn-block">Logout</button></form></a>
             </div>
           </li>
         </ul>

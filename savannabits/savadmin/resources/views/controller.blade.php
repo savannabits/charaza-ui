@@ -14,6 +14,7 @@ class {{ $controllerBaseName }} extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('{{str_plural($modelRouteAndViewName)}}.index');
         $columns = [
             @foreach($columnsToQuery as $col)
 [

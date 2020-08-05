@@ -56,10 +56,12 @@ class UserController  extends Controller
         try {
             $array = $request->sanitizedArray();
             $user = new User($array);
-            
+            if (isset($array["password"])) {
+                $user->password = bcrypt($array["password"]);
+            }
             // Save Relationships
             $object = $request->sanitizedObject();
-                        
+
 
             $user->saveOrFail();
             return $this->api->success()->message('User Created')->payload($user)->send();
@@ -98,13 +100,16 @@ class UserController  extends Controller
         try {
             $data = $request->sanitizedArray();
             $user->update($data);
-            
+            if (isset($data["password"])) {
+                $user->password = bcrypt($data["password"]);
+            }
+
             // Save Relationships
                 $object = $request->sanitizedObject();
-                
+
 
             $user->saveOrFail();
-            return $this->api->success()->message("Role has been updated")->payload($user)->code(200)->send();
+            return $this->api->success()->message("User has been updated")->payload($user)->code(200)->send();
         } catch (\Throwable $exception) {
             \Log::error($exception);
             return $this->api->failed()->code(400)->message($exception->getMessage())->send();
