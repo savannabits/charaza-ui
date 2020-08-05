@@ -18,4 +18,17 @@ mix.webpackConfig({
         publicPath: `/${process.env.MIX_APP_URI ? process.env.MIX_APP_URI+'' : ''}`
     }
 });
-mix.sass('resources/sass/app.scss', 'public/css').mergeManifest();
+mix
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/backend.scss','public/css')
+    .mergeManifest();
+mix.copy('node_modules/@coreui/icons/fonts', 'public/fonts');
+//icons
+mix.copy('node_modules/@coreui/icons/css/free.min.css', 'public/css');
+mix.copy('node_modules/@coreui/icons/css/brand.min.css', 'public/css');
+mix.copy('node_modules/@coreui/icons/css/flag.min.css', 'public/css');
+mix.copy('node_modules/@coreui/icons/svg/flag', 'public/svg/flag');
+
+mix.copy('node_modules/@coreui/icons/sprites/', 'public/icons/sprites');
+
+mix.copy('resources/assets', 'public/assets');

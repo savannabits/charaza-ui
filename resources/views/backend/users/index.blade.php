@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backend')
 @push('styles')
 @endpush
 
@@ -14,7 +14,7 @@
         >
             <b-row>
                 <b-col>
-                    <b-card title="Users Table">
+                    <b-card title="Users List">
                         <div class="text-right mb-2">
                             <b-button v-on:click="showFormDialog()" variant="primary"><i class="mdi mdi-plus"></i> New User</b-button>
                         </div>
@@ -27,7 +27,7 @@
                                       v-on:show-user="showDetailsDialog"
                         ></dt-component>
                     </b-card>
-                    <b-modal v-if="form" v-on:ok.prevent="onFormSubmit" no-close-on-backdrop v-cloak ref="userFormDialog">
+                    <b-modal size="lg" v-if="form" v-on:ok.prevent="onFormSubmit" no-close-on-backdrop scrollable v-cloak ref="userFormDialog">
                         <template v-slot:modal-title>
                             <h4 v-if="form.id" class="font-weight-bolder">Edit User @{{ form.id }}</h4>
                             <h4 v-else class="font-weight-bolder">Create New User</h4>
@@ -36,7 +36,7 @@
                             @include("backend.users.form")
                         </template>
                     </b-modal>
-                    <b-modal v-if="form" scrollable v-cloak ref="userDetailsDialog">
+                    <b-modal size="lg" v-if="form" scrollable v-cloak ref="userDetailsDialog">
                         @include('backend.users.show')
                     </b-modal>
                 </b-col>

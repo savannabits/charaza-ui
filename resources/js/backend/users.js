@@ -8,15 +8,16 @@ export default {
     },
     data: () => ({
         model: {
-            username:  null ,
-            email:  null ,
-            name:  null ,
-            first_name:  null ,
-            middle_name:  null ,
-            last_name:  null ,
-            email_verified_at:  null ,
-            password:  null ,
-                        
+            username: null ,
+                        email: null ,
+                        name: null ,
+                        first_name: null ,
+                        middle_name: null ,
+                        last_name: null ,
+                        email_verified_at: null ,
+                        password: null ,
+            password_confirmation: null
+                                    
         },
     }),
 }

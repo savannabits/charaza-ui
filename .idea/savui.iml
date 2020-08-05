@@ -139,5 +139,6 @@
     <orderEntry type="library" name="jquery.dataTables" level="application" />
     <orderEntry type="library" name="dataTables.bootstrap4" level="application" />
     <orderEntry type="library" name="materialdesignicons" level="application" />
+    <orderEntry type="library" name="font-awesome" level="application" />
   </component>
 </module>
