@@ -8,6 +8,7 @@
             table-id="{{$modelJSName}}-dt"
             form-dialog-ref="{{$modelVariableName}}FormDialog"
             details-dialog-ref="{{$modelVariableName}}DetailsDialog"
+            delete-dialog-ref="{{$modelVariableName}}DeleteDialog"
             app-url="@{{config('app.url')}}"
             @php
             echo 'api-route="{{route(\'api.'.$modelRouteAndViewName.'.index\')}}"'.PHP_EOL;
@@ -26,12 +27,12 @@
                                       @endphp
                                       v-cloak
                                       @php
-                                      echo ':columns="{{json_encode($columns)}}"
-                                      :action-buttons="{{json_encode($actions)}}"'.PHP_EOL;
+                                      echo ':columns="{{json_encode($columns)}}"'.PHP_EOL;
                                       @endphp
                                       table-classes="table table-hover"
                                       v-on:edit-{{str_singular($modelRouteAndViewName)}}="showFormDialog"
                                       v-on:show-{{str_singular($modelRouteAndViewName)}}="showDetailsDialog"
+                                      v-on:delete-{{str_singular($modelRouteAndViewName)}}="showDeleteDialog"
                         ></dt-component>
                     </b-card>
                     <b-modal size="lg" v-if="form" v-on:ok.prevent="onFormSubmit" no-close-on-backdrop scrollable v-cloak ref="{{$modelVariableName}}FormDialog">
@@ -45,6 +46,15 @@
                     </b-modal>
                     <b-modal size="lg" v-if="form" scrollable v-cloak ref="{{$modelVariableName}}DetailsDialog">
                         {{"@"}}include('backend.{{$modelJSName}}.show')
+                    </b-modal>
+                    <b-modal size="sm" v-on:ok.prevent="deleteItem" hide-footer hide-header body-bg-variant="danger" body-text-variant="light" centered v-if="form" scrollable v-cloak ref="{{$modelVariableName}}DeleteDialog">
+                        <template v-slot:default="{ok,hide}">
+                            Are you sure you want to delete this {{$modelTitle}}?
+                            <div class="text-right">
+                                <b-button v-on:click="hide()" variant="light">No</b-button>
+                                <b-button v-on:click="ok()" variant="primary">Yes</b-button>
+                            </div>
+                        </template>
                     </b-modal>
                 </b-col>
             </b-row>

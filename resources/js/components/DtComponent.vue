@@ -1,11 +1,11 @@
 <template>
     <div  v-cloak class="table-responsive">
-        <table :id="tableId" class="table table-hover" :class="tableClasses" style="width:100%">
+        <table v-show="table_ready" :id="tableId" class="table table-hover" :class="tableClasses" style="width:100%">
             <thead>
-            <tr>
+            <!--<tr v-if="table_ready">
                 <th v-for="column of columns" :key="column.data">{{column.title || column.data}}</th>
                 <th>Actions</th>
-            </tr>
+            </tr>-->
             </thead>
         </table>
     </div>
@@ -58,21 +58,31 @@
         data() {
             return {
                 item_id: null,
-                table: null
+                table: null,
+                table_ready: false,
             }
         },
         mounted() {
             let vm = this;
             let columns = [
                 ...vm.columns,
-                {
-                    data: "Actions",
+                /*{
+                    data: "manage",
+                    name: 'manage',
                     searchable: false,
                     className: 'text-right',
+                    orderable: false,
                     render: function(data, type, row) {
                         return vm.makeActionColumn(row)
                     }
-                },
+                },*/
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    className: 'text-right',
+                    orderable: false,
+                    searchable: false
+                }
             ]
             $(document).ready(function() {
                 vm.table = $(`#${vm.tableId}`).DataTable({
@@ -81,7 +91,7 @@
                     stateSave: true,
                     ajax: vm.ajaxUrl,
                     columns: columns,
-                    columnDefs: vm.columnDefs
+                    columnDefs: vm.columnDefs,
                 });
                 vm.table.on('click', '.action-button', function (e) {
                     var ev = $(this)
@@ -94,6 +104,7 @@
                         });
                     }
                 });
+                vm.table_ready = true;
 
             })
             vm.$root.$on("refresh-dt", function(e) {
@@ -117,7 +128,6 @@
                     ${actions}
                     <${actionButton.tag} class="action-button ${actionButton.classes}"
                         href="${actionButton.href}"
-                        @click="emitActionEvent"
                         data-action="${actionButton.event}"
                         data-url="${actionButton.url}"
                         data-id="${payload.id}"

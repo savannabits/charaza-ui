@@ -24,25 +24,8 @@ class {{ $controllerBaseName }} extends Controller
             ],
             @endforeach
 ];
-        $actions = [
-            [
-                "tag" => "button",
-                "href" => "",
-                "title" => "details",
-                "icon" => "mdi mdi-eye",
-                "event" => "show-{{str_singular($modelRouteAndViewName)}}",
-                "classes" => "btn btn-secondary rounded-0"
-            ],
-            [
-                "tag" => "button",
-                "href" => "",
-                "title" => "edit",
-                "icon" => "mdi mdi-pencil",
-                "event" => "edit-{{str_singular($modelRouteAndViewName)}}",
-                "classes" => "btn btn-primary rounded-0"
-            ],
-        ];
-        return view('backend.{{str_plural($modelRouteAndViewName)}}.index', compact('columns', 'actions'));
+
+        return view('backend.{{str_plural($modelRouteAndViewName)}}.index', compact('columns'));
     }
 @if($export)
 

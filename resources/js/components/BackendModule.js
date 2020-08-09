@@ -32,6 +32,11 @@ export default {
             required: true,
             type: String,
             default: "detailsDialog"
+        },
+        "deleteDialogRef": {
+            required: true,
+            type: String,
+            default: "deleteDialog"
         }
     },
     mounted() {
@@ -96,6 +101,14 @@ export default {
                 vm.$refs[vm.formDialogRef].hide();
             });
         },
+        deleteItem(e) {
+            const vm = this;
+            let method = "delete";
+            let url = `${vm.form.api_route}/${vm.form.id}`
+            vm.submitForm(e,url,method).then(res => {
+                vm.$refs[vm.deleteDialogRef].hide();
+            });
+        },
         /**
          *
          * @param e
@@ -135,6 +148,15 @@ export default {
                 vm.$snotify.error(err.message || err);
             })
         },
+        showDeleteDialog(e) {
+            let vm = this;
+            vm.fetchModel(e.id).then(res => {
+                vm.$refs[vm.deleteDialogRef].show();
+            }).catch(err => {
+                vm.$snotify.error(err.message || err);
+            })
+        },
+
         async fetchModel(id) {
             const vm = this;
             return new Promise((resolve, reject) => {
