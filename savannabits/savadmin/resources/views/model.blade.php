@@ -62,13 +62,18 @@ class {{ $modelBaseName }} extends Model
     ];
     @endif
 
-    @if ($dates)protected $dates = [
+    protected $dates = [
+@if ($dates)
     @foreach($dates as $date)
+    '{{ $date }}' => 'Y-m-d',
+    @endforeach
+@endif
+@if($datetimes)
+    @foreach($datetimes as $date)
     '{{ $date }}',
     @endforeach
-
-    ];
-    @endif
+@endif
+];
 @if (!$timestamps)public $timestamps = false;
     @endif
 

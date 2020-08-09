@@ -33,7 +33,7 @@ class {{ $controllerBaseName }}  extends Controller
     {
         $query = {{$modelBaseName}}::query();
         if ($request->has('search')) {
-            $query = $query->whereNotNull('id')
+            $query->whereId($request->search)
             @foreach($columnsToSearchIn as $col)
 ->orWhere("{{$col}}","LIKE","%$request->search%")
             @endforeach
@@ -44,7 +44,16 @@ class {{ $controllerBaseName }}  extends Controller
     }
 
     public function dt(Request $request) {
-        return DataTables::eloquent({{$modelBaseName}}::latest())->make();
+        return DataTables::of({{$modelBaseName}}::query())
+            ->addColumn("actions",function($model) {
+                $actions = '';
+                if (\Auth::user()->can('{{$modelRouteAndViewName}}.show')) $actions .= '<button class="btn btn-outline-primary btn-square action-button mr-2" title="View Details" data-action="show-{{Str::singular($modelRouteAndViewName)}}" data-tag="button" data-id="'.$model->id.'"><i class="mdi mdi-eye"></i></button>';
+                if (\Auth::user()->can('{{$modelRouteAndViewName}}.edit')) $actions .= '<button class="btn btn-outline-warning btn-square action-button mr-2" title="Edit Item" data-action="edit-{{Str::singular($modelRouteAndViewName)}}" data-tag="button" data-id="'.$model->id.'"><i class="mdi mdi-pencil"></i></button>';
+                if (\Auth::user()->can('{{$modelRouteAndViewName}}.delete')) $actions .= '<button class="btn btn-outline-danger btn-square action-button mr-2" title="Delete Item" data-action="delete-{{Str::singular($modelRouteAndViewName)}}" data-tag="button" data-id="'.$model->id.'"><i class="mdi mdi-delete"></i></button>';
+                return $actions;
+            })
+            ->rawColumns(['actions'])
+            ->make();
     }
 
     /**

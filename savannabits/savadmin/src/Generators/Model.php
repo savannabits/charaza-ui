@@ -64,8 +64,12 @@ class Model extends ClassGenerator {
             'tableName' => ($this->tableName !== Str::snake(Str::plural($this->classBaseName))) ? $this->tableName : null,
 
             'dates' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
-                return $column['type'] == "datetime" || $column['type'] == "date";
+                return $column['type'] == "date";
             })->pluck('name'),
+            'datetimes' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
+                return $column['type'] == "datetime";
+            })->pluck('name'),
+
             'booleans' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return $column['type'] == "boolean" || $column['type'] == "bool";
             })->pluck('name'),
