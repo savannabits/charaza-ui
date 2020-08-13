@@ -65,6 +65,18 @@
     @include('layouts.backend.sidebar')
 </div>
 <div id="app" class="c-wrapper">
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{{asset('assets/brand/logo-dark.png')}}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
     <vue-snotify></vue-snotify>
     @include('layouts.backend.header')
     <div class="c-body">
@@ -84,6 +96,14 @@
 <script src="{{ mix('/js/main.js') }}"></script>
 <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(window).on('load', function () {
+        $('#preloader-active').delay(450).fadeOut('slow');
+        $('body').delay(450).css({
+            'overflow': 'visible'
+        });
+    });
+</script>
 @stack('scripts')
 </body>
 </html>

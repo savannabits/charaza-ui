@@ -11,17 +11,20 @@ use App\Http\Requests\Api\{{ $modelWithNamespaceFromDefault }}\Index{{ $modelBas
 use App\Http\Requests\Api\{{ $modelWithNamespaceFromDefault }}\Store{{ $modelBaseName }};
 use App\Http\Requests\Api\{{ $modelWithNamespaceFromDefault }}\Update{{ $modelBaseName }};
 use {{$modelFullName}};
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Savannabits\Savadmin\Helpers\ApiResponse;
+use Savannabits\Savadmin\Helpers\SavbitsHelper;
 use Yajra\DataTables\Facades\DataTables;
 
 class {{ $controllerBaseName }}  extends Controller
 {
-    private $api;
-    public function __construct(ApiResponse $apiResponse)
+    private $api, $helper;
+    public function __construct(ApiResponse $apiResponse, SavbitsHelper $helper)
     {
         $this->api = $apiResponse;
+        $this->helper = $helper;
     }
 
     /**
@@ -31,15 +34,10 @@ class {{ $controllerBaseName }}  extends Controller
      */
     public function index(Index{{ $modelBaseName }} $request)
     {
-        $query = {{$modelBaseName}}::query();
-        if ($request->has('search')) {
-            $query->whereId($request->search)
-            @foreach($columnsToSearchIn as $col)
-->orWhere("{{$col}}","LIKE","%$request->search%")
-            @endforeach
-;
-        }
-        $data = $query->paginate($request->get('per_page') ?? 15);
+        $data = $this->helper::listing({{$modelBaseName}}::class, $request)->customQuery(function ($builder) use($request) {
+        /**@var {{$modelBaseName}}|Builder $builder*/
+        // Add custom queries here
+        })->process();
         return $this->api->success()->message("List of {{$modelPlural}}")->payload($data)->send();
     }
 
@@ -88,7 +86,7 @@ if (isset($object->{{$relation["relationship_variable"]}})) {
             @endif
             @endif{{PHP_EOL}}
             ${{$modelVariableName}}->saveOrFail();
-            return $this->api->success()->message('{{$modelBaseName}} Created')->payload(${{$modelVariableName}})->send();
+            return $this->api->success()->message('{{$modelTitle}} Created')->payload(${{$modelVariableName}})->send();
         } catch (\Throwable $exception) {
             \Log::error($exception);
             return $this->api->failed()->message($exception->getMessage())->payload([])->code(500)->send();
@@ -116,7 +114,7 @@ ${{$modelVariableName}}->load([
         ]);
 @endif
             @endif
-return $this->api->success()->message("{{$modelBaseName}} ${{$modelVariableName}}->id")->payload(${{$modelVariableName}})->send();
+return $this->api->success()->message("{{$modelTitle}} ${{$modelVariableName}}->id")->payload(${{$modelVariableName}})->send();
         } catch (\Throwable $exception) {
             return $this->api->failed()->message($exception->getMessage())->send();
         }
@@ -155,7 +153,7 @@ if (isset($object->{{$relation["relationship_variable"]}})) {
     @endif
             @endif{{PHP_EOL}}
             ${{$modelVariableName}}->saveOrFail();
-            return $this->api->success()->message("{{$modelBaseName}} has been updated")->payload(${{$modelVariableName}})->code(200)->send();
+            return $this->api->success()->message("{{$modelTitle}} has been updated")->payload(${{$modelVariableName}})->code(200)->send();
         } catch (\Throwable $exception) {
             \Log::error($exception);
             return $this->api->failed()->code(400)->message($exception->getMessage())->send();
@@ -172,7 +170,7 @@ if (isset($object->{{$relation["relationship_variable"]}})) {
     public function destroy({{$modelBaseName}} ${{$modelVariableName}})
     {
         ${{$modelVariableName}}->delete();
-        return $this->api->success()->message("{{$modelBaseName}} has been deleted")->payload(${{$modelVariableName}})->code(200)->send();
+        return $this->api->success()->message("{{$modelTitle}} has been deleted")->payload(${{$modelVariableName}})->code(200)->send();
     }
 
 @if($export)

@@ -1,0 +1,137 @@
+.support-company-area{
+    .support-location-img{
+		position: relative;
+		&::before{
+			position: absolute;
+			content: "";
+			height: 100%;
+			border-right: 30px solid #3589f1;
+			right:0;
+			z-index: 0;
+			top: 0;
+		}
+        img{
+            width: 100%;
+        }
+        .support-img-cap{
+            position: absolute;
+			bottom: 113px;
+			right: -105px;
+			transform: rotate(-90deg);
+			@media #{$xs}{
+				bottom: 103px;
+			}
+            span{
+                background: rgba(255, 255, 255, 0.8);
+                padding:19px 55px;
+                font-size: 30px;
+                color:#000a2d;
+                text-transform: uppercase;
+                font-weight: 700;
+				@media #{$xs}{
+					padding:6px 40px;
+					font-size: 30px;
+				}
+
+            }
+        }
+	}
+	// Right Content
+	.right-caption{
+		position: relative;
+		right: -50px;
+		@media #{$lg}{
+			right: -25px;
+		}
+		@media #{$md}{
+			right: 0px;
+		}
+		@media #{$sm}{
+			right: 0px;
+		}
+		@media #{$xs}{
+			right: 0px;
+		}
+		.support-caption{
+			p{
+				padding-right: 84px;
+				margin-bottom: 46px;
+				@media #{$md}{
+					padding-right: 0px;
+				}
+				@media #{$sm}{
+					padding-right: 0px;
+				}
+				@media #{$xs}{
+					padding-right: 0px;
+				}
+			}
+
+		}
+	}
+}
+
+
+/* check_box_style */
+.select-suport-items{
+	margin-bottom: 60px;
+	.single-items{
+		display: block;
+		position: relative;
+		padding-left: 35px;
+		margin-bottom: 18px;
+		cursor: pointer;
+		font-size: 22px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		color: #666666;
+		font-size: 16px;
+
+	 input {
+			position: absolute;
+			opacity: 0;
+			cursor: pointer;
+			height: 0;
+			width: 0;
+		}
+	.checkmark {
+			position: absolute;
+			top: 5px;
+			left: 0;
+			height: 19px;
+			width: 19px;
+			border: 2px solid #d0d0d0;
+			border-radius: 5px;
+		}
+	 &:hover input ~ .checkmark {
+			background-color: #fff;
+			border: 2px solid #d0d0d0;
+		}
+		 input:checked ~ .checkmark {
+			background-color: #014b85;
+			border: 2px solid transparent;
+		}
+	 .checkmark:after {
+			content: "";
+			position: absolute;
+			display: none;
+		}
+       input:checked ~ .checkmark:after {
+			display: block;
+		}
+		 .checkmark::after {
+			left: 4px;
+			top: 1px;
+			width: 7px;
+			height: 11px;
+			border: solid white;
+			border-width: 0 3px 3px 0;
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+	}
+}
+/*End check_box_style */

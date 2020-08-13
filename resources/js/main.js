@@ -16,10 +16,11 @@ import "@coreui/utils/src/index"
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
 import BootstrapVue, {BootstrapVueIcons} from "bootstrap-vue";
 import Vue from "vue";
-window.Vue = Vue;
 import Snotify, { SnotifyPosition } from 'vue-snotify'
 import VeeValidate from "vee-validate";
-
+import "./backend"
+import Vue2Filters from "vue2-filters";
+window.Vue = Vue;
 const options = {
     toast: {
         position: SnotifyPosition.rightTop,
@@ -33,10 +34,11 @@ Vue.use(VeeValidate,{
 })
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
+Vue.use(Vue2Filters)
 // Vue.component('dt-component', DtComponent)
 Vue.component('dt-component', () => import(/*webpackChunkName: 'js/dt-component'*/'./components/DtComponent'))
 Vue.component('datePicker', () => import(/*webpackChunkName: 'js/date-picker'*/'vue-bootstrap-datetimepicker'))
-import "./backend"
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

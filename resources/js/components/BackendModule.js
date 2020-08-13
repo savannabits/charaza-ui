@@ -1,13 +1,23 @@
 import DateUtils from "../mixins/DateUtils";
-
+import {VMoney} from "v-money";
+import Money from "v-money";
 export default {
     mixins:[DateUtils],
     data() {
         return {
             form: {},
             model: {},
+            moneyMask: {
+                precision: 2,
+                decimal: '.',
+                thousands: ',',
+                prefix: 'Ksh. ',
+                mask: true,
+            }
         }
     },
+    directives: {money: VMoney},
+    components: {Money},
     props: {
         "tableId": {
             required: true,
@@ -99,6 +109,7 @@ export default {
             }
             vm.submitForm(e,url,method).then(res => {
                 vm.$refs[vm.formDialogRef].hide();
+            }).finally(res => {
             });
         },
         deleteItem(e) {
@@ -124,6 +135,7 @@ export default {
                         reject("The form contains invalid fields")
                         return;
                     }
+                    vm.showLoader();
                     axios.request({
                         method: method,
                         url: url,
@@ -136,6 +148,8 @@ export default {
                         vm.$setErrorsFromResponse(err.response?.data);
                         vm.$snotify.error(err.response?.data?.message || err.message || err)
                         reject(err);
+                    }).finally(res => {
+                        vm.hideLoader();
                     })
                 })
             })
@@ -157,14 +171,19 @@ export default {
             })
         },
 
-        async fetchModel(id) {
+        async fetchModel(id, params=null) {
             const vm = this;
             return new Promise((resolve, reject) => {
-                axios.get(`${vm.form.api_route}/${id}`).then(res => {
+                vm.showLoader();
+                axios.get(`${vm.form.api_route}/${id}`,{
+                    params: params||{}
+                }).then(res => {
                     vm.form = {...res.data.payload}
                     resolve(res.data);
                 }).catch(err => {
                     reject(err);
+                }).finally(res => {
+                    vm.hideLoader();
                 })
             })
         },
@@ -172,6 +191,12 @@ export default {
             this.$root.$emit("refresh-dt", {
                 tableId: tableId
             })
+        },
+        showLoader() {
+            $('#preloader-active').show();
+        },
+        hideLoader() {
+            $('#preloader-active').fadeOut('slow');
         }
 
     }
