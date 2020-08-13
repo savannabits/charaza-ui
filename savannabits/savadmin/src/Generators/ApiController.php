@@ -86,6 +86,7 @@ class ApiController extends ClassGenerator {
             'modelBaseName' => $this->modelBaseName,
             'modelFullName' => $this->modelFullName,
             'modelPlural' => $this->modelPlural,
+            'modelTitle' => $this->titleSingular,
             'modelVariableName' => $this->modelVariableName,
             'modelVariableNamePlural' => Str::plural($this->modelVariableName),
             'modelRouteAndViewName' => $this->modelRouteAndViewName,

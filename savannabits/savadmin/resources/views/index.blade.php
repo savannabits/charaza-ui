@@ -19,8 +19,10 @@
                 <b-col>
                     <b-card title="{{\Illuminate\Support\Str::pluralStudly($modelTitle)}} List">
                         <div class="text-right mb-2">
-                            <b-button v-on:click="showFormDialog()" variant="primary"><i class="mdi mdi-plus"></i> New {{$modelTitle}}</b-button>
+                            {{'@'}}can('{{$modelRouteAndViewName}}.create')<b-button v-on:click="showFormDialog()" variant="primary"><i class="mdi mdi-plus"></i> New {{$modelTitle}}</b-button>
+                            {{'@'}}endcan
                         </div>
+                        {{'@'}}can('{{$modelRouteAndViewName}}.index')
                         <dt-component table-id="{{$modelRouteAndViewName}}-dt"
                                       @php
                                       echo 'ajax-url="{{route(\'api.'.$modelRouteAndViewName.'.dt\')}}"'
@@ -34,8 +36,10 @@
                                       v-on:show-{{str_singular($modelRouteAndViewName)}}="showDetailsDialog"
                                       v-on:delete-{{str_singular($modelRouteAndViewName)}}="showDeleteDialog"
                         ></dt-component>
+                        {{'@'}}endcan
                     </b-card>
-                    <b-modal size="lg" v-if="form" v-on:ok.prevent="onFormSubmit" no-close-on-backdrop scrollable v-cloak ref="{{$modelVariableName}}FormDialog">
+                    {{'@'}}canany(['{{$modelRouteAndViewName}}.create','{{$modelRouteAndViewName}}.edit'])
+                    <b-modal size="lg" v-if="form" v-on:ok.prevent="onFormSubmit" no-close-on-backdrop v-cloak ref="{{$modelVariableName}}FormDialog">
                         <template v-slot:modal-title>
                             <h4 v-if="form.id" class="font-weight-bolder">Edit {{$modelTitle}} @@{{ form.id }}</h4>
                             <h4 v-else class="font-weight-bolder">Create New {{$modelTitle}}</h4>
@@ -44,9 +48,13 @@
                             {{"@"}}include("backend.{{$modelJSName}}.form")
                         </template>
                     </b-modal>
+                    {{'@'}}endcanany
+                    {{'@'}}can('{{$modelRouteAndViewName}}.show')
                     <b-modal size="lg" v-if="form" scrollable v-cloak ref="{{$modelVariableName}}DetailsDialog">
                         {{"@"}}include('backend.{{$modelJSName}}.show')
                     </b-modal>
+                    {{'@'}}endcan
+                    {{'@'}}can('{{$modelRouteAndViewName}}.delete')
                     <b-modal size="sm" v-on:ok.prevent="deleteItem" hide-footer hide-header body-bg-variant="danger" body-text-variant="light" centered v-if="form" scrollable v-cloak ref="{{$modelVariableName}}DeleteDialog">
                         <template v-slot:default="{ok,hide}">
                             Are you sure you want to delete this {{$modelTitle}}?
@@ -56,6 +64,7 @@
                             </div>
                         </template>
                     </b-modal>
+                    {{'@'}}endcan
                 </b-col>
             </b-row>
         </{{$modelJSName}}-component>

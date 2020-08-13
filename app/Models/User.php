@@ -4,19 +4,34 @@ namespace App\Models;
 /* Imports */
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
+use Rennokki\QueryCache\Traits\QueryCacheable;
 
 class User extends \App\User
 {
-    protected $fillable = [
-        'username',
-        'email',
+    use Searchable;
+    use QueryCacheable;
+//    public $cacheFor=60*60*24; //cache for 1 day
+    protected static $flushCacheOnUpdate=true; //invalidate the cache when the database is changed
+protected $fillable = [
         'name',
         'first_name',
-        'middle_name',
         'last_name',
+        'middle_name',
+        'username',
+        'email',
         'email_verified_at',
-        'password',
+    ];
 
+protected $searchable = [
+            'id',
+            'name',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'username',
+            'email',
+            'email_verified_at',
     ];
 
     protected $hidden = [
@@ -27,13 +42,18 @@ class User extends \App\User
 
 
     protected $dates = [
-        'email_verified_at',
+            'email_verified_at',
         'created_at',
         'updated_at',
-
     ];
 
     protected $appends = ["api_route"];
+
+    public function toSearchableArray() {
+        return collect($this->only($this->searchable))->merge([
+            // Add more keys here
+        ])->toArray();
+    }
 
     /* ************************ ACCESSOR ************************* */
 

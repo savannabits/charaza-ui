@@ -1,6 +1,7 @@
 // Body
 $body-bg: #f8fafc;
-
+$border-radius:               0 !default;
+$border-radius:               0 !default;
 // Typography
 $font-family-sans-serif: 'Poppins', sans-serif;
 $font-size-base: 0.95rem;
@@ -18,6 +19,7 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 $white: #fff;
+$black: #000;
 
 $primary: #0d47a1;
 $secondary: #C5CBE3;
@@ -43,3 +45,38 @@ $sidebar-sub-bg: lighten($primary, 50%);
 $sidebar-color: $white;
 $sidebar-width: 250px;
 $sidebar-min-width: 80px;
+
+$sidebar-dark-brand-color:  $white !default;
+$sidebar-dark-brand-bg:     darken($primary,10) !default;
+
+$sidebar-light-brand-color:  $white !default;
+$sidebar-light-brand-bg:     $primary !default;
+
+$sidebar-dark-color:    $white !default;
+$sidebar-dark-bg:       darken($primary,20) !default;
+
+$sidebar-light-bg:       $white !default;
+
+$sidebar-dark-nav-link-active-color:       $white !default;
+$sidebar-dark-nav-link-active-bg:          $primary !default;
+$sidebar-dark-nav-link-active-icon-color:  $white !default;
+
+$sidebar-light-nav-link-active-color:       rgba($black, .8) !default;
+$sidebar-light-nav-link-active-bg:          rgba($black, .05) !default;
+$sidebar-light-nav-link-active-icon-color:  $primary !default;
+
+
+$theme-color: $primary;
+$theme-color2: $secondary;
+$theme-color3: $warning;
+$theme-color4: $danger;
+
+$box-shadow-sm:               0 .125rem .25rem rgba($primary, .075) !default;
+$box-shadow:                  0 0 1rem 2px rgba($primary,.75) !default;
+$box-shadow-lg:               0 1rem 3rem rgba($primary, .175) !default;
+
+$modal-content-border-radius:       $border-radius !default;
+
+$modal-content-box-shadow-xs:       0 .25rem .5rem rgba($primary, .5) !default;
+//$modal-content-box-shadow-sm-up:    0 .5rem 1rem rgba($primary, .5) !default;
+$modal-content-box-shadow-sm-up:    0 0 2px 5px rgba($primary,.175) !default;

@@ -23,7 +23,8 @@
         "laravel/sanctum": "^2.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
-        "savannabits/savadmin": "@dev",
+        "rennokki/laravel-eloquent-query-cache": "^2.2",
+        "savannabits/savadmin": "^1.2",
         "spatie/laravel-medialibrary": "^8.3",
         "spatie/laravel-permission": "^3.13",
         "yajra/laravel-datatables-oracle": "^9.10"
@@ -61,13 +62,6 @@
         }
     },
     "repositories": {
-        "savannabits/savadmin": {
-            "type": "path",
-            "url": "./savannabits/savadmin",
-            "options": {
-                "symlink": true
-            }
-        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

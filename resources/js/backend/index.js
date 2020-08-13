@@ -26,3 +26,5 @@ Vue.prototype.$setErrorsFromResponse = function(errorResponse) {
 };
 Vue.component('roles-component', () => import(/*webpackChunkName: 'js/roles-component'*/'./roles'));
 Vue.component('users-component', () => import(/*webpackChunkName: 'js/users-component'*/'./users'));
+Vue.component('settings-component', () => import(/*webpackChunkName: 'js/settings-component'*/'./settings'));
+Vue.component('data-types-component', () => import(/*webpackChunkName: 'js/data-types-component'*/'./data-types'));

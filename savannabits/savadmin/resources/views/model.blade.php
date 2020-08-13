@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
 @if($fillable)@foreach($fillable as $fillableColumn)
 @endforeach
 @endif
+@if($searchable)use Laravel\Scout\Searchable;
+@endif
 @if($hasSoftDelete)use Illuminate\Database\Eloquent\SoftDeletes;
 @endif
 @if (isset($relations['belongsToMany']) && count($relations['belongsToMany']))
@@ -27,20 +29,33 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 @endif
 @if($hasRoles)use Spatie\Permission\Traits\HasRoles;
 @endif
+use Rennokki\QueryCache\Traits\QueryCacheable;
 
 class {{ $modelBaseName }} extends Model
 {
 @if($hasSoftDelete)
     use SoftDeletes;
-@endif
+    @endif
 @if($hasRoles)use HasRoles;
-@endif
-    @if (!is_null($tableName))protected $table = '{{ $tableName }}';
-
+    @endif
+@if($searchable)use Searchable;
+    @endif
+    use QueryCacheable;
+    public $cacheFor=60*60*24; //cache for 1 day
+    protected static $flushCacheOnUpdate=true; //invalidate the cache when the database is changed
+@if (!is_null($tableName))protected $table = '{{ $tableName }}';
     @endif
 @if ($fillable)protected $fillable = [
     @foreach($fillable as $f)
     '{{ $f }}',
+    @endforeach
+
+    ];
+    @endif
+
+@if ($searchable)protected $searchable = [
+    @foreach($searchable as $s)
+        '{{ $s }}',
     @endforeach
 
     ];
@@ -78,6 +93,14 @@ class {{ $modelBaseName }} extends Model
     @endif
 
     protected $appends = ["api_route"];
+
+@if ($searchable)
+    public function toSearchableArray() {
+        return collect($this->only($this->searchable))->merge([
+            // Add more keys here
+        ])->toArray();
+    }
+    @endif
 
     /* ************************ ACCESSOR ************************* */
 

@@ -5,17 +5,20 @@ use App\Http\Requests\Api\User\IndexUser;
 use App\Http\Requests\Api\User\StoreUser;
 use App\Http\Requests\Api\User\UpdateUser;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Savannabits\Savadmin\Helpers\ApiResponse;
+use Savannabits\Savadmin\Helpers\SavbitsHelper;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController  extends Controller
 {
-    private $api;
-    public function __construct(ApiResponse $apiResponse)
+    private $api, $helper;
+    public function __construct(ApiResponse $apiResponse, SavbitsHelper $helper)
     {
         $this->api = $apiResponse;
+        $this->helper = $helper;
     }
 
     /**
@@ -25,24 +28,24 @@ class UserController  extends Controller
      */
     public function index(IndexUser $request)
     {
-        $query = User::query();
-        if ($request->has('search')) {
-            $query->whereNotNull('id')
-            ->orWhere("id","LIKE","%$request->search%")
-            ->orWhere("username","LIKE","%$request->search%")
-            ->orWhere("email","LIKE","%$request->search%")
-            ->orWhere("name","LIKE","%$request->search%")
-            ->orWhere("first_name","LIKE","%$request->search%")
-            ->orWhere("middle_name","LIKE","%$request->search%")
-            ->orWhere("last_name","LIKE","%$request->search%")
-            ;
-        }
-        $data = $query->paginate($request->get('per_page') ?? 15);
+        $data = $this->helper::listing(User::class, $request)->customQuery(function ($builder) use($request) {
+        /**@var  User|Builder $builder*/
+        // Add custom queries here
+        })->process();
         return $this->api->success()->message("List of Users")->payload($data)->send();
     }
 
     public function dt(Request $request) {
-        return DataTables::eloquent(User::latest())->make();
+        return DataTables::of(User::query())
+            ->addColumn("actions",function($model) {
+                $actions = '';
+                if (\Auth::user()->can('users.show')) $actions .= '<button class="btn btn-outline-primary btn-square action-button mr-2" title="View Details" data-action="show-user" data-tag="button" data-id="'.$model->id.'"><i class="mdi mdi-eye"></i></button>';
+                if (\Auth::user()->can('users.edit')) $actions .= '<button class="btn btn-outline-warning btn-square action-button mr-2" title="Edit Item" data-action="edit-user" data-tag="button" data-id="'.$model->id.'"><i class="mdi mdi-pencil"></i></button>';
+                if (\Auth::user()->can('users.delete')) $actions .= '<button class="btn btn-outline-danger btn-square action-button mr-2" title="Delete Item" data-action="delete-user" data-tag="button" data-id="'.$model->id.'"><i class="mdi mdi-delete"></i></button>';
+                return $actions;
+            })
+            ->rawColumns(['actions'])
+            ->make();
     }
 
     /**
@@ -56,12 +59,10 @@ class UserController  extends Controller
         try {
             $array = $request->sanitizedArray();
             $user = new User($array);
-            if (isset($array["password"])) {
-                $user->password = bcrypt($array["password"]);
-            }
+            
             // Save Relationships
             $object = $request->sanitizedObject();
-
+                        
 
             $user->saveOrFail();
             return $this->api->success()->message('User Created')->payload($user)->send();
@@ -100,13 +101,10 @@ class UserController  extends Controller
         try {
             $data = $request->sanitizedArray();
             $user->update($data);
-            if (isset($data["password"])) {
-                $user->password = bcrypt($data["password"]);
-            }
-
+            
             // Save Relationships
                 $object = $request->sanitizedObject();
-
+                
 
             $user->saveOrFail();
             return $this->api->success()->message("User has been updated")->payload($user)->code(200)->send();

@@ -26447,10 +26447,16 @@ Vue.prototype.$setErrorsFromResponse = function (errorResponse) {
 };
 
 Vue.component('roles-component', function () {
-  return Promise.all(/*! import() | js/roles-component */[__webpack_require__.e("vendors~js/roles-component~js/users-component"), __webpack_require__.e("js/roles-component~js/users-component"), __webpack_require__.e("js/roles-component")]).then(__webpack_require__.bind(null, /*! ./roles */ "./resources/js/backend/roles.js"));
+  return Promise.all(/*! import() | js/roles-component */[__webpack_require__.e("vendors~js/data-types-component~js/roles-component~js/settings-component~js/users-component"), __webpack_require__.e("js/data-types-component~js/roles-component~js/settings-component~js/users-component"), __webpack_require__.e("js/roles-component")]).then(__webpack_require__.bind(null, /*! ./roles */ "./resources/js/backend/roles.js"));
 });
 Vue.component('users-component', function () {
-  return Promise.all(/*! import() | js/users-component */[__webpack_require__.e("vendors~js/roles-component~js/users-component"), __webpack_require__.e("js/roles-component~js/users-component"), __webpack_require__.e("js/users-component")]).then(__webpack_require__.bind(null, /*! ./users */ "./resources/js/backend/users.js"));
+  return Promise.all(/*! import() | js/users-component */[__webpack_require__.e("vendors~js/data-types-component~js/roles-component~js/settings-component~js/users-component"), __webpack_require__.e("js/data-types-component~js/roles-component~js/settings-component~js/users-component"), __webpack_require__.e("js/users-component")]).then(__webpack_require__.bind(null, /*! ./users */ "./resources/js/backend/users.js"));
+});
+Vue.component('settings-component', function () {
+  return Promise.all(/*! import() | js/settings-component */[__webpack_require__.e("vendors~js/data-types-component~js/roles-component~js/settings-component~js/users-component"), __webpack_require__.e("js/data-types-component~js/roles-component~js/settings-component~js/users-component"), __webpack_require__.e("js/settings-component")]).then(__webpack_require__.bind(null, /*! ./settings */ "./resources/js/backend/settings.js"));
+});
+Vue.component('data-types-component', function () {
+  return Promise.all(/*! import() | js/data-types-component */[__webpack_require__.e("vendors~js/data-types-component~js/roles-component~js/settings-component~js/users-component"), __webpack_require__.e("js/data-types-component~js/roles-component~js/settings-component~js/users-component"), __webpack_require__.e("js/data-types-component")]).then(__webpack_require__.bind(null, /*! ./data-types */ "./resources/js/backend/data-types.js"));
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js")))
 

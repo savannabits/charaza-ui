@@ -74,7 +74,11 @@ class Model extends ClassGenerator {
                 return $column['type'] == "boolean" || $column['type'] == "bool";
             })->pluck('name'),
             'fillable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
-                return !in_array($column['name'], ['id', 'created_at', 'updated_at', 'deleted_at', 'remember_token','slug']);
+                return !in_array($column['name'], ['id', 'created_at', 'updated_at', 'deleted_at','password', 'remember_token','slug']);
+            })->pluck('name'),
+            'searchable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
+                return !in_array($column['name'], ['created_at', 'updated_at', 'deleted_at','password', 'remember_token','slug'])
+                    && !in_array($column["type"],["json"]);
             })->pluck('name'),
             'hidden' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
                 return in_array($column['name'], ['password', 'remember_token']);

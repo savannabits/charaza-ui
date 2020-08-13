@@ -80,18 +80,29 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   data: function data() {
     return {
       item_id: null,
-      table: null
+      table: null,
+      table_ready: false
     };
   },
   mounted: function mounted() {
     var vm = this;
-    var columns = [].concat(_toConsumableArray(vm.columns), [{
-      data: "Actions",
-      searchable: false,
+    var columns = [].concat(_toConsumableArray(vm.columns), [
+    /*{
+        data: "manage",
+        name: 'manage',
+        searchable: false,
+        className: 'text-right',
+        orderable: false,
+        render: function(data, type, row) {
+            return vm.makeActionColumn(row)
+        }
+    },*/
+    {
+      data: 'actions',
+      name: 'actions',
       className: 'text-right',
-      render: function render(data, type, row) {
-        return vm.makeActionColumn(row);
-      }
+      orderable: false,
+      searchable: false
     }]);
     $(document).ready(function () {
       vm.table = $("#".concat(vm.tableId)).DataTable({
@@ -114,6 +125,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           });
         }
       });
+      vm.table_ready = true;
     });
     vm.$root.$on("refresh-dt", function (e) {
       if (e.tableId === vm.tableId) {
@@ -132,7 +144,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var vm = this;
       var actions = "";
       vm.actionButtons.forEach(function (actionButton, key) {
-        actions = "\n                ".concat(actions, "\n                <").concat(actionButton.tag, " class=\"action-button ").concat(actionButton.classes, "\"\n                    href=\"").concat(actionButton.href, "\"\n                    @click=\"emitActionEvent\"\n                    data-action=\"").concat(actionButton.event, "\"\n                    data-url=\"").concat(actionButton.url, "\"\n                    data-id=\"").concat(payload.id, "\"\n                    data-tag=\"").concat(actionButton.tag, "\"\n                ><i v-if=\"").concat(actionButton.icon, "\" class=\"").concat(actionButton.icon, "\"></i> ").concat(actionButton.title, "\n                </").concat(actionButton.tag, ">\n                ");
+        actions = "\n                ".concat(actions, "\n                <").concat(actionButton.tag, " class=\"action-button ").concat(actionButton.classes, "\"\n                    href=\"").concat(actionButton.href, "\"\n                    data-action=\"").concat(actionButton.event, "\"\n                    data-url=\"").concat(actionButton.url, "\"\n                    data-id=\"").concat(payload.id, "\"\n                    data-tag=\"").concat(actionButton.tag, "\"\n                ><i v-if=\"").concat(actionButton.icon, "\" class=\"").concat(actionButton.icon, "\"></i> ").concat(actionButton.title, "\n                </").concat(actionButton.tag, ">\n                ");
       });
       return actions;
     }
@@ -160,28 +172,20 @@ var render = function() {
     _c(
       "table",
       {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.table_ready,
+            expression: "table_ready"
+          }
+        ],
         staticClass: "table table-hover",
         class: _vm.tableClasses,
         staticStyle: { width: "100%" },
         attrs: { id: _vm.tableId }
       },
-      [
-        _c("thead", [
-          _c(
-            "tr",
-            [
-              _vm._l(_vm.columns, function(column) {
-                return _c("th", { key: column.data }, [
-                  _vm._v(_vm._s(column.title || column.data))
-                ])
-              }),
-              _vm._v(" "),
-              _c("th", [_vm._v("Actions")])
-            ],
-            2
-          )
-        ])
-      ]
+      [_c("thead")]
     )
   ])
 }

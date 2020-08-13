@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"js/dt-component":"js/dt-component","vendors~js/date-picker":"vendors~js/date-picker","js/date-picker":"js/date-picker","vendors~js/roles-component~js/users-component":"vendors~js/roles-component~js/users-component","js/roles-component~js/users-component":"js/roles-component~js/users-component","js/roles-component":"js/roles-component","js/users-component":"js/users-component"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"js/dt-component":"js/dt-component","vendors~js/data-types-component~js/roles-component~js/settings-component~js/users-component":"vendors~js/data-types-component~js/roles-component~js/settings-component~js/users-component","js/data-types-component~js/roles-component~js/settings-component~js/users-component":"js/data-types-component~js/roles-component~js/settings-component~js/users-component","js/data-types-component":"js/data-types-component","js/roles-component":"js/roles-component","js/settings-component":"js/settings-component","js/users-component":"js/users-component","vendors~js/date-picker":"vendors~js/date-picker","js/date-picker":"js/date-picker"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function

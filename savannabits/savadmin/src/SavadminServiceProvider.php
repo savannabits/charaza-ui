@@ -44,6 +44,7 @@ class SavadminServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../config/config.php' => config_path('savadmin.php'),
+                __DIR__ . '/../config/scout.php' => config_path('scout.php'),
             ], 'config');
 
             // Publishing the views.

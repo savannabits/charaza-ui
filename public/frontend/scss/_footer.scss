@@ -1,0 +1,124 @@
+.footer-area{
+    background-image: url(../img/gallery/footer_bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    .footer-logo{
+        margin-bottom:40px;
+    }
+    .footer-pera{
+        & p{
+            color:#8ba4b1;
+            padding-right: 12px;
+
+            @media #{$laptop}{
+                padding-right: 8px;
+            }
+            @media #{$lg}{
+                padding-right: 0px;
+            }
+            @media #{$md}{
+                padding-right: 0px;
+            }
+            @media #{$sm}{
+                padding-right: 0px;
+            }
+            @media #{$xs}{
+                padding-right: 0px;
+            }
+            font-size: 16px;
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+        &.footer-pera2 p{
+            padding: 0;
+        }
+    }
+    .footer-tittle{
+        & h4{
+            color:#fff;
+            font-size: 20px;
+            margin-bottom: 29px;
+            font-weight: 500;
+            text-transform: capitalize;
+            font-family: $font_2;
+            span{
+                color:#fff;
+            }
+        }
+        & ul{
+            & li{
+                color: #8ba4b1;
+                margin-bottom: 15px;
+                & a{
+                    color: #8ba4b1;
+                    font-weight: 300;
+                    &:hover{
+                        color: $theme-color;
+                        padding-left: 5px;
+                    }
+                }
+                &.app-log{
+                    margin-bottom: 30px;
+                    display: block;
+                }
+            }
+        }
+        P{
+            color: #8ba4b1;
+        }
+    }
+    // Footer SociaL
+    .footer-social {
+        @media #{$md}{
+           float: left; 
+           padding-top: 10px;
+        }
+        @media #{$sm}{
+           float: left; 
+           padding-top: 10px;
+        }
+        @media #{$xs}{
+           float: left; 
+           padding-top: 10px;
+        }
+        a {
+            color: #8ba4b1;
+            font-size: 14px;
+            text-align: center;
+            margin-left: 16px;
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+    //copy Right 
+    .footer-bottom{
+        // border-top: 1px solid #1c2e4c;
+        padding-bottom: 50px;
+        padding-top: 20px;
+
+        .footer-copy-right{
+            & p{
+                color: #8ba4b1;
+                font-weight: 300;
+                font-size: 16px;
+                line-height: 2;
+                margin-bottom: 12px;
+                & i{
+                    color:$theme-color;
+                }
+                & a{
+                    color: $theme-color;
+                    &:hover{
+                        // color: #fff;
+                    }
+                     
+                }
+            }
+        }
+    }
+
+}
+
+
+
