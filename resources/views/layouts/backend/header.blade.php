@@ -46,7 +46,7 @@
                     </svg> Payments Due<span class="badge badge-secondary ml-auto">42</span>
                 </a>
               <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{route('logout')}}">
+                <a class="dropdown-item" href="{{route('logout',tenant('id'))}}">
                     <svg class="c-icon mr-2">
                       <use xlink:href="{{ env('APP_URL', '') }}/icons/sprites/free.svg#cil-account-logout"></use>
                     </svg>

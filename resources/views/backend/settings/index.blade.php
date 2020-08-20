@@ -11,6 +11,8 @@
             delete-dialog-ref="settingDeleteDialog"
             app-url="{{config('app.url')}}"
             api-route="{{route('api.settings.index')}}"
+            tenant="{{tenant('id')}}"
+            tenant-header-name="{{config('savadmin.tenancy.header_name')}}"
             v-cloak inline-template
         >
             <b-row>
@@ -23,6 +25,8 @@
                                       ajax-url="{{route('api.settings.dt')}}"                                      v-cloak
                                       :columns="{{json_encode($columns)}}"
                                       table-classes="table table-hover"
+                                      tenant="{{tenant('id')}}"
+                                      tenant-header-name="{{config('savadmin.tenancy.header_name')}}"
                                       v-on:edit-setting="showFormDialog"
                                       v-on:show-setting="showDetailsDialog"
                                       v-on:delete-setting="showDeleteDialog"

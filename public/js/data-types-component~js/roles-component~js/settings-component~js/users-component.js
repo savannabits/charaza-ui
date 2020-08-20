@@ -409,8 +409,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _mixins_DateUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mixins/DateUtils */ "./resources/js/mixins/DateUtils.js");
-/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! v-money */ "./node_modules/v-money/dist/v-money.js");
-/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(v_money__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -424,28 +422,13 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_mixins_DateUtils__WEBPACK_IMPORTED_MODULE_1__["default"]],
   data: function data() {
     return {
       form: {},
-      model: {},
-      moneyMask: {
-        precision: 2,
-        decimal: '.',
-        thousands: ',',
-        prefix: 'Ksh. ',
-        mask: true
-      }
+      model: {}
     };
-  },
-  directives: {
-    money: v_money__WEBPACK_IMPORTED_MODULE_2__["VMoney"]
-  },
-  components: {
-    Money: v_money__WEBPACK_IMPORTED_MODULE_2___default.a
   },
   props: {
     "tableId": {
@@ -460,6 +443,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     "apiRoute": {
       required: true,
       type: String
+    },
+    "tenant": {
+      required: false,
+      type: String,
+      "default": null
+    },
+    "tenantHeaderName": {
+      required: false,
+      "default": null
+    },
+    "tenantQueryParam": {
+      required: false,
+      "default": null
     },
     "formDialogRef": {
       required: true,
@@ -482,6 +478,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     vm.form = vm.model;
     vm.form.api_route = vm.apiRoute;
     axios.defaults.baseURL = this.appUrl;
+
+    if (vm.tenant) {
+      if (vm.tenantHeaderName) {
+        axios.defaults.headers.common[vm.tenantHeaderName] = vm.tenant;
+      } else {
+        axios.defaults.params[vm.tenantQueryParam] = vm.tenant;
+      }
+    }
   },
   methods: {
     validateState: function validateState(ref) {

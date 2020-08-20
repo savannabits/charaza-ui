@@ -68,3 +68,11 @@ function getPaymentDates(\Carbon\Carbon  $start,$t, $n=12, $unit='year') {
     }
     return $dates;
 }
+
+function hasTenantVariable() {
+    $var = request()->route('tenant') ?? request()->query(config('savadmin.tenancy.query_parameter_name','tenant'));
+    if (!$var) {
+        $var = request()->header(config('savadmin.tenancy.header_name','X-Tenant')) ?? null;
+    }
+    return $var;
+}

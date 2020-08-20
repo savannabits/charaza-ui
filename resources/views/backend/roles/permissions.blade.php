@@ -11,6 +11,8 @@
             delete-dialog-ref="roleDeleteDialog"
             app-url="{{config('app.url')}}"
             api-route="{{route('api.roles.index')}}"
+            tenant="{{tenant('id')}}"
+            tenant-header-name="{{config('savadmin.tenancy.header_name')}}"
             v-cloak inline-template
         >
             <b-row class="justify-content-center">

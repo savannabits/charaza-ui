@@ -3,7 +3,7 @@
 @endphp
 
 <a href="{{route('welcome')}}" class="c-sidebar-brand">
-    <img class="c-sidebar-brand-full" src="{{asset('/assets/brand/banner-white-brown.png')}}" height="50" alt="Banner">
+    <img class="c-sidebar-brand-full" src="{{asset('/assets/brand/banner-white.png')}}" height="50" alt="Banner">
     <img class="c-sidebar-brand-minimized" src="{{asset('assets/brand/logo-white.png')}}" height="50" alt="Signet">
 </a>
 <ul class="c-sidebar-nav">

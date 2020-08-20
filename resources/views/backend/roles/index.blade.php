@@ -11,6 +11,8 @@
             delete-dialog-ref="roleDeleteDialog"
             app-url="{{config('app.url')}}"
             api-route="{{route('api.roles.index')}}"
+            tenant="{{tenant('id')}}"
+            tenant-header-name="{{config('savadmin.tenancy.header_name')}}"
             v-cloak inline-template
         >
             <b-row>
@@ -24,6 +26,8 @@
                                       v-cloak
                                       :columns="{{json_encode($columns)}}"
                                       table-classes="table table-hover"
+                                      tenant="{{tenant('id')}}"
+                                      tenant-header-name="{{config('savadmin.tenancy.header_name')}}"
                                       v-on:edit-role="showFormDialog"
                                       v-on:show-role="showDetailsDialog"
                                       v-on:delete-role="showDeleteDialog"

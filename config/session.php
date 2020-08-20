@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'driver' => tenant('id') ? env('SESSION_DRIVER', 'file'): 'cookie',
+    'driver' => tenant('id') ? env('SESSION_DRIVER', 'file'): 'array',
 
     /*
     |--------------------------------------------------------------------------

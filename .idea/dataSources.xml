@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="savui@localhost" uuid="97e3831b-3171-44d0-8e37-a03efeb8f0b6">
+    <data-source source="LOCAL" name="savui_first@localhost" uuid="309e6fb9-4081-4c1f-b16d-6e77df27c2fa">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/savui_first</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="savui_second@localhost" uuid="67373b4f-704d-4b6b-9ccb-e34f632ea025">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/savui_second</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="savui@localhost" uuid="c08c0ece-d71d-4a1a-b770-a12d0a0cafab">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
