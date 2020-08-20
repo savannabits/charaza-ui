@@ -53,6 +53,13 @@
             "ajaxUrl": {
                 required: true,
                 type: String,
+            },
+            "ajaxParams": {
+                required: false,
+                type: Object,
+                default: () => {
+                    return {};
+                }
             }
         },
         data() {
@@ -89,7 +96,14 @@
                     processing: true,
                     serverSide: true,
                     stateSave: true,
-                    ajax: vm.ajaxUrl,
+                    ajax: {
+                        url: vm.ajaxUrl,
+                        data: function(d) {
+                            for (const [key, value] of Object.entries(vm.ajaxParams)) {
+                                d[key] = value;
+                            }
+                        }
+                    },
                     columns: columns,
                     columnDefs: vm.columnDefs,
                 });

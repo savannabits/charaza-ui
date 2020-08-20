@@ -1,23 +1,12 @@
 import DateUtils from "../mixins/DateUtils";
-import {VMoney} from "v-money";
-import Money from "v-money";
 export default {
     mixins:[DateUtils],
     data() {
         return {
             form: {},
             model: {},
-            moneyMask: {
-                precision: 2,
-                decimal: '.',
-                thousands: ',',
-                prefix: 'Ksh. ',
-                mask: true,
-            }
         }
     },
-    directives: {money: VMoney},
-    components: {Money},
     props: {
         "tableId": {
             required: true,
