@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Stancl\Tenancy\Middleware\InitializeTenancyByPath;
+use Stancl\Tenancy\Middleware\InitializeTenancyByRequestData;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -30,8 +33,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
+        InitializeTenancyByRequestData::$header = config('savadmin.tenancy.header_name',"X-Tenant");
+        InitializeTenancyByRequestData::$queryParameter = config('savadmin.tenancy.query_parameter_name',"tenant");
+        InitializeTenancyByPath::$onFail = function ($exception, $request, $next) {
+            session()->flash('error', $exception->getMessage());
+//            return redirect(url(''));
+            throw new NotFoundHttpException($exception->getMessage(),$exception);
+        };
         parent::boot();
     }
 
@@ -43,10 +51,8 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
-
         $this->mapWebRoutes();
-
-        //
+        $this->mapCentralRoutes();
     }
 
     /**
@@ -58,11 +64,18 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
+        Route::middleware(['web',InitializeTenancyByPath::class])
             ->namespace($this->namespace)
+            ->prefix("{tenant?}")
             ->group(base_path('routes/web.php'));
     }
 
+    protected function mapCentralRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/central.php'));
+    }
     /**
      * Define the "api" routes for the application.
      *
@@ -73,7 +86,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware(['api',InitializeTenancyByRequestData::class])
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
     }

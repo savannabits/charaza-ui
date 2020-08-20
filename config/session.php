@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    'driver' => tenant('id') ? env('SESSION_DRIVER', 'file'): 'cookie',
 
     /*
     |--------------------------------------------------------------------------
@@ -72,7 +72,7 @@ return [
     |
     */
 
-    'connection' => env('SESSION_CONNECTION', null),
+    'connection' =>  env('SESSION_CONNECTION', null),
 
     /*
     |--------------------------------------------------------------------------

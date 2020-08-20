@@ -14,7 +14,6 @@ URL::forceRootUrl(config('app.url'));
 |
 */
 
-Route::get('/',"FrontendController@welcome")->name('welcome');
 Route::get('/apply', 'FrontendController@showApply')->middleware('auth')->name('apply.show');
 Route::post('/apply', 'FrontendController@showApply')->middleware('auth')->name('apply.submit');
 

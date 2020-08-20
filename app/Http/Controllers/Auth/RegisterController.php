@@ -41,6 +41,13 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    /**
+     * @return string
+     */
+    public function getRedirectTo(): string
+    {
+        return tenant('id').$this->redirectTo;
+    }
 
     /**
      * Get a validator for an incoming registration request.

@@ -39,4 +39,11 @@ class VerificationController extends Controller
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
+    /**
+     * @return string
+     */
+    public function getRedirectTo(): string
+    {
+        return tenant('id').$this->redirectTo;
+    }
 }

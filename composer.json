@@ -27,6 +27,7 @@
         "savannabits/savadmin": "^1.2",
         "spatie/laravel-medialibrary": "^8.3",
         "spatie/laravel-permission": "^3.13",
+        "stancl/tenancy": "^3.1",
         "yajra/laravel-datatables-oracle": "^9.10"
     },
     "require-dev": {

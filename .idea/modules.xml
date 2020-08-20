@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../savannabits/savadmin/.idea/savadmin.iml" filepath="$PROJECT_DIR$/../../savannabits/savadmin/.idea/savadmin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/savui.iml" filepath="$PROJECT_DIR$/.idea/savui.iml" />
     </modules>
   </component>

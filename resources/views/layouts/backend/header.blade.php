@@ -3,6 +3,11 @@
         <button class="c-header-toggler c-class-toggler d-lg-none mr-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show"><span class="c-header-toggler-icon"></span></button><a class="c-header-brand d-sm-none" href="#"><img class="c-header-brand" src="{{url('/assets/brand/banner-white-brown.png')}}" height="50" alt="Charaza"></a>
         <button class="c-header-toggler c-class-toggler ml-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true"><span class="c-header-toggler-icon"></span></button>
 
+          <ul class="c-header-nav ml-2 d-sm-down-none">
+              <li>
+                  <a class="text-light font-weight-bolder" href="{{route('welcome')}}">Current {{env('TENANT_PARAM','tenant')}}: {{tenant('name')}}</a>
+              </li>
+          </ul>
         <ul class="c-header-nav ml-auto mr-4">
           <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link">
               <svg class="c-icon">

@@ -27,4 +27,11 @@ class ResetPasswordController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    /**
+     * @return string
+     */
+    public function getRedirectTo(): string
+    {
+        return tenant('id').$this->redirectTo;
+    }
 }

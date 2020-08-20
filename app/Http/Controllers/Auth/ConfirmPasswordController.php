@@ -37,4 +37,11 @@ class ConfirmPasswordController extends Controller
     {
         $this->middleware('auth');
     }
+    /**
+     * @return string
+     */
+    public function getRedirectTo(): string
+    {
+        return tenant('id').$this->redirectTo;
+    }
 }

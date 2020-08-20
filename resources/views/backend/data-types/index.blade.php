@@ -10,6 +10,8 @@
             details-dialog-ref="dataTypeDetailsDialog"
             delete-dialog-ref="dataTypeDeleteDialog"
             app-url="{{config('app.url')}}"
+            tenant="{{tenant('id')}}"
+            tenant-header-name="{{env('TENANT_HEADER_NAME')}}"
             api-route="{{route('api.data-types.index')}}"
             v-cloak inline-template
         >
@@ -22,8 +24,11 @@
                         </div>
                         @can('data-types.index')
                         <dt-component table-id="data-types-dt"
-                                      ajax-url="{{route('api.data-types.dt')}}"                                      v-cloak
+                                      ajax-url="{{route('api.data-types.dt')}}"
+                                      v-cloak
                                       :columns="{{json_encode($columns)}}"
+                                      tenant="{{tenant('id')}}"
+                                      tenant-header-name="{{env('TENANT_HEADER_NAME')}}"
                                       table-classes="table table-hover"
                                       v-on:edit-data-type="showFormDialog"
                                       v-on:show-data-type="showDetailsDialog"
