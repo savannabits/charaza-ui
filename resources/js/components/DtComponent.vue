@@ -60,7 +60,20 @@
                 default: () => {
                     return {};
                 }
-            }
+            },
+            "tenant": {
+                required:false,
+                type: String,
+                default: null
+            },
+            "tenantHeaderName": {
+                required:false,
+                default: null
+            },
+            "tenantQueryParam": {
+                required:false,
+                default: null
+            },
         },
         data() {
             return {
@@ -101,6 +114,11 @@
                         data: function(d) {
                             for (const [key, value] of Object.entries(vm.ajaxParams)) {
                                 d[key] = value;
+                            }
+                        },
+                        beforeSend: function(request) {
+                            if (vm.tenant && vm.tenantHeaderName) {
+                                request.setRequestHeader(`${vm.tenantHeaderName}`,`${vm.tenant}`);
                             }
                         }
                     },
