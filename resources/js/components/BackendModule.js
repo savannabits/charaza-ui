@@ -1,5 +1,4 @@
 import DateUtils from "../mixins/DateUtils";
-
 export default {
     mixins:[DateUtils],
     data() {
@@ -32,6 +31,11 @@ export default {
             required: true,
             type: String,
             default: "detailsDialog"
+        },
+        "deleteDialogRef": {
+            required: true,
+            type: String,
+            default: "deleteDialog"
         }
     },
     mounted() {
@@ -94,6 +98,15 @@ export default {
             }
             vm.submitForm(e,url,method).then(res => {
                 vm.$refs[vm.formDialogRef].hide();
+            }).finally(res => {
+            });
+        },
+        deleteItem(e) {
+            const vm = this;
+            let method = "delete";
+            let url = `${vm.form.api_route}/${vm.form.id}`
+            vm.submitForm(e,url,method).then(res => {
+                vm.$refs[vm.deleteDialogRef].hide();
             });
         },
         /**
@@ -111,6 +124,7 @@ export default {
                         reject("The form contains invalid fields")
                         return;
                     }
+                    vm.showLoader();
                     axios.request({
                         method: method,
                         url: url,
@@ -123,6 +137,8 @@ export default {
                         vm.$setErrorsFromResponse(err.response?.data);
                         vm.$snotify.error(err.response?.data?.message || err.message || err)
                         reject(err);
+                    }).finally(res => {
+                        vm.hideLoader();
                     })
                 })
             })
@@ -135,14 +151,28 @@ export default {
                 vm.$snotify.error(err.message || err);
             })
         },
-        async fetchModel(id) {
+        showDeleteDialog(e) {
+            let vm = this;
+            vm.fetchModel(e.id).then(res => {
+                vm.$refs[vm.deleteDialogRef].show();
+            }).catch(err => {
+                vm.$snotify.error(err.message || err);
+            })
+        },
+
+        async fetchModel(id, params=null) {
             const vm = this;
             return new Promise((resolve, reject) => {
-                axios.get(`${vm.form.api_route}/${id}`).then(res => {
+                vm.showLoader();
+                axios.get(`${vm.form.api_route}/${id}`,{
+                    params: params||{}
+                }).then(res => {
                     vm.form = {...res.data.payload}
                     resolve(res.data);
                 }).catch(err => {
                     reject(err);
+                }).finally(res => {
+                    vm.hideLoader();
                 })
             })
         },
@@ -150,6 +180,12 @@ export default {
             this.$root.$emit("refresh-dt", {
                 tableId: tableId
             })
+        },
+        showLoader() {
+            $('#preloader-active').show();
+        },
+        hideLoader() {
+            $('#preloader-active').fadeOut('slow');
         }
 
     }
