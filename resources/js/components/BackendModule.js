@@ -21,7 +21,19 @@ export default {
             required: true,
             type: String
         },
-
+        "tenant": {
+            required:false,
+            type: String,
+            default: null
+        },
+        "tenantHeaderName": {
+            required:false,
+            default: null
+        },
+        "tenantQueryParam": {
+            required:false,
+            default: null
+        },
         "formDialogRef": {
             required: true,
             type: String,
@@ -43,6 +55,13 @@ export default {
         vm.form = vm.model;
         vm.form.api_route = vm.apiRoute
         axios.defaults.baseURL = this.appUrl;
+        if (vm.tenant) {
+            if (vm.tenantHeaderName) {
+                axios.defaults.headers.common[vm.tenantHeaderName] = vm.tenant;
+            } else {
+                axios.defaults.params[vm.tenantQueryParam] = vm.tenant;
+            }
+        }
     },
     methods: {
         validateState(ref) {
