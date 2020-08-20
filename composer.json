@@ -1,14 +1,20 @@
 {
-    "name": "savannabits/charaza-ui",
+    "name": "savannabits/charaza-ui-tenancy",
+    "authors": [{
+        "name": "Sam Arossi Maosa",
+        "email": "maosa.sam@gmail.com"
+    }],
     "type": "project",
-    "description": "Laravel 7 Scaffold of Savannabit's Admin CRUD generator",
+    "description": "Multi-tenant version of savannabits/charaza-ui Admin Code Generator and scaffolder",
     "keywords": [
         "framework",
         "laravel",
+        "tenancy",
         "coreui",
         "savannabits",
         "charaza",
         "admin generator",
+        "code-generator",
         "boilerplate"
     ],
     "license": "MIT",
@@ -24,7 +30,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "rennokki/laravel-eloquent-query-cache": "^2.2",
-        "savannabits/savadmin": "@dev",
+        "savannabits/savadmin": "^1.3",
         "spatie/laravel-medialibrary": "^8.3",
         "spatie/laravel-permission": "^3.13",
         "stancl/tenancy": "^3.1",
@@ -63,10 +69,6 @@
         }
     },
     "repositories": {
-        "savannabits/savadmin": {
-            "type": "path",
-            "url": "/data/www/savannabits/savadmin"
-        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
