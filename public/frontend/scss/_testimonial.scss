@@ -1,0 +1,127 @@
+.testimonial-area{
+    .testimonial-caption{
+        .testimonial-top-cap{
+            & img{
+                margin-bottom: 50px;
+                width: auto;
+                display: inline-block;
+                @media #{$md}{
+                    margin-bottom: 30px;
+                }
+                @media #{$xs}{
+                    margin-bottom: 30px;
+                }
+            }
+            & p{
+                color: #fff;
+                font-weight: 400;
+                line-height: 1.5;
+                padding: 0 3px;
+                margin-bottom: 50px;
+                font-size: 30px;
+                @media #{$lg}{
+                    font-size: 20px;
+                }
+                @media #{$md}{
+                    font-size: 20px;
+                }
+                @media #{$sm}{
+                    font-size: 23px;
+                }
+                @media #{$xs}{
+                    font-size: 18px;
+                }
+                // margin
+                @media #{$md}{
+                    margin-bottom: 30px;
+                }
+                @media #{$xs}{
+                    margin-bottom: 30px;
+                }
+            }
+        }
+        .testimonial-founder{
+            .founder-img{
+
+            }
+            .founder-text{
+                margin-left: 20px;
+                & span{
+                    color:#fff;
+                }
+                & p{
+                    color:#fff;
+                    font-weight:500;
+                    line-height:1.5 ;
+                }
+            }
+        }
+        
+    }
+
+}
+
+/* Homepage1 Testimonial */
+.h1-testimonial-active{
+    button.slick-arrow {
+        position: absolute;
+        top: 50%;
+        left: -133px;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        border: 0;
+        padding: 0;
+        z-index: 2;
+        height: 45px;
+        width: 45px;
+        line-height: 15px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        @include transition(.3s);
+        color: #fff;
+        // Hide btn
+        opacity: 0;
+        visibility: hidden;
+        background: $theme-color;
+
+        @media #{$sm}{
+            left: -45px;
+        }
+         @media #{$sm}{
+            left: -45px;
+        }
+        
+    } 
+   button.slick-next {
+        left: auto;
+        right: -133px;
+        @media #{$sm}{
+            right: -45px;
+        }
+    }
+    &:hover button.slick-prev {
+        left: -120px;
+        @media #{$sm}{
+            left: -35px;
+        }
+    }
+    &:hover button.slick-next {
+    right: -120px;
+    @media #{$sm}{
+        right: -37px;
+    }
+    }
+    &:hover button {
+        // Show btn
+        opacity: 1;
+        visibility: visible;
+    }
+}
+.t-bg{
+    background: #021a47;
+}
+.slick-initialized .slick-slide {
+    outline: 0;
+}

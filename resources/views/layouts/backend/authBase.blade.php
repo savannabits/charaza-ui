@@ -51,7 +51,7 @@
     <link href="{{ asset('css/free.min.css') }}" rel="stylesheet"> <!-- icons -->
     <link href="{{ asset('css/flag.min.css') }}" rel="stylesheet"> <!-- icons -->
     <!-- Main styles for this application-->
-    <link href="{{ mix('/css/backend.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/backend.css') }}" rel="stylesheet">
     @yield('css')
 </head>
 

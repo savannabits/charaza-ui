@@ -1,0 +1,150 @@
+.application-area{
+    // Form Style Slider
+    @media #{$md}{
+        padding-top: 100px;
+        padding-bottom:100px;
+    }
+    @media #{$sm}{
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+    @media #{$xs}{
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+ 
+      // Form Style Slider
+      form.search-box{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .select-form{
+            width: 25%;
+            @media #{$xs}{
+                width: 100%;
+            }
+            @media #{$sm}{
+                width: 50%;
+            }
+            .nice-select {
+                width: 100%;
+                height: 60px;
+                background: #fff;
+                border-radius: 0px;
+                padding: 11px 19px 11px 17px;
+                 color: #616875;
+                 line-height: 42px;
+                border: 0;
+                position: relative;
+                @media #{$xs}{
+                    margin-bottom: 20px;
+                    padding-left: 25px;
+                }
+                @media #{$sm}{
+                    margin-bottom: 20px;
+                    padding-left: 25px;
+                }
+               .list {
+                    width: 100%;
+                }
+                &.open .list {
+                    width: 100%;
+                    border-radius: 0;
+                    border: 0;
+                }
+                &::after {
+                    border-bottom: 2px solid #a9b6cd;
+                    border-right: 2px solid #a9b6cd;
+                    height: 10px;
+                    width: 10px;
+                    margin-top: -7px;
+                    right: 29px;
+                }
+                &::before {
+                    position: absolute;
+                    content: '';
+                    width: 1px;
+                    height: 60px;
+                    background:#e0e4f8;
+                    right: 0px;
+                    top: 50%;
+                    z-index: 1;
+                    transform: translateY(-50%);
+                    @media #{$sm}{
+                        top: 38%;
+                    }
+                    @media #{$xs}{
+                       display: none;
+                    }
+                    @media #{$sm}{
+                        background: unset;
+                    }
+                }
+            }
+    
+        }
+        .input-form{
+            width: 25%;
+            position: relative;
+            overflow: hidden;
+            @media #{$sm}{
+                width: 50%;
+            }
+            @media #{$xs}{
+                width: 100%;
+            }
+            input{
+                height: 60px;
+                width: 100%;
+                color: #777777;
+                font-size: 18px;
+                font-weight: 400;
+                padding: 9px 5px 9px 22px;
+                border: none;
+                position: relative;
+                @media #{$xs}{
+                    margin-bottom: 20px;
+                }
+                @media #{$sm}{
+                    padding: 9px 5px 9px 22px;
+                    margin-bottom: 20px;
+                }
+                &::placeholder {
+                    color: #616875;
+                    @media #{$xs}{
+                        font-size: 13px;
+                        
+                    }
+                }
+            }
+        }
+        .search-form{
+            width: 25%;
+            overflow: hidden;
+            @media #{$sm}{
+                width: 50%;
+            }
+            @media #{$xs}{
+                width: 100%;
+            }
+    
+            a{
+                border: 5px solid #fff;
+                width: 100%;
+                height: 60px;
+                background:#3589f1;;
+                line-height: 1;
+                text-align: center;
+                color: #fff;
+                display: block;
+                padding: 15px;
+                border-radius: 0px;
+                text-transform: uppercase;
+                line-height: 22px;
+                font-size: 14px;
+            }
+        }
+    
+    }
+}
+

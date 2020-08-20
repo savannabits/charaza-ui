@@ -66,7 +66,7 @@
                     <h4 class="pt-3">@yield('title')</h4>
                     <p class="text-muted">@yield('message')</p>
                 </div>
-              <a href="{{route('home')}}" class="btn btn-primary text-center">
+              <a href="{{url('')}}" class="btn btn-primary text-center">
                   <svg class="c-icon">
                       <use xlink:href="{{asset('assets/icons/coreui/free-symbol-defs.svg#cui-chevron-left')}}"></use>
                   </svg>

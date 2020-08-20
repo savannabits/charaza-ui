@@ -22,6 +22,9 @@ trait Columns {
             $columnUniqueIndexes = $indexes->filter(function($index) use ($columnName) {
                 return in_array($columnName, $index->getColumns()) && ($index->isUnique() && !$index->isPrimary());
             });
+            $columnPrimaryIndex = $indexes->filter(function($index) use ($columnName) {
+                return in_array($columnName,$index->getColumns()) && $index->isPrimary();
+            });
             $columnUniqueDeleteAtCondition = $columnUniqueIndexes->filter(function($index) {
                 return $index->hasOption('where') ? $index->getOption('where') == '(deleted_at IS NULL)' : false;
             });
@@ -30,12 +33,42 @@ trait Columns {
 
             return [
                 'name' => $columnName,
+                'primary' => $columnPrimaryIndex->count() > 0,
                 'type' => Schema::getColumnType($tableName, $columnName),
                 'required' => boolval(Schema::getConnection()->getDoctrineColumn($tableName, $columnName)->getNotnull()),
                 'unique' => $columnUniqueIndexes->count() > 0,
                 'unique_deleted_at_condition' => $columnUniqueDeleteAtCondition->count() > 0,
             ];
-        });
+        })
+            /*->sortByDesc(function ($item) {return $item['type']==='json';})
+            ->sortByDesc(function ($item) {return $item['type']==='longText';})
+            ->sortByDesc(function ($item) {return $item['type']==='time';})
+            ->sortByDesc(function ($item) {return $item['type']==='tinyinteger';})
+            ->sortByDesc(function ($item) {return $item['type']==='bigInteger';})
+            ->sortByDesc(function ($item) {return $item['type']==='mediumInteger';})
+            ->sortByDesc(function ($item) {return $item['type']==='integer';})
+            ->sortByDesc(function ($item) {return $item['type']==='float';})
+            ->sortByDesc(function ($item) {return $item['type']==='double';})
+            ->sortByDesc(function ($item) {return $item['type']==='text';})
+            ->sortByDesc(function ($item) {return $item['name']==='amount';})*/
+            ->sortByDesc(function ($item) {return $item['type']==='boolean';})
+            ->sortByDesc(function ($item) {return $item['type']==='datetime'&& !in_array($item['name'],['created_at','updated_at']);})
+            ->sortByDesc(function ($item) {return $item['type']==='date';})
+            ->sortByDesc(function ($item) {return $item['type']==='float';})
+//            ->sortByDesc(function ($item) {return $item['type']==='double';})
+            ->sortByDesc(function ($item) {return $item['type']==='text' && !in_array($item['name'],["description",'details','content','body','text']);})
+            ->sortByDesc(function ($item) {return $item['type']==='string' && !in_array($item['name'],["description",'details','content','body','text','middle_name','other_names','first_name','last_name','surname','title','headline','name','display_name','slug']);})
+            ->sortByDesc(function ($item) {return in_array($item['name'],["description",'details','content','body','text']);})
+            ->sortByDesc(function ($item) {return in_array($item['name'],['middle_name','other_names']);})
+            ->sortByDesc(function ($item) {return in_array($item['name'],['first_name','last_name','surname']);})
+            ->sortByDesc(function ($item) {return in_array($item['name'],['headline']);})
+            ->sortByDesc(function ($item) {return in_array($item['name'],['display_name']);})
+            ->sortByDesc(function ($item) {return in_array($item['name'],['title']);})
+            ->sortByDesc(function ($item) {return in_array($item['name'],['name']);})
+            ->sortByDesc(function ($item) {return in_array($item['name'],['slug']);})
+            ->sortByDesc(function ($item) {return in_array($item['name'],['id']);})
+            ->values()
+            ;
     }
 
     protected function getVisibleColumns($tableName, $modelVariableName) {
@@ -112,7 +145,7 @@ trait Columns {
                 case 'date':
                     $serverStoreRules->push('\'date\'');
                     $serverUpdateRules->push('\'date\'');
-                    $frontendRules->push('date_format:yyyy-MM-dd HH:mm:ss');
+                    $frontendRules->push('date_format:yyyy-MM-dd');
                     break;
                 case 'time':
                     $serverStoreRules->push('\'date_format:H:i:s\'');
@@ -229,7 +262,7 @@ trait Columns {
             $functionName = collect($fk->getColumns())->first();
             if (str_contains($functionName,"_id")) $functionName = str_replace("_id","",$functionName);
             $functionName = Str::camel(Str::singular($functionName));
-            $relatedTitle = Str::title(str_replace("-"," ",Str::slug($functionName)));
+            $relatedTitle = Str::title(str_replace("_"," ",Str::snake(Str::studly($functionName))));
             return [
                 "function_name" => $functionName,
                 "related_table" => $fk->getForeignTableName(),

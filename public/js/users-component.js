@@ -21,15 +21,15 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       model: {
-        username: null,
-        email: null,
         name: null,
         first_name: null,
-        middle_name: null,
         last_name: null,
-        email_verified_at: null,
+        middle_name: null,
+        username: null,
+        email: null,
         password: null,
-        password_confirmation: null
+        password_confirmation: null,
+        email_verified_at: null
       }
     };
   }

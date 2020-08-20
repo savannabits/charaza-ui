@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
+use App\Models\Permission;
+use App\Repos\Permissions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -12,6 +14,7 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('roles.index');
         $columns = [
             [
                 "data" => "id",
@@ -39,24 +42,10 @@ class RoleController extends Controller
                 "title" => "Updated At"
             ],
             ];
-        $actions = [
-            [
-                "tag" => "button",
-                "href" => "",
-                "title" => "details",
-                "icon" => "mdi mdi-eye",
-                "event" => "show-role",
-                "classes" => "btn btn-secondary rounded-0"
-            ],
-            [
-                "tag" => "button",
-                "href" => "",
-                "title" => "edit",
-                "icon" => "mdi mdi-pencil",
-                "event" => "edit-role",
-                "classes" => "btn btn-primary rounded-0"
-            ],
-        ];
-        return view('backend.roles.index', compact('columns', 'actions'));
+
+        return view('backend.roles.index', compact('columns'));
+    }
+    public function managePermissions(Request  $request) {
+        return view('backend.roles.permissions');
     }
 }

@@ -27,14 +27,14 @@ class UpdateUser extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['sometimes', Rule::unique('users', 'username')->ignore($this->user->getKey(), $this->user->getKeyName()), 'string'],
-            'email' => ['sometimes', 'email', Rule::unique('users', 'email')->ignore($this->user->getKey(), $this->user->getKeyName()), 'string'],
             'name' => ['sometimes', 'string'],
             'first_name' => ['sometimes', 'string'],
-            'middle_name' => ['nullable', 'string'],
             'last_name' => ['sometimes', 'string'],
-            'email_verified_at' => ['nullable', 'date'],
+            'middle_name' => ['nullable', 'string'],
+            'username' => ['sometimes', Rule::unique('users', 'username')->ignore($this->user->getKey(), $this->user->getKeyName()), 'string'],
+            'email' => ['sometimes', 'email', Rule::unique('users', 'email')->ignore($this->user->getKey(), $this->user->getKeyName()), 'string'],
             'password' => ['nullable', 'confirmed', 'min:7', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9]).*$/', 'string'],
+            'email_verified_at' => ['nullable', 'date'],
                     
         ];
     }

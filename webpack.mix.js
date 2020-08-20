@@ -10,12 +10,12 @@ require('laravel-mix-merge-manifest')
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.setResourceRoot(`${process.env.MIX_APP_URI || ''}`);
+mix.setResourceRoot(`/${process.env.MIX_APP_URI ? process.env.MIX_APP_URI+'/' : ''}`);
 mix.webpackConfig({
     output: {
         chunkFilename: `[name].js`,
         filename: "[name].js",
-        publicPath: `${process.env.MIX_APP_URI || '/'}`
+        publicPath: `/${process.env.MIX_APP_URI ? process.env.MIX_APP_URI+'/' : ''}`
     }
 });
 mix.autoload({

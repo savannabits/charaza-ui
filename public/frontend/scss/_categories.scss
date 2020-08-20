@@ -1,0 +1,70 @@
+.categories-area {
+    .single-cat{
+        border: 1px solid #e1ebf7;
+        border-radius: 6px;
+        padding: 61px 22px;
+        @include transition(.4s);
+        position: relative;
+        z-index: 1;
+
+        .cat-icon{
+            span{
+                color: $theme-color;
+                font-size: 50px;
+                margin-bottom: 30px;
+                display: block;
+            }
+        }
+        .cat-cap{
+            h5{
+             & > a{
+                font-size: 25px;
+                font-weight: 700;
+                margin-bottom: 21px;
+                display: block;
+                @include transition(.2s);
+                @media #{$sm}{
+                    font-size: 29px;
+                }
+              }
+            }
+            p{
+                margin-bottom: 36px;
+                color: #57667e;
+                font-size: 16px;
+                @include transition(.2s);
+                @media #{$sm}{
+                    font-size: 15px;
+
+                }
+            }
+        }
+
+
+        // Hover Effect In single 
+        &:hover{
+                // border: 1px solid transparent;
+                // // background: #ff3d1c;
+
+                // &::before {
+                //     height: 100%;
+                // }
+                // .cat-icon{
+                // span{
+                //     color: #fff;
+                // }
+                // }
+                // .cat-cap{
+                //     h5{
+                //         color: #fff;
+                //     }
+                //     p{
+                //         color: #fff;
+                //     }
+                //     a{
+                //         color: #fff;
+                //     }
+                // }
+       }
+    }
+}
