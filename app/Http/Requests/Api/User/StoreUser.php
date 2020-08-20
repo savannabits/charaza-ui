@@ -25,14 +25,14 @@ class StoreUser extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['required', Rule::unique('users', 'username'), 'string'],
-            'email' => ['required', 'email', Rule::unique('users', 'email'), 'string'],
             'name' => ['required', 'string'],
             'first_name' => ['required', 'string'],
-            'middle_name' => ['nullable', 'string'],
             'last_name' => ['required', 'string'],
-            'email_verified_at' => ['nullable', 'date'],
+            'middle_name' => ['nullable', 'string'],
+            'username' => ['required', Rule::unique('users', 'username'), 'string'],
+            'email' => ['required', 'email', Rule::unique('users', 'email'), 'string'],
             'password' => ['nullable', 'confirmed', 'min:7', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9]).*$/', 'string'],
+            'email_verified_at' => ['nullable', 'date'],
                     
         ];
     }

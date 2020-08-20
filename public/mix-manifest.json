@@ -16,5 +16,15 @@
     "/vendors~js/date-picker.js": "/vendors~js/date-picker.js",
     "/vendors~js/roles-component~js/users-component.js": "/vendors~js/roles-component~js/users-component.js",
     "/js/coreui-utils.js": "/js/coreui-utils.js",
-    "/js/coreui.bundle.min.js": "/js/coreui.bundle.min.js"
+    "/js/coreui.bundle.min.js": "/js/coreui.bundle.min.js",
+    "/js/payment-plan-chart.js": "/js/payment-plan-chart.js",
+    "/vendors~js/date-picker~js/payment-plan-chart.js": "/vendors~js/date-picker~js/payment-plan-chart.js",
+    "/vendors~js/payment-plan-chart.js": "/vendors~js/payment-plan-chart.js",
+    "/vendors~js/roles-component.js": "/vendors~js/roles-component.js",
+    "/js/roles-component~js/settings-component~js/users-component.js": "/js/roles-component~js/settings-component~js/users-component.js",
+    "/js/settings-component.js": "/js/settings-component.js",
+    "/vendors~js/roles-component~js/settings-component~js/users-component.js": "/vendors~js/roles-component~js/settings-component~js/users-component.js",
+    "/js/data-types-component.js": "/js/data-types-component.js",
+    "/js/data-types-component~js/roles-component~js/settings-component~js/users-component.js": "/js/data-types-component~js/roles-component~js/settings-component~js/users-component.js",
+    "/vendors~js/data-types-component~js/roles-component~js/settings-component~js/users-component.js": "/vendors~js/data-types-component~js/roles-component~js/settings-component~js/users-component.js"
 }
