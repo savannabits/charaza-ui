@@ -10,8 +10,9 @@
             details-dialog-ref="dataTypeDetailsDialog"
             delete-dialog-ref="dataTypeDeleteDialog"
             app-url="{{config('app.url')}}"
-            tenant="{{tenant('id')}}"
-            tenant-header-name="{{config('savadmin.tenancy.header_name')}}"
+            tenant="{{ tenant('id') }}"
+            tenant-header-name="{{ config('savadmin.tenancy.header_name') }}"
+            tenant-query-param="{{ config('savadmin.tenancy.query_parameter_name') }}"
             api-route="{{route('api.data-types.index')}}"
             v-cloak inline-template
         >
@@ -27,9 +28,10 @@
                                       ajax-url="{{route('api.data-types.dt')}}"
                                       v-cloak
                                       :columns="{{json_encode($columns)}}"
-                                      tenant="{{tenant('id')}}"
-                                      tenant-header-name="{{config('savadmin.tenancy.header_name')}}"
                                       table-classes="table table-hover"
+                                      tenant="{{ tenant('id') }}"
+                                      tenant-header-name="{{ config('savadmin.tenancy.header_name') }}"
+                                      tenant-query-param="{{ config('savadmin.tenancy.query_parameter_name') }}"
                                       v-on:edit-data-type="showFormDialog"
                                       v-on:show-data-type="showDetailsDialog"
                                       v-on:delete-data-type="showDeleteDialog"

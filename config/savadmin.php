@@ -11,7 +11,7 @@ return [
         'prefix' => 'admin'
     ],
     'tenancy' => [
-        'use_tenancy' => env("USE_TENANCY", false),
+        'use_tenancy' => env("USE_TENANCY", true),
         'header_name' => env('TENANT_HEADER','X-Tenant'),
         'query_parameter_name' => env("TENANT_PARAM", "tenant")
     ]

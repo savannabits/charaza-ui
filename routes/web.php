@@ -13,10 +13,6 @@ URL::forceRootUrl(config('app.url'));
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/apply', 'FrontendController@showApply')->middleware('auth')->name('apply.show');
-Route::post('/apply', 'FrontendController@showApply')->middleware('auth')->name('apply.submit');
-
 Auth::routes(['verify' =>true]);
 Route::any('logout', "Auth\LoginController@logout")->name('logout');
 Route::get('/home', 'HomeController@index')->name('home');

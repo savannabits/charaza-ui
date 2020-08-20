@@ -11,7 +11,8 @@
             <svg class="c-sidebar-nav-icon">
                 <use xlink:href="{{url('/assets/icons/coreui/free-symbol-defs.svg#cui-speedometer')}}"></use>
             </svg> Dashboard</a></li>
-@can("data-types")<li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href='{{route("$adminPrefix.data-types.index",tenant('id'))}}'><i class="c-sidebar-nav-icon fa fa-sticky-note-o"></i> Data Types</a></li>@endcan
+
+    @can("data-types")<li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href={{route("$adminPrefix.data-types.index",["tenant" =>tenant("id")])}}><i class="c-sidebar-nav-icon fa fa-sticky-note-o"></i> Data Type</a></li>@endcan
 {{--DO NOT REMOVE ME!--}}
     @canany(['roles.index','users.index'])
     <li class="c-sidebar-nav-dropdown">

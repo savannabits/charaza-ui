@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c0f97d955d797d361139ab06a778bf6",
+    "content-hash": "49ee1af7b9060032a480945335974a39",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3199,17 +3199,11 @@
         },
         {
             "name": "savannabits/savadmin",
-            "version": "v1.2.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/savannabits/savadmin.git",
-                "reference": "94cbbb07829a25c06fb3a2e4e111c1c7e4f6e3bd"
-            },
+            "version": "dev-master",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/savannabits/savadmin/zipball/94cbbb07829a25c06fb3a2e4e111c1c7e4f6e3bd",
-                "reference": "94cbbb07829a25c06fb3a2e4e111c1c7e4f6e3bd",
-                "shasum": ""
+                "type": "path",
+                "url": "/data/www/savannabits/savadmin",
+                "reference": "94cbbb07829a25c06fb3a2e4e111c1c7e4f6e3bd"
             },
             "require": {
                 "ext-json": "*",
@@ -3244,7 +3238,19 @@
                     "Savannabits\\Savadmin\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Savannabits\\Savadmin\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "test-coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -3258,14 +3264,13 @@
             "description": "Simplistic, Minimal, yet fully automated Laravel Admin CRUD Code Generator with support for belongsTo Relationships, fully scaffolded roles and users module and CoreUI 3.0.0 frontend framework",
             "homepage": "https://github.com/savannabits/savadmin",
             "keywords": [
-                "Admin Generator",
+                "Laravel",
+                "admin generator",
                 "coreui",
                 "crud generator",
-                "laravel",
                 "savadmin",
                 "savannabits"
-            ],
-            "time": "2020-08-12T05:38:15+00:00"
+            ]
         },
         {
             "name": "spatie/image",
@@ -8488,6 +8493,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
@@ -9538,7 +9544,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "savannabits/savadmin": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

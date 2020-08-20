@@ -24,7 +24,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "rennokki/laravel-eloquent-query-cache": "^2.2",
-        "savannabits/savadmin": "^1.2",
+        "savannabits/savadmin": "@dev",
         "spatie/laravel-medialibrary": "^8.3",
         "spatie/laravel-permission": "^3.13",
         "stancl/tenancy": "^3.1",
@@ -63,6 +63,10 @@
         }
     },
     "repositories": {
+        "savannabits/savadmin": {
+            "type": "path",
+            "url": "/data/www/savannabits/savadmin"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

@@ -134,7 +134,6 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
       <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
       <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
-      <path value="$PROJECT_DIR$/vendor/savannabits/savadmin" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
@@ -142,6 +141,7 @@
       <path value="$PROJECT_DIR$/vendor/stancl/virtualcolumn" />
       <path value="$PROJECT_DIR$/vendor/stancl/jobpipeline" />
       <path value="$PROJECT_DIR$/vendor/stancl/tenancy" />
+      <path value="$PROJECT_DIR$/vendor/savannabits/savadmin" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
