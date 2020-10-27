@@ -1,68 +1,61 @@
 <?php
 
 namespace App\Models;
-/* Imports */
-use DateTimeInterface;
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
-use Rennokki\QueryCache\Traits\QueryCacheable;
 
-class User extends \App\User
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Sanctum\HasApiTokens;
+
+class User extends Authenticatable
 {
-    use Searchable;
-    use QueryCacheable;
-//    public $cacheFor=60*60*24; //cache for 1 day
-    protected static $flushCacheOnUpdate=true; //invalidate the cache when the database is changed
-protected $fillable = [
+    use HasApiTokens;
+    use HasFactory;
+    use HasProfilePhoto;
+    use Notifiable;
+    use TwoFactorAuthenticatable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
         'name',
-        'first_name',
-        'last_name',
-        'middle_name',
-        'username',
         'email',
-        'email_verified_at',
+        'password',
     ];
 
-protected $searchable = [
-            'id',
-            'name',
-            'first_name',
-            'last_name',
-            'middle_name',
-            'username',
-            'email',
-            'email_verified_at',
-    ];
-
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
         'password',
         'remember_token',
-
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
-
-    protected $dates = [
-            'email_verified_at',
-        'created_at',
-        'updated_at',
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ["api_route"];
-
-    public function toSearchableArray() {
-        return collect($this->only($this->searchable))->merge([
-            // Add more keys here
-        ])->toArray();
-    }
-
-    /* ************************ ACCESSOR ************************* */
-
-    public function getApiRouteAttribute() {
-        return route("api.users.index");
-    }
-    protected function serializeDate(DateTimeInterface $date) {
-        return $date->format('Y-m-d H:i:s');
-    }
-
-    /* ************************ RELATIONS ************************ */
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'profile_photo_url',
+    ];
 }

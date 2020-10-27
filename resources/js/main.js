@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import './bootstrap';
+import './bootstrap.backend';
 import "@coreui/coreui/js/src/carousel"
 import "@coreui/coreui/js/src/sidebar"
 import "@coreui/coreui/js/src/button"

@@ -74,3 +74,7 @@ Route::group(["prefix" => config('savadmin.app.prefix',''),
         Route::get('','DataTypeController@index')->name('index');
     });
 });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
