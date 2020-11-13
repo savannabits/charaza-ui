@@ -13,6 +13,7 @@
         "back-watch-poll": "npm run back-watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "back-hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --env.mixfile=webpack.back.mix --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "echo": "node echo.js",
         "prod": "npm run production",
         "css-prod": "npm run css-production",
         "back-prod": "npm run back-production",
@@ -21,6 +22,7 @@
         "back-production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --env.mixfile=webpack.back.mix --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "object-path": ">=0.11.5",
         "@coreui/coreui": "3.0.0",
         "@coreui/icons": "^1.0.1",
         "@coreui/utils": "^1.3.1",
@@ -33,7 +35,9 @@
         "jquery": "^3.5",
         "laravel-mix": "^5.0.1",
         "laravel-mix-merge-manifest": "^0.1.2",
-        "lodash": "^4.17.13",
+        "dotenv": "^8.2.0",
+        "laravel-echo-server": "^1.6.2",
+        "lodash": "^4.17.20",
         "popper.js": "^1.12",
         "postcss-import": "^12.0.1",
         "resolve-url-loader": "^2.3.1",
