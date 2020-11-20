@@ -4,9 +4,9 @@
 Charaza UI is a Laravel Starter that is integrated with savannabits/savadmin Admin Generator to enable you kickstart and rapidly develop your next laravel project.
 Equipped with the latest laravel tools, Charaza UI doesn't leave much of the boilerplate work to you. The auth module is scaffolded for you. The templates are setup for you.
 The routing is already set up for you. All you have to do is just start writing your modules' code. What is even better: you don't have to go through much trouble to generate fully operational modules 
-including Models, API controllers, Datatable Controllers, API and backend routes, views for editing and showing, code for deleting... The savadmin generator does all this for you with a single command:
+including Models, API controllers, Datatable Controllers, API and backend routes, views for editing and showing, code for deleting... The savadmin generator does all this for you with a single command.
 
-```
+```shell script
 php artisan sv:generate table_name
 ```
 
@@ -87,7 +87,8 @@ Let us generate an `Articles` module from the `articles` table
 bash app-exec bash #(If you are using docker)
 php artisan make:migration create_articles_table
 ```
-2. Edit the articles migration as you wish:
+
+2. Edit the articles migration as you wish
 ```php
     /**
      * Run the migrations.
