@@ -6,7 +6,7 @@ Equipped with the latest laravel tools, Charaza UI doesn't leave much of the boi
 The routing is already set up for you. All you have to do is just start writing your modules' code. What is even better: you don't have to go through much trouble to generate fully operational modules 
 including Models, API controllers, Datatable Controllers, API and backend routes, views for editing and showing, code for deleting... The savadmin generator does all this for you with a single command:
 
-```shell script
+```
 php artisan sv:generate table_name
 ```
 
@@ -41,14 +41,14 @@ composer create-project savannabits/charaza-ui my-project
 The package comes with an optional docker configuration. It is highly recommended to use this to experience the full power with minimal configuration.
 After setting your .env variables, run the following to build and spin-up the docker containers:
 
-```shell script
+```
 docker-compose build app
 docker-compose up -d
 ```
 
 This will boot up the app server exposed under the port you configured in the env. To enter the container's shell, there is a simple shell script included to enable this:
 
-```shell script
+```
 bash app-exec [yoru command]
 bash app-exec bash
 ```
@@ -83,7 +83,7 @@ Using the code generator to generate your commands is easy:
 
 Let us generate an `Articles` module from the `articles` table
 1. Create the `articles` table
-```shell script
+```
 bash app-exec bash #(If you are using docker)
 php artisan make:migration create_articles_table
 ```
@@ -107,17 +107,17 @@ php artisan make:migration create_articles_table
     }
 ```
 3. Run the migration
-```shell script
+```
 bash app-exec 'php artisan migrate' #(For docker users)
 php artisan migrate #(Non-docker users)
 ```
 4. Use the generator to generate the model, controller, routes, menus, views and assets
-```shell script
+```
 bash app-exec bash #Enter the container's bash - for Docker users
 php artisan sv:generate articles # The code generator
 ```
 __NB__ If you already generated the files but would like to force overwrite use ```--force``,
-   ```shell script
+   ```
     php artisan sv:generate articles --force
    ```
 Output:
