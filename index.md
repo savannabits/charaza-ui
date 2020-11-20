@@ -1,16 +1,21 @@
 
 ## About Charaza UI
+
 Charaza UI is a Laravel Starter that is integrated with savannabits/savadmin Admin Generator to enable you kickstart and rapidly develop your next laravel project.
 Equipped with the latest laravel tools, Charaza UI doesn't leave much of the boilerplate work to you. The auth module is scaffolded for you. The templates are setup for you.
 The routing is already set up for you. All you have to do is just start writing your modules' code. What is even better: you don't have to go through much trouble to generate fully operational modules 
 including Models, API controllers, Datatable Controllers, API and backend routes, views for editing and showing, code for deleting... The savadmin generator does all this for you with a single command:
+
 ```shell script
 php artisan sv:generate table_name
 ```
+
 ![Screenshot](https://github.com/savannabits/charaza-ui/blob/master/storage/screenshots/Screenshot_20201120_092151.png?raw=false)
 ![Screenshot](https://github.com/savannabits/charaza-ui/blob/master/storage/screenshots/Screenshot_20201120_092249.png?raw=false)
 ![Screenshot](https://github.com/savannabits/charaza-ui/blob/master/storage/screenshots/Screenshot_20201120_091437.png?raw=false)
+
 ## Features
+
 - Code Generation with savannabits/savadmin
 - Laravel 8 Scaffold
 - Laravel Jetstream Frontend
@@ -22,19 +27,27 @@ php artisan sv:generate table_name
 - API Keys using Jetstream and Laravel Sanctum
 - Optional DB cacheing
 - Fuzzy Search using Laravel TNTSearch
+
 ## Installation
+
 Charaza UI is meant for easing your work when beginning new projects. To start an all powered-up new project, simply create it from charaza as follows:
+
 ```
 composer create-project savannabits/charaza-ui my-project
 ```
+
 ## Usage
+
 The package comes with an optional docker configuration. It is highly recommended to use this to experience the full power with minimal configuration.
 After setting your .env variables, run the following to build and spin-up the docker containers:
+
 ```shell script
 docker-compose build app
 docker-compose up -d
 ```
+
 This will boot up the app server exposed under the port you configured in the env. To enter the container's shell, there is a simple shell script included to enable this:
+
 ```shell script
 bash app-exec [yoru command]
 bash app-exec bash
@@ -43,6 +56,7 @@ bash app-exec bash
 However, if you don't wish to use docker, no worry! All you have to do is configure database variables as you see fit, then proceed to the next step
 
 Next, proceed with the normal laravel setup steps:
+
 ```
 composer install
 yarn install
@@ -53,9 +67,11 @@ yarn back-dev (or back-prod)
 yarn css-prod (or css-prod)
 yarn dev (or prod or watch)
 ```
+
 There you go! Your system is now setup and you are ready to create your next amazing app!
 
 ### Code Generator:
+
 Using the code generator to generate your commands is easy:
 1. Create your migration file and edit it accordingly
 2. Run the Migration
@@ -64,6 +80,7 @@ Using the code generator to generate your commands is easy:
 5. If you are not running `yarn back-watch`, then run `yarn back-dev` to rebuild the assets
 
 ### Example:
+
 Let us generate an `Articles` module from the `articles` table
 1. Create the `articles` table
 ```shell script
@@ -104,9 +121,11 @@ __NB__ If you already generated the files but would like to force overwrite use 
     php artisan sv:generate articles --force
    ```
 Output:
+
 ![Articles](https://github.com/savannabits/charaza-ui/blob/master/storage/screenshots/Screenshot_20201120_091437.png?raw=false)
 ![Articles](https://github.com/savannabits/charaza-ui/blob/master/storage/screenshots/Screenshot_20201120_092032.png?raw=false)
 ![Articles](https://github.com/savannabits/charaza-ui/blob/master/storage/screenshots/Screenshot_20201120_092101.png?raw=false)
+
 ### Generated files
 
 __app/Models/Article.php__
