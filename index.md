@@ -6,7 +6,7 @@ Equipped with the latest laravel tools, Charaza UI doesn't leave much of the boi
 The routing is already set up for you. All you have to do is just start writing your modules' code. What is even better: you don't have to go through much trouble to generate fully operational modules 
 including Models, API controllers, Datatable Controllers, API and backend routes, views for editing and showing, code for deleting... The savadmin generator does all this for you with a single command.
 
-```shell script
+```
 php artisan sv:generate table_name
 ```
 
