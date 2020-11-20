@@ -1,5 +1,5 @@
 
-## Charaza UI - Laravel App Development without the hassle of scaffold code! Generate a CRUD in < 1 min
+## Charaza UI - Generate a CRUD in < 1 min
 
 Charaza UI is a Laravel Starter that is integrated with savannabits/savadmin Admin Generator to enable you kickstart and rapidly develop your next laravel project.
 Equipped with the latest laravel tools, Charaza UI doesn't leave much of the boilerplate work to you. The auth module is scaffolded for you. The templates are setup for you.
