@@ -1,0 +1,3 @@
+#! /bin/sh
+set -e
+exec docker-compose exec -u www-data app $1

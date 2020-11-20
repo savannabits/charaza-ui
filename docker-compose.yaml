@@ -6,7 +6,7 @@ services:
         user: ${DOCKER_USER}
         uid: ${DOCKER_UID}
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: .docker/Dockerfile
     image: ${DOCKER_IMAGE_NAME}
     environment:
       APP_ENV: local
@@ -14,15 +14,18 @@ services:
     links:
       - db
       - redis
+    ports:
+      - 8026:80
     container_name: ${DOCKER_IMAGE_NAME}-app
     restart: unless-stopped
-    working_dir: /var/www
+    working_dir: /var/www/html
     volumes:
-      - ./:/var/www
+      - ./:/var/www/html
+      - ./.docker:/etc/apache2/sites-available
     networks:
       - default
   db:
-    image: mysql:5.7
+    image: mariadb:latest
     container_name: ${DOCKER_IMAGE_NAME}-db
     restart: unless-stopped
     environment:
@@ -39,48 +42,32 @@ services:
       - db-data:/var/lib/mysql
     networks:
       - default
-
-  server:
-    image: nginx:alpine
-    container_name: ${DOCKER_IMAGE_NAME}-server
-    links:
-      - echo
-      - app
-    restart: unless-stopped
-    ports:
-      - ${DOCKER_SERVER_EXPOSED_PORT}:80
-      - ${DOCKER_SERVER_SECURE_PORT}:443
-    volumes:
-      - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
-    networks:
-      - default
   queue:
     image: ${DOCKER_IMAGE_NAME}
     container_name: ${DOCKER_IMAGE_NAME}-queue
     restart: unless-stopped
-    working_dir: /var/www
+    working_dir: /var/www/html
     environment:
       APP_ENV: local
       CONTAINER_ROLE: queue
     depends_on:
       - app
     volumes:
-      - ./:/var/www
+      - ./:/var/www/html
     networks:
       - default
   scheduler:
     image: ${DOCKER_IMAGE_NAME}
     container_name: ${DOCKER_IMAGE_NAME}-scheduler
     restart: always
-    working_dir: /var/www
+    working_dir: /var/www/html
     environment:
       APP_ENV: local
       CONTAINER_ROLE: scheduler
     depends_on:
       - app
     volumes:
-      - ./:/var/www
+      - ./:/var/www/html
     networks:
       - default
   redis:
@@ -96,14 +83,14 @@ services:
     image: ${DOCKER_IMAGE_NAME}
     container_name: ${DOCKER_IMAGE_NAME}-echo
     restart: unless-stopped
-    working_dir: /var/www
+    working_dir: /var/www/html
     environment:
       APP_ENV: local
       CONTAINER_ROLE: echo
     depends_on:
       - app
     volumes:
-      - ./:/var/www
+      - ./:/var/www/html
     networks:
       - default
 volumes:

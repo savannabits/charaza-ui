@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-URL::forceScheme(env('APP_SCHEME','https'));
-URL::forceRootUrl(config('app.url'));
+//URL::forceScheme(env('APP_SCHEME','https'));
+//URL::forceRootUrl(config('app.url'));
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,8 +14,8 @@ URL::forceRootUrl(config('app.url'));
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-$apiPrefix = env('API_VERSION','');
-$apiNamespace = "Api";
+$apiPrefix = config('api.prefix');
+$apiNamespace = config('api.namespace',"Api");
 Route::get('/', function () {
     return "Welcome to the API";
 });
@@ -44,34 +44,12 @@ Route::group(['prefix' => $apiPrefix,'as' => 'api.', 'namespace' => $apiNamespac
 });
 
 
-/* Auto-generated settings api routes */
+/* Auto-generated articles api routes */
 Route::group(['prefix' => $apiPrefix,'as' => 'api.', 'namespace' => $apiNamespace], function() {
     Route::group(['middleware' => ["auth:sanctum","verified"]], function() {
-        Route::group(['prefix' => "settings", 'as' => 'settings.'],function() {
-            Route::get("dt", "SettingController@dt")->name('dt');
+        Route::group(['prefix' => "articles", 'as' => 'articles.'],function() {
+            Route::get("dt", "ArticleController@dt")->name('dt');
         });
-        Route::apiResource('settings',"SettingController")->parameters(["settings" => "setting"]);
-    });
-});
-
-
-/* Auto-generated data-types api routes */
-Route::group(['prefix' => $apiPrefix,'as' => 'api.', 'namespace' => $apiNamespace], function() {
-    Route::group(['middleware' => ["auth:sanctum","verified"]], function() {
-        Route::group(['prefix' => "data-types", 'as' => 'data-types.'],function() {
-            Route::get("dt", "DataTypeController@dt")->name('dt');
-        });
-        Route::apiResource('data-types',"DataTypeController")->parameters(["data-types" => "dataType"]);
-    });
-});
-
-
-/* Auto-generated data-types api routes */
-Route::group(['prefix' => $apiPrefix,'as' => 'api.', 'namespace' => $apiNamespace], function() {
-    Route::group(['middleware' => ["auth:sanctum","verified"]], function() {
-        Route::group(['prefix' => "data-types", 'as' => 'data-types.'],function() {
-            Route::get("dt", "DataTypeController@dt")->name('dt');
-        });
-        Route::apiResource('data-types',"DataTypeController")->parameters(["data-types" => "dataType"]);
+        Route::apiResource('articles',"ArticleController")->parameters(["articles" => "article"]);
     });
 });

@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-URL::forceScheme(env('APP_SCHEME','https'));
-URL::forceRootUrl(config('app.url'));
+//URL::forceScheme(env('APP_SCHEME','https'));
+//URL::forceRootUrl(config('app.url'));
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +14,12 @@ URL::forceRootUrl(config('app.url'));
 |
 */
 
-Route::get('/',"FrontendController@welcome")->name('welcome');
+Auth::routes(['verify' =>true]);
+
+Route::get('/',['App\Http\Controllers\FrontendController','welcome'])->name('welcome');
 Route::get('/apply', 'FrontendController@showApply')->middleware('auth')->name('apply.show');
 Route::post('/apply', 'FrontendController@showApply')->middleware('auth')->name('apply.submit');
 
-Auth::routes(['verify' =>true]);
 Route::any('logout', "Auth\LoginController@logout")->name('logout');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(["prefix" => config('savadmin.app.prefix',''),
@@ -29,7 +30,6 @@ Route::group(["prefix" => config('savadmin.app.prefix',''),
 
    Route::get('roles',"RoleController@index")->name('roles.index');
 });
-
 
 /* Auto-generated admin routes */
 
@@ -53,28 +53,17 @@ Route::group(["prefix" => config('savadmin.app.prefix',''),
     });
 });
 
-
-/* Auto-generated admin routes */
-
-Route::group(["prefix" => config('savadmin.app.prefix',''),
-    "namespace" => "Admin",
-    "as" => config('savadmin.app.prefix').".",'middleware' => ['auth','verified']],function() {
-    Route::group(['as' => "settings.", 'prefix' => "settings"], function() {
-        Route::get('','SettingController@index')->name('index');
-    });
-});
-
-
-/* Auto-generated admin routes */
-
-Route::group(["prefix" => config('savadmin.app.prefix',''),
-    "namespace" => "Admin",
-    "as" => config('savadmin.app.prefix').".",'middleware' => ['auth','verified']],function() {
-    Route::group(['as' => "data-types.", 'prefix' => "data-types"], function() {
-        Route::get('','DataTypeController@index')->name('index');
-    });
-});
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+/* Auto-generated admin routes */
+
+Route::group(["prefix" => config('savadmin.app.prefix',''),
+    "namespace" => "Admin",
+    "as" => config('savadmin.app.prefix').".",'middleware' => ['auth','verified']],function() {
+    Route::group(['as' => "articles.", 'prefix' => "articles"], function() {
+        Route::get('','ArticleController@index')->name('index');
+    });
+});

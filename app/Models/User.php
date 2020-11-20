@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -17,6 +19,8 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasPermissions;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +29,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
+        'first_name',
+        'middle_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -57,5 +65,15 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        "api_route",
     ];
+    protected $dates = [
+        'email_verified_at',
+        "created_at",
+        "updated_at"
+    ];
+    public function getApiRouteAttribute() {
+        return route("api.users.index");
+    }
+
 }
