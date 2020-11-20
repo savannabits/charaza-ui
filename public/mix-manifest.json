@@ -17,5 +17,8 @@
     "/css/backend.css": "/css/backend.css",
     "/css/free.min.css": "/css/free.min.css",
     "/css/brand.min.css": "/css/brand.min.css",
-    "/css/flag.min.css": "/css/flag.min.css"
+    "/css/flag.min.css": "/css/flag.min.css",
+    "/js/articles-component.js": "/js/articles-component.js",
+    "/js/articles-component~js/roles-component~js/users-component.js": "/js/articles-component~js/roles-component~js/users-component.js",
+    "/vendors~js/articles-component~js/roles-component~js/users-component.js": "/vendors~js/articles-component~js/roles-component~js/users-component.js"
 }
