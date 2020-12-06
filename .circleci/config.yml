@@ -22,7 +22,7 @@ jobs:
       - checkout
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo docker-php-ext-install zip
+      - run: sudo docker-php-ext-install zip intl tokenizer fileinfo mbstring exif pcintl bcmath gd json curl xml zip pdo_sqlite
 
       # Download and cache dependencies
       - restore_cache:
