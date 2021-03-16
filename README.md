@@ -1,5 +1,7 @@
 
 ## About Charaza UI
+__Looking for a Jetstream Tailwindcss, Inertia and Vue3 CRUD generator? Checkout our sister project, [Jetstream Inertia Generator (Jig)](https://github.com/coolsam726/jetstream-inertia-generator)__
+
 Charaza UI is a Laravel Starter that is integrated with savannabits/savadmin Admin Generator to enable you kickstart and rapidly develop your next laravel project.
 Equipped with the latest laravel tools, Charaza UI doesn't leave much of the boilerplate work to you. The auth module is scaffolded for you. The templates are setup for you.
 The routing is already set up for you. All you have to do is just start writing your modules' code. What is even better: you don't have to go through much trouble to generate fully operational modules 
